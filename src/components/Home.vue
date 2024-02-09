@@ -3,10 +3,13 @@
 </script>
 
 <template>
-  <div class="container">
-    <div class="img-bakery"> Imagen </div>
-    <div class="container-content"> Contenido</div>
-  </div>
+  <main>
+    <content>
+      <section>
+        <h2>Home</h2>
+      </section>
+    </content>
+  </main>
 
 </template>
 

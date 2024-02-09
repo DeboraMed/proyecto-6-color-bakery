@@ -3,7 +3,11 @@
 </script>
 
 <template>
-  <h2>Perfil</h2>
+  <main>
+    <content>
+      <h2>Perfil</h2>
+    </content>
+  </main>
 </template>
 
 <style scoped>

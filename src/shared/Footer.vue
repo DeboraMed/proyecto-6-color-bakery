@@ -6,13 +6,15 @@
   <footer>
     <!-- borde naranja -->
     <section class="ft-init">
-      <ul class="ft-legal-list">
-      </ul>
+        <div class="container-img">
+          <img class="background-img" src="../assets/img/color-bakery-texto.svg">
+        </div>
+
     </section>
     <!-- Footer main -->
     <section class="ft-main">
       <div class="ft-main-item">
-        <h2 class="ft-title">Color Bakery</h2>
+        <img class="ft-title" src="../assets/img/color-bakery-texto.svg">
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Descubre</a></li>
@@ -34,7 +36,7 @@
         <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
-          <input type="button" value="Contacto">
+          <input type="button" class="button" value="Contacto">
         </form>
       </div>
     </section>
@@ -48,17 +50,29 @@
       </ul>
     </section>
   </footer>
-
 </template>
 
 <style scoped>
+.container-img{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  background-color: #FFEFC9;
+  }
+.background-img{
+  margin-right: 1rem;
+  margin-bottom: -1.1rem;
+  width: 25%;
+  bottom: -4rem;
+  right: 0;
+}
 /*footer general*/
   .ft-main {
-    padding: 1.25rem 1.875rem;
+    padding: 0.25rem 4.875rem;
     display: flex;
     flex-wrap: wrap;
-    margin-left: 4rem;
-    margin-right: 4rem;
+    bottom: 0;
+    background-color: #4E3D90;
   }
   .ft-main-item {
     padding: 1.25rem;
@@ -77,19 +91,15 @@
 }
 /*legal footer*/
 .ft-init {
-  padding: 0.9375rem 1.5rem;
-  background-color: #FCBD7A;
-
+  /*background-color: #FFF8E8;*/
+  border-bottom-width: 4rem;
+  border-bottom-style: solid;
+  border-bottom-color: #FCBD7A;
 }
 /*contacto footer*/
 form {
   display: flex;
   flex-wrap: wrap;
-}
-input[type="email"] {
-  border: 0;
-  padding: 0.625rem;
-  margin-top: 0.3125rem;
 }
 input[type="button"] {
   background-color: #C2431E;
@@ -102,7 +112,7 @@ input[type="button"] {
 }
 /*legal footer*/
 .ft-legal {
-  padding: 0.9375rem 1.5rem;
+  padding: 0.05rem 1.5rem;
   background-color: #2E2067;
 }
 .ft-legal-list {

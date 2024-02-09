@@ -4,7 +4,7 @@
 <template>
   <div class="nav">
     <div class="nav">
-        <router-link to="/"><img src="../assets/color-bakery-logo-hor.svg"></router-link>
+        <router-link to="/"><img src="../assets/color-bakery-logo-hor.svg" class="nav-logo"></router-link>
       <div class="navbar-content">
         <router-link class="nav-router" to="/"><p>Inicio</p></router-link >
         <router-link class="nav-router" to="/login"><p>Logueate</p></router-link>
@@ -12,7 +12,7 @@
         <router-link class="nav-router" to="/perfil"><p>Perfil</p></router-link>
         <router-link class="nav-router" to="/contacto"><p>Contacto</p></router-link>
         <router-link class="nav-router" to="/proyectos"><p>Proyectos</p></router-link>
-        <router-link class="nav-router" to="/descubre"><button>Descubre</button></router-link>
+        <router-link class="nav-router" to="/descubre"><button class="button">Descubre</button></router-link>
       </div>
 
     </div>
@@ -20,6 +20,36 @@
 </template>
 
 <style scoped>
+.nav-logo{
+  animation: palpito 2s ease 0s 1 normal forwards;
+}
+@keyframes palpito {
+  0% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+    transform-origin: center center;
+  }
+
+  10% {
+    animation-timing-function: ease-in;
+    transform: scale(0.91);
+  }
+
+  17% {
+    animation-timing-function: ease-out;
+    transform: scale(0.98);
+  }
+
+  33% {
+    animation-timing-function: ease-in;
+    transform: scale(0.87);
+  }
+
+  45% {
+    animation-timing-function: ease-out;
+    transform: scale(1);
+  }
+}
   img{
     height: 4rem;
     margin-left: 4rem;
@@ -28,7 +58,9 @@
     padding: 0rem;
     margin-right: 4rem;
   }
+  /*barra de navegacion*/
   .nav {
+    z-index: 1;
     position:fixed ;
     width: 100%;
     height: 5.5rem;
@@ -53,11 +85,11 @@
   .nav-router {
     text-decoration: none;
   }
-  .navbar-content p:hover {
-    color: black;
-  }
+ /* .navbar-content p:hover {
+    color: #4c3b9a;
+  }*/
   button{
-    background-color: #C2431E;
+    background-color: #4c3b9a;
     color: #fff;
     border-radius: 1rem;
     cursor: pointer;

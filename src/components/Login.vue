@@ -1,7 +1,4 @@
 <script>
-import {ref} from "vue";
-
-const mensaje = ref('');
 export default {
   data() {
     return {
@@ -14,21 +11,14 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      this.errors = { email: '',  password: '' };
-      let isValid = true;
-
-      if (!this.password) {
+    validateForm(field) {
+      if (!this.password || this.password.length < 3) {
         this.errors.nombre = 'Introduce un contraseña con al menos 3 caracteres.';
-        isValid = false;
       }
       if (!this.email || !this.validateEmail(this.email)) {
         this.errors.email = 'Introduce un correo electrónico válido.';
-        isValid = false;
-      }
-      if (isValid) {
-        // datos del formulario validado
-        console.log('Formulario enviado:'+this.email, this.password);
+      }else {
+        this.errors[field] = '';
       }
     },
     validateEmail(email) {
@@ -37,55 +27,81 @@ export default {
       return re.test(email);
     },
   },
-  watch: {
-    /*v-bind en el input y que el resultado lo reciba el watch*/
+  submitForm() {
+    this.validateForm('email');
+    this.validateForm('password');
 
+    if (!Object.values(this.errors).some(error => error !== '')) {
+      console.log('Formulario enviado:', this.email, this.password);
+    }
   }
 }
 </script>
 
 <template>
-  <div class="main-content">
-    <div class="form">
-      <h2>Logueate_</h2>
-      <form
-          @submit.prevent="submitForm">
+  <main class="main-content">
+
+    <article class="content-article">
+      <form class="form" @submit.prevent="submitForm">
+        <h2>Logueate_</h2>
         <!--id="contacto"
             @submit="checkForm"
             action="url"
             method="post"-->
-        <div>
+        <article>
           <p> Logueate en la web.</p>
-        </div>
-        <div>
+        </article>
+        <article>
           <label for="email"></label>
           <input
               id="email"
               placeholder="email@email.com"
               v-model="email"
               type="text"
-          >
-          <p class="p-error">{{ mensaje }}</p>
-        </div>
-        <div>
-          <label for="title"></label>
+              @change="validateForm('email')">
+          <p class="p-error">{{ errors.email }}</p>
+        </article>
+        <article>
+          <label for="contraseña"></label>
           <input
               id="password"
               placeholder="Contraseña"
               v-model="password"
               type="password"
-          >
-          <p class="p-error">{{ mensaje }}</p>
-        </div>
-        <button type="submit">Acceder</button>
+              @change="validateForm('password')">
+          <p class="p-error">{{ errors.password }}</p>
+        </article>
+        <button class="button" type="submit">Enviar</button>
       </form>
-    </div>
-  </div>
+    </article>
+    <section class="content-section"><img src="../assets/img/img-colores.png"></section>
+  </main>
 </template>
 
 <style scoped>
+.main-content{
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 6rem 0 6rem;
+}
+.content-section{
+  margin: auto;
+  width: 40%;
+}
+.content-section img{
+  width: 50%;
+  margin: auto;
+}
+.content-article{
+  margin: auto;
+  width: 60%;
+}
 h2{
   color: #4E3D90;
+}
+.p-validado{
+  color: darkgreen;
 }
 .p-error{
   color: #C2431E;
@@ -93,32 +109,23 @@ h2{
 
 .form{
   justify-self: center;
-  padding: 2rem 2rem;
-  margin: 2rem 2rem;
+  padding: 0rem 2rem;
+  margin: 0rem 2rem;
 }
 form{
   text-align: left;
-  /*TODO: voy por aqui ajustando el formulario*/
 }
 input {
-  width: 25%;
+  width: 50%;
   border: 1px #797474;
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
 }
-textarea {
-  width: 50%;
-  border: 0;
-  border-radius: 0.7rem;
-  padding: 0.625rem;
-  margin-top: 0.3125rem;
-  height: 4rem;
-}
+
 button[type="submit"] {
-  background-color: #C2431E;
+  background-color: #c2431e;
   color: #fff;
-  border-radius: 1rem;
   cursor: pointer;
   border: 0;
   padding: 0.625rem 0.9375rem;

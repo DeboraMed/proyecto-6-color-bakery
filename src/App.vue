@@ -9,12 +9,13 @@ export default {
 
 <template>
   <Navbar/>
-  <div class="container">
-    <div class="container-div">
+  <main class="container">
+    <content class="container-div">
     <router-view />
-    </div>
-  </div>
+    </content>
+  </main>
   <Footer />
 </template>
-<!--estilo importado para scss-->
-<!--<style lang="scss" src="style.css"></style>-->
+
+<style>
+</style>

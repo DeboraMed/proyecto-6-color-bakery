@@ -3,7 +3,13 @@
 </script>
 
 <template>
-<h2>Descubre</h2>
+  <main>
+    <content>
+      <section>
+        <h2>Descubre</h2>
+      </section>
+    </content>
+  </main>
 </template>
 
 <style scoped>

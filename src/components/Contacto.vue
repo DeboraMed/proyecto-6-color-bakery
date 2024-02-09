@@ -10,57 +10,49 @@ export default {
         nombre: '',
         email: '',
         titulo: '',
-        message: ''
+        mensaje: ''
       },
     }
   },
   methods: {
-    submitForm() {
-      this.errors = { nombre: '', email: '', titulo: '', mensaje: '' };
-      let isValid = true;
-
-      if (!this.nombre || typeof this.nombre !== 'string' || this.nombre.length < 3) {
+    validateForm(field) {
+      if (field === 'nombre' && (!this.nombre || typeof this.nombre !== 'string' || this.nombre.length < 3)) {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
-        isValid = false;
-      }
-      if (!this.titulo || typeof this.titulo !== 'string' || this.titulo.length < 3) {
+      } else if (field === 'titulo' && (!this.titulo || typeof this.titulo !== 'string' || this.titulo.length < 3)) {
         this.errors.titulo = 'Introduce un título con al menos 3 caracteres.';
-        isValid = false;
-      }
-      if (!this.mensaje || this.mensaje.length < 10) {
-        this.errors.message = 'Introduce un mensaje con al menos 10 caracteres.';
-        isValid = false;
-      }
-      if (!this.email || !this.validateEmail(this.email)) {
+      } else if (field === 'mensaje' && (!this.mensaje || this.mensaje.length < 10)) {
+        this.errors.mensaje = 'Introduce un mensaje con al menos 10 caracteres.';
+      } else if (field === 'email' && (!this.email || !this.validateEmail(this.email))) {
         this.errors.email = 'Introduce un correo electrónico válido.';
-        isValid = false;
-      }
-
-      if (isValid) {
-        // datos del formulario validado
-        console.log('Formulario enviado:', this.nombre, this.email, this.titulo, this.mensaje);
+      } else {
+        this.errors[field] = '';
       }
     },
     validateEmail(email) {
       let re = /\w+@\w+\.+[a-z]/;
       return re.test(email);
     },
+    submitForm() {
+      this.validateForm('nombre');
+      this.validateForm('email');
+      this.validateForm('titulo');
+      this.validateForm('mensaje');
+
+      if (!Object.values(this.errors).some(error => error !== '')) {
+        console.log('Formulario enviado:', this.nombre, this.email, this.titulo, this.mensaje);
+      }
+    },
   }
 }
 </script>
 
 <template>
-  <div class="main-content">
-    <div class="form">
-      <h2>Formulario de Contacto_</h2>
-      <form
-          @submit.prevent="submitForm">
-      <!--id="contacto"
-          @submit="checkForm"
-          action="url"
-          method="post"-->
-
-        <div>
+  <main class="main-content">
+    <section class="content-section"><img src="../assets/img/img-horno.png"></section>
+    <article class="content-article">
+      <form class="form" @submit.prevent="submitForm">
+        <h2>Formulario de Contacto_</h2>
+        <article>
           <p> Gracias por ponerte en contacto con nosotros.</p>
           <label for="name"></label>
           <input
@@ -68,46 +60,64 @@ export default {
               placeholder="Nombre"
               v-model="nombre"
               type="text"
-          >
+              @change="validateForm('nombre')">
           <p class="p-error">{{ errors.nombre }}</p>
-        </div>
-        <div>
+        </article>
+        <article>
           <label for="email"></label>
           <input
               id="email"
               placeholder="email@email.com"
               v-model="email"
               type="text"
-          >
+              @change="validateForm('email')">
           <p class="p-error">{{ errors.email }}</p>
-        </div>
-        <div>
+        </article>
+        <article>
           <label for="title"></label>
           <input
               id="title"
               placeholder="Titulo"
               v-model="titulo"
               type="text"
-          >
+              @change="validateForm('titulo')">
           <p class="p-error">{{ errors.titulo }}</p>
-        </div>
-        <div>
+        </article>
+        <article>
           <label for="message"></label>
           <textarea
               id="message"
               placeholder="Escriba aqui su mensaje"
               v-model="mensaje"
               rows="6"
-          ></textarea>
-          <p class="p-error">{{ errors.message }}</p>
-        </div>
-        <button type="submit">Enviar</button>
+              @change="validateForm('mensaje')"></textarea>
+          <p class="p-error">{{ errors.mensaje }}</p>
+        </article>
+        <button class="button" type="submit">Enviar</button>
       </form>
-    </div>
-  </div>
+    </article>
+  </main>
 </template>
 
 <style scoped>
+.main-content{
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0 6rem 0 6rem;
+}
+.content-section{
+  margin: auto;
+  width: 40%;
+}
+.content-section img{
+  width: 60%;
+  margin: auto;
+}
+.content-article{
+  margin: auto;
+  width: 60%;
+}
 h2{
   color: #4E3D90;
 }
@@ -117,9 +127,7 @@ h2{
 .p-error{
   color: #C2431E;
 }
-.img-bakery{
-  background: #747bff;
-}
+
 .form{
   justify-self: center;
   padding: 2rem 2rem;
@@ -127,7 +135,6 @@ h2{
 }
 form{
   text-align: left;
-  /*TODO: voy por aqui ajustando el formulario*/
 }
 input {
   width: 25%;
@@ -142,12 +149,10 @@ textarea {
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
-  height: 4rem;
 }
 button[type="submit"] {
-  background-color: #C2431E;
+  background-color: #c2431e;
   color: #fff;
-  border-radius: 1rem;
   cursor: pointer;
   border: 0;
   padding: 0.625rem 0.9375rem;
