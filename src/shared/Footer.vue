@@ -14,7 +14,7 @@
     <!-- Footer main -->
     <section class="ft-main">
       <div class="ft-main-item">
-        <img class="ft-title" src="../assets/img/color-bakery-texto.svg">
+        <img class="ft-title" src="../assets/img/color-bakery-texto-w.svg">
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Descubre</a></li>
@@ -73,6 +73,7 @@
     flex-wrap: wrap;
     bottom: 0;
     background-color: #4E3D90;
+    text-decoration: none;
   }
   .ft-main-item {
     padding: 1.25rem;
@@ -95,6 +96,9 @@
   border-bottom-width: 4rem;
   border-bottom-style: solid;
   border-bottom-color: #FCBD7A;
+}
+a{
+  text-decoration: none;
 }
 /*contacto footer*/
 form {

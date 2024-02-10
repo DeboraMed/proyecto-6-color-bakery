@@ -48,7 +48,9 @@ export default {
 
 <template>
   <main class="main-content">
-    <section class="content-section"><img src="../assets/img/img-horno.png"></section>
+    <section class="content-section">
+      <img src="../assets/img/img-horno.png" alt="Horno de colores" title="Horno de colores">
+    </section>
     <article class="content-article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Contacto_</h2>

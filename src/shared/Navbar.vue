@@ -56,7 +56,7 @@
   }
   p{
     padding: 0rem;
-    margin-right: 4rem;
+    margin-right: 3rem;
   }
   /*barra de navegacion*/
   .nav {

@@ -21,9 +21,9 @@ export default {
       } else if (field === 'email' && (!this.email || !this.validateEmail(this.email))) {
         this.errors.email = 'Introduce un correo electrónico válido.';
       } else if (!this.password || this.password.length < 3) {
-        this.errors.nombre = 'Introduce un contraseña con al menos 3 caracteres.';
+        this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
       } else if (!this.re_password || this.re_password!== this.password) {
-        this.errors.nombre = 'Introduce la misma contraseña.';
+        this.errors.re_password = 'Introduce la misma contraseña.';
       } else {
         this.errors[field] = '';
       }
@@ -47,7 +47,7 @@ export default {
 
 <template>
   <main class="main-content">
-    <section class="content-section"><img src="../assets/img/img-bolleria.png"></section>
+    <section class="content-section"><img src="../assets/img/img-bolleria.png" alt="Bollitos de colores" title="Bollitos de colores"></section>
     <article class="content-article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Registro_</h2>
@@ -85,14 +85,13 @@ export default {
         <article>
           <label for="contraseña"></label>
           <input
-              id="password"
+              id="re_password"
               placeholder="Repite la contraseña"
               v-model="re_password"
               type="password"
-              @change="validateForm('password')">
+              @change="validateForm('re_password')">
           <p class="p-error">{{ errors.re_password }}</p>
         </article>
-
         <button class="button" type="submit">Enviar</button>
       </form>
     </article>

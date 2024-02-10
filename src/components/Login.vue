@@ -13,7 +13,7 @@ export default {
   methods: {
     validateForm(field) {
       if (!this.password || this.password.length < 3) {
-        this.errors.nombre = 'Introduce un contraseña con al menos 3 caracteres.';
+        this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
       }
       if (!this.email || !this.validateEmail(this.email)) {
         this.errors.email = 'Introduce un correo electrónico válido.';
@@ -40,7 +40,6 @@ export default {
 
 <template>
   <main class="main-content">
-
     <article class="content-article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Logueate_</h2>
@@ -74,7 +73,9 @@ export default {
         <button class="button" type="submit">Enviar</button>
       </form>
     </article>
-    <section class="content-section"><img src="../assets/img/img-colores.png"></section>
+    <section class="content-section">
+      <img src="../assets/img/img-colores.png" alt="Ruedas de colores" title="Ruedas de colores">
+    </section>
   </main>
 </template>
 
