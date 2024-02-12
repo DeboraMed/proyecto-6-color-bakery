@@ -1,8 +1,15 @@
-<script setup>
+<script>
+export default {
+  data() {
+    return {
+      darkMode: false,
+    }
+  },
+}
 </script>
 
 <template>
-  <div class="nav">
+  <div :class="{ 'dark-mode': darkMode }">
     <div class="nav">
         <router-link to="/"><img src="../assets/color-bakery-logo-hor.svg" class="nav-logo"></router-link>
       <div class="navbar-content">
@@ -13,8 +20,8 @@
         <router-link class="nav-router" to="/contacto"><p>Contacto</p></router-link>
         <router-link class="nav-router" to="/proyectos"><p>Proyectos</p></router-link>
         <router-link class="nav-router" to="/descubre"><button class="button">Descubre</button></router-link>
+    <!--<button @click="darkMode = !darkMode">Cambiar tema</button>-->
       </div>
-
     </div>
   </div>
 </template>

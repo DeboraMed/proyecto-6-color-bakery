@@ -1,7 +1,7 @@
 <script>
   import axios from 'axios';
   import ResultadoColor from "./ResultadoColor.vue";
-
+  import ResultadoImagen from "./ResultadoImagen.vue";
 export default {
   components: {ResultadoColor},
   data() {
@@ -9,20 +9,31 @@ export default {
       text: '',
       selected: '',
       color: '',
+      url: '',
+      isValidImage: false,
       errors: {
         color: '',
         selected: '',
+        url: '',
       },
     }
   },
   methods: {
-    validateForm(field) {
-      if (field === 'color' && (!this.color || !this.validateColor(this.color))) {
+    validateFormColor() {
+      if (!this.color || !this.validateColor(this.color)) {
         this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
-      }else if (field === 'selected' && (this.selected === '')){
-        this.errors.selected = 'Elige tu esquema de color';
+      } else if (this.selected === ''){
+        this.errors.selected = 'Elige tu esquema de color.';
       } else {
-        this.errors[field] = '';
+        this.errors.color = '';
+        this.errors.selected = '';
+      }
+    },
+    validateFormImage() {
+      if (!this.checkImage()){
+        this.errors.url = 'Indica una URL válida.';
+      } else {
+        this.errors.url = '';
       }
     },
     /* se valida el formato de entrada y se convierte a Hexadecimal */
@@ -59,12 +70,31 @@ export default {
       console.log(this.color)
       return this.color
     },
-
-    submitForm(){
-      this.validateForm('color','selected');
+    /*valida si la url carga la imagen*/
+    validateImageURL(url) {
+      let img = new Image();
+      img.onload = () => this.isValidImage = true;
+      img.onerror = () => this.isValidImage = false;
+      img.src = url;
+    },
+    checkImage() {
+      this.validateImageURL(this.url);
+    },
+    submitFormColor(){
+      this.validateFormColor();
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.color);
+        this.$refs.rescolor.fetchColorPalette()
+      }
+    },
+    submitFormImage(){
+      this.checkImage();
+      this.validateFormImage();
+
+      if (!Object.values(this.errors).some(error => error !== '')) {
+        console.log('Url enviada:', this.url);
+        this.$refs.rescolor.getPaletteImageColor() // TODO: cambiar metodo de envio
       }
     },
   }
@@ -82,10 +112,10 @@ export default {
             <label for="color"></label>
             <input
                 id="color"
-                placeholder="#ffffff"
+                placeholder="F28585"
                 v-model="color"
                 type="text"
-                @change="validateForm('color')"
+                @change="submitFormColor('color')"
                 >
             <p class="p-error">{{ errors.color }}</p>
           </article>
@@ -94,8 +124,8 @@ export default {
             <!--Dropdown menu-->
             <select class="home-select"
                 v-model="selected"
-                id="esquema"
-                @change="validateForm('selected')"
+                id="selected"
+                @change="submitFormColor('selected')"
                 >
               <option disabled value="">Selecciona un modo</option>
               <option value="monochrome">Monocromo</option>
@@ -115,28 +145,29 @@ export default {
       </section>
       <section class="main">
         <h2>O elige una <span class="main-color">imagen_</span></h2>
-        <p>Elige una imagen jpg o png.</p>
+        <p>Introduce la Url de la imagen.</p>
         <form @submit.prevent="submitForm">
-          <article class="article-content">
-          <!--input tipo file-->
+          <article>
+
+          <!--Input tipo URL-->
             <input
-                id="imagen"
-                placeholder="#ffffff"
-                type="file"
-                accept="image/jpg"
-                @change="uploadImage"
+                id="url"
+                placeholder="http://midireccion.com/mi-imagen.jpg"
+                v-model="url"
+                type="url"
+                @change="submitFormImage('url')"
             >
-            <button class="button" type="submit">Subir</button>
-            <p class="p-error">{{ errors.imagen }}</p>
+            <button class="button" type="submit">Hornear</button>
+            <p class="p-error">{{ errors.url }}</p>
           </article>
         </form>
       </section>
     </article>
     <section class="content-section">
-      <resultado-color :color="color" :selected="selected"></resultado-color>
+      <resultado-color :color="color" :selected="selected" ref="rescolor"></resultado-color>
+      <resultado-imagen :url="url" ref="resimagen"></resultado-imagen>
     </section>
   </main>
-
 </template>
 
 <style scoped>
@@ -154,8 +185,9 @@ export default {
   padding: 0 6rem 0 6rem;
 }
 .content-section{
-  align-content:center;
-  width: 40%;
+  /*padding-top: 2rem;*/
+  width: 50%;
+  margin: auto;
 }
 section option{
   border: 1px #797474;
@@ -167,7 +199,7 @@ section option{
 }
 .content-article{
   margin: auto;
-  width: 60%;
+  width: 50%;
 }
 .article-content{
   display:inline-flex;
@@ -206,9 +238,20 @@ input {
   margin-top: 0.3125rem;
 
 }
+.custom-file {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.custom-file :hover {
+  background-color: #45a049;
+}
 
 button[type="submit"] {
-
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: pre;

@@ -107,6 +107,13 @@ ul {
   list-style: none;
   padding-left: 0;
 }
+.p-validado{
+  color: darkgreen;
+}
+.p-error{
+  color: #C2431E;
+  font-size: small;
+}
 /*estilo generico footer*/
 footer {
   /*margin-top: auto;*/

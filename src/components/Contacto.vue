@@ -123,13 +123,6 @@ export default {
 h2{
   color: #4E3D90;
 }
-.p-validado{
-  color: darkgreen;
-}
-.p-error{
-  color: #C2431E;
-}
-
 .form{
   justify-self: center;
   padding: 2rem 2rem;
