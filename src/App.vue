@@ -10,9 +10,9 @@ export default {
 <template>
   <Navbar/>
   <main class="container">
-    <content class="container-div">
+    <section class="container-div">
     <router-view />
-    </content>
+    </section>
   </main>
   <Footer />
 </template>

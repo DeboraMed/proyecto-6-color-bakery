@@ -73,9 +73,8 @@ export default {
     /*valida si la url carga la imagen*/
     validateImageURL(url) {
       let img = new Image();
-      console.log("Esto pasa")
-      img.onload = () => {this.isValidImage = true; this.refreshErrors()}
-      img.onerror = () => {this.isValidImage = false; this.refreshErrors()}
+      img.onload = () => {this.isValidImage = true; this.refreshErrors(); console.log('Url valida')}
+      img.onerror = () => {this.isValidImage = false; this.refreshErrors(); console.log('Url no valida')}
       img.src = url;
       console.log(url)
     },
@@ -96,7 +95,7 @@ export default {
     refreshErrors() {
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
-        this.$refs.rescolor.getPaletteImageColor() // TODO: cambiar metodo de envio
+        /*this.$refs.rescolor.getPaletteImageColor() */
       }
     }
   }
@@ -167,7 +166,7 @@ export default {
     </article>
     <section class="content-section">
       <resultado-color :color="color" :selected="selected" ref="rescolor"></resultado-color>
-      <resultado-imagen :url="url" ref="resimagen"></resultado-imagen>
+  <!--<resultado-imagen :url="url" ref="resimagen"></resultado-imagen>-->
     </section>
   </main>
 </template>
