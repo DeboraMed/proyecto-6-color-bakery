@@ -72,11 +72,18 @@ export default {
     },
     /*valida si la url carga la imagen*/
     validateImageURL(url) {
-      let img = new Image();
-      img.onload = () => {this.isValidImage = true; this.refreshErrors(); console.log('Url valida')}
-      img.onerror = () => {this.isValidImage = false; this.refreshErrors(); console.log('Url no valida')}
-      img.src = url;
-      console.log(url)
+      return new Promise((resolve, reject) => {
+        let img = new Image();
+        img.onload = () => {
+          this.isValidImage = true;
+          resolve();
+        }
+        img.onerror = () => {
+          this.isValidImage = false;
+          resolve();
+        }
+        img.src = url;
+      });
     },
     submitFormColor(){
       this.validateFormColor();
@@ -86,18 +93,16 @@ export default {
         this.$refs.rescolor.fetchColorPalette()
       }
     },
-    submitFormImage(){
+    async submitFormImage(){
+      await this.validateImageURL(this.url);
       this.validateFormImage();
-      this.validateImageURL(this.url);
-
-
     },
     refreshErrors() {
-      if (!Object.values(this.errors).some(error => error !== '')) {
+      if (!Object.values(this.errors.url).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
         /*this.$refs.rescolor.getPaletteImageColor() */
       }
-    }
+    },
   }
 }
 </script>
