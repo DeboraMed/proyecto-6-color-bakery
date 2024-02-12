@@ -30,7 +30,7 @@ export default {
       }
     },
     validateFormImage() {
-      if (!this.checkImage()){
+      if (!this.isValidImage){
         this.errors.url = 'Indica una URL válida.';
       } else {
         this.errors.url = '';
@@ -73,12 +73,11 @@ export default {
     /*valida si la url carga la imagen*/
     validateImageURL(url) {
       let img = new Image();
-      img.onload = () => this.isValidImage = true;
-      img.onerror = () => this.isValidImage = false;
+      console.log("Esto pasa")
+      img.onload = () => {this.isValidImage = true; this.refreshErrors()}
+      img.onerror = () => {this.isValidImage = false; this.refreshErrors()}
       img.src = url;
-    },
-    checkImage() {
-      this.validateImageURL(this.url);
+      console.log(url)
     },
     submitFormColor(){
       this.validateFormColor();
@@ -89,14 +88,17 @@ export default {
       }
     },
     submitFormImage(){
-      this.checkImage();
       this.validateFormImage();
+      this.validateImageURL(this.url);
 
+
+    },
+    refreshErrors() {
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
         this.$refs.rescolor.getPaletteImageColor() // TODO: cambiar metodo de envio
       }
-    },
+    }
   }
 }
 </script>
