@@ -5,10 +5,6 @@ import {createRouter, createWebHashHistory} from "vue-router";
 const routes = [
     { path: '/', component: Home },
     {
-        path: '/imgcolor',
-        component: () => import('../components/ResultadoImagen.vue')
-    },
-    {
         path: '/registro',
         component: () => import('../components/Registro.vue')
     },

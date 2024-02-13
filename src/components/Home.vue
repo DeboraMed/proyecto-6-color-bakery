@@ -6,7 +6,7 @@ export default {
   components: {ResultadoColor, ResultadoImagen},
   data() {
     return {
-      flag: true, // flag
+      flag: false, // flag
       text: '',
       selected: '',
       color: '',
@@ -20,24 +20,7 @@ export default {
     }
   },
   methods: {
-    validateFormColor() {
-      if (!this.color || !this.validateColor(this.color)) {
-        this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
-      } else if (this.selected === ''){
-        this.errors.selected = 'Elige tu esquema de color.';
-      } else {
-        this.errors.color = '';
-        this.errors.selected = '';
-      }
-    },
-    validateFormImage() {
-      if (!this.isValidImage){
-        this.errors.url = 'Indica una URL válida.';
-      } else {
-        this.errors.url = '';
-      }
-    },
-    /* se valida el formato de entrada y se convierte a Hexadecimal */
+    /* se valida el formato de entrada del color y se convierte a Hexadecimal */
     validateColor(color){
       const regexHex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       const regexRgb = /^([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5])$/;
@@ -71,12 +54,13 @@ export default {
       console.log(this.color)
       return this.color
     },
-    /*valida si la url carga la imagen*/
+    /*valida si la url carga una imagen o no*/
     validateImageURL(url) {
       return new Promise((resolve, reject) => {
         let img = new Image();
         img.onload = () => {
           this.isValidImage = true;
+          this.$refs.resimagen.getPaletteImageColor() // metodo de ResultadoImagen.vue que valida
           resolve();
         }
         img.onerror = () => {
@@ -86,6 +70,25 @@ export default {
         img.src = url;
       });
     },
+    /* validaciones de los formularios */
+    validateFormColor() {
+      if (!this.color || !this.validateColor(this.color)) {
+        this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
+      } else if (this.selected === ''){
+        this.errors.selected = 'Elige tu esquema de color.';
+      } else {
+        this.errors.color = '';
+        this.errors.selected = '';
+      }
+    },
+    validateFormImage() {
+      if (!this.isValidImage){
+        this.errors.url = 'Indica una URL válida.';
+      } else {
+        this.errors.url = '';
+      }
+    },
+    /* submit si las entradas de los formularios son válidas */
     submitFormColor(){
       this.validateFormColor();
 
@@ -101,7 +104,7 @@ export default {
     refreshErrors() {
       if (!Object.values(this.errors.url).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
-        this.$refs.rescolor.getPaletteImageColor()
+
       }
     },
   }
@@ -152,7 +155,7 @@ export default {
       </section>
       <section class="main">
         <h2>O elige una <span class="main-color">imagen_</span></h2>
-        <p>Introduce la Url de la imagen.</p>
+        <p>Introduce la URL de la imagen.</p>
         <form @submit.prevent="submitForm">
           <article>
 
@@ -172,10 +175,10 @@ export default {
     </article>
     <section class="content-section">
       <article v-if="!flag">
-        <resultado-color :color="color" :selected="selected" ref="rescolor"></resultado-color>
+        <resultado-color :color="color" :selected="selected" ref="rescolor"/>
       </article>
-      <article v-if="flag">
-        <resultado-imagen :url="url" ref="resimagen"></resultado-imagen>
+      <article v-else>
+        <resultado-imagen :url="url" ref="resimagen"/>
       </article>
     </section>
   </main>

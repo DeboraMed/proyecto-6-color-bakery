@@ -42,7 +42,7 @@ export default {
 <template>
   <main class="main-content-color">
   <section class="container-img">
-    <article v-if="!colorPalette" class="main-img" alt="Horno de colores" title="Horno de colores"></article>
+    <article v-if="!colorPalette" class="main-img" title="Horno de colores"></article>
     <section>
       <article v-if="colorPalette" class="content-color">
         <article v-for="(color, index) in colorPalette.colors" :key="color.hex.value"

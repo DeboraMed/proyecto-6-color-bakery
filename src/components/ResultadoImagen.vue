@@ -1,20 +1,16 @@
 <script>
 import ColorThief from 'colorthief'
 
+/* uso de la libreria ColorThief con la URL de la imagen dada */
 export default {
-  props: {
-    url: {
-      type: String,
-      required: true,
-    }
-  },
+  props: ['url'],
   data() {
     return {
-      flag: true, // bandera
       palette: [],
       hexPalette: [],
       color: '',
-      imageLoaded: false
+      imageLoaded: false,
+      imageError: false,
     }
   },
   watch: {
@@ -27,6 +23,10 @@ export default {
   methods: {
     onImageLoad() {
       this.imageLoaded = true;
+      this.imageError = false;
+    },
+    onImageError() {
+      this.imageError = true;
     },
     getPaletteImageColor() {
       let colorThief = new ColorThief();
@@ -42,6 +42,7 @@ export default {
         this.hexPalette.push(this.convertRGBtoHex(r, g, b))
       }
       console.log(this.hexPalette)
+      console.log(this.url)
       return this.hexPalette;
     },
     convertRGBtoHex(r,g,b){
@@ -66,14 +67,15 @@ export default {
 <template>
   <main class="main-content-color">
     <section>
-      <article v-if="!flag" class="main-img" alt="Horno de colores" title="Horno de colores"></article>
-      <article v-if="flag">
+      <article v-if="!url" class="main-img" title="Horno de colores"></article>
+      <article v-else>
       <div class="resultado-imagen">
           <div class="image-container">
-            <img src="https://loremflickr.com/420/340" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad">
+            <img :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
             <!--https://loremflickr.com/420/340-->
           </div>
-          <div v-for="(color,i) in this.hexPalette"
+          <div v-if="imageError">La imagen no se pudo cargar.</div>
+          <div v-if="!imageError" v-for="(color,i) in this.hexPalette"
                :key="i"
                :style="`background-color: #${color}`"
                class="tile">
