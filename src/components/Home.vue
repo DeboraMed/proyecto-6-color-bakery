@@ -6,7 +6,7 @@ export default {
   components: {ResultadoColor, ResultadoImagen},
   data() {
     return {
-      flag: false, // flag
+      inputType: false, // flag para el formulario
       text: '',
       selected: '',
       color: '',
@@ -60,7 +60,6 @@ export default {
         let img = new Image();
         img.onload = () => {
           this.isValidImage = true;
-          this.$refs.resimagen.getPaletteImageColor() // metodo de ResultadoImagen.vue que valida
           resolve();
         }
         img.onerror = () => {
@@ -94,19 +93,29 @@ export default {
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.color);
+        this.inputType = false;
         this.$refs.rescolor.fetchColorPalette()
       }
     },
     async submitFormImage(){
       await this.validateImageURL(this.url);
       this.validateFormImage();
-    },
-    refreshErrors() {
+
       if (!Object.values(this.errors.url).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
-
+        this.inputType = true;
+        this.$refs.resimagen.getPaletteImageColor()
       }
     },
+   /* refreshErrors() {
+
+      if (!Object.values(this.errors.url).some(error => error !== '')) {
+        console.log('Url enviada:', this.url);
+        this.inputType = true;
+        this.$refs.resimagen.getPaletteImageColor()
+
+      }
+    },*/
   }
 }
 </script>
@@ -117,7 +126,7 @@ export default {
       <section class="main">
         <h2>Hornea tu paleta de <span class="main-color">color</span> favorita_</h2>
         <p>Introduce un color en formato RGB o HEX y elige el estilo de tu paleta de color.</p>
-        <form @submit.prevent="submitForm">
+        <form @submit.prevent="submitFormColor">
           <article>
             <label for="color"></label>
             <input
@@ -155,8 +164,8 @@ export default {
       </section>
       <section class="main">
         <h2>O elige una <span class="main-color">imagen_</span></h2>
-        <p>Introduce la URL de la imagen.</p>
-        <form @submit.prevent="submitForm">
+        <p>Introduce la URL de la imagen jpg o png.</p>
+        <form @submit.prevent="submitFormImage">
           <article>
 
           <!--Input tipo URL-->
@@ -174,7 +183,7 @@ export default {
       </section>
     </article>
     <section class="content-section">
-      <article v-if="!flag">
+      <article v-if="!inputType">
         <resultado-color :color="color" :selected="selected" ref="rescolor"/>
       </article>
       <article v-else>
