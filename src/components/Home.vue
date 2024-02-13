@@ -3,9 +3,10 @@
   import ResultadoColor from "./ResultadoColor.vue";
   import ResultadoImagen from "./ResultadoImagen.vue";
 export default {
-  components: {ResultadoColor},
+  components: {ResultadoColor, ResultadoImagen},
   data() {
     return {
+      flag: true, // flag
       text: '',
       selected: '',
       color: '',
@@ -51,10 +52,10 @@ export default {
         let g = Number(color[1])
         let b = Number(color[2])
 
-        return this.ConvertRGBtoHex(r,g,b)
+        return this.convertRGBtoHex(r,g,b)
       }
     },
-    ConvertRGBtoHex(r, g, b) {
+    convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
       let blue = b.toString(16);
@@ -100,7 +101,7 @@ export default {
     refreshErrors() {
       if (!Object.values(this.errors.url).some(error => error !== '')) {
         console.log('Url enviada:', this.url);
-        /*this.$refs.rescolor.getPaletteImageColor() */
+        this.$refs.rescolor.getPaletteImageColor()
       }
     },
   }
@@ -144,7 +145,7 @@ export default {
               <option value="quad">Cuarteto</option>
             </select>
             <p class="p-error">{{ errors.selected }}</p>
-            <button class="button" type="submit">Hornear</button>
+            <button class="button" type="submit">Hornear color</button>
           <!--<span> Seleccionado: {{ selected }}</span>-->
           </article>
         </form>
@@ -163,15 +164,19 @@ export default {
                 type="url"
                 @change="submitFormImage('url')"
             >
-            <button class="button" type="submit">Hornear</button>
+            <button class="button" type="submit">Hornear imagen</button>
             <p class="p-error">{{ errors.url }}</p>
           </article>
         </form>
       </section>
     </article>
     <section class="content-section">
-      <resultado-color :color="color" :selected="selected" ref="rescolor"></resultado-color>
-  <!--<resultado-imagen :url="url" ref="resimagen"></resultado-imagen>-->
+      <article v-if="!flag">
+        <resultado-color :color="color" :selected="selected" ref="rescolor"></resultado-color>
+      </article>
+      <article v-if="flag">
+        <resultado-imagen :url="url" ref="resimagen"></resultado-imagen>
+      </article>
     </section>
   </main>
 </template>
