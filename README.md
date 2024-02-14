@@ -1,40 +1,23 @@
 
-# Primera Entrega Intermedia: Estructura y Funcionalidad Básica
-Nos enfocaremos en comenzar a transformar las ideas y planes iniciales en una aplicación concreta.
+# Color Bakery
+### App Idea
+The application I’m going to develop, **ColorBakery** , is about colors, searching for color palettes given a base color, and having the option to obtain the most representative colors of an image that the user could upload. Its use and utility are mainly focused on artists, web developers, UI UX designers, and anyone interested in color from a practical perspective.
 
-Esta etapa permitirá evaluar el progreso en la implementación de las funcionalidades y la estructura básica del proyecto, así como la aplicación práctica de los conceptos de Vue.js y otras tecnologías involucradas.
+Project Description: The project aims to be practical, facilitating the user’s use of colors, ranges, and palettes to assist in design.
 
-## Objetivos de Aprendizaje y Criterios de Evaluación
-- **RA 4 (c, d, f, g, h):** Creación y uso de arrays y objetos personalizados; definición de la estructura de objetos, creación de métodos y propiedades; depuración y documentación del código.
-- **RA 5 (c, h):** Diferenciación de tipos de eventos; prueba y documentación del manejo de eventos.
-- **RA 6 (c):** Creación y verificación de código que accede a la estructura del documento.
-## Entregables
-### Código Fuente Parcial:
-Implementación de la estructura básica de la aplicación utilizando Vue.js.
+Planned Features: The application will feature a color search engine, where by entering the HEX or RGB code of the color we will have the possibility to search for “Palettes” based on it.
+- **Option 1:** It will also offer the possibility to use an image (jpg, png) to obtain the most representative colors of it.
+- **Option 2:** Task/project manager where you can associate a color palette (or several) with a project.
+- **Other ideas:** Have a collection where you can save favorites without logging in to local storage, have a random feature. In addition, the application will include a login, a profile page, and a contact form.
 
-Creación y uso de arrays y objetos personalizados relevantes para la funcionalidad de la aplicación.
+### Technology to be used 
+In addition to Vue, I will use some color library to obtain the chromatic ranges. And as API, I will use **TheColorAPI* and the library **ColorThief***.
 
-Código inicial que demuestre la interacción con la estructura del documento (por ejemplo, mediante el uso de v-model, v-for, eventos, etc.).
+### Target Audience:
+As I mentioned earlier, the target audience for my application is mainly people who work with color, web designers, graphic designers, illustrators, etc. Also, anyone who needs to do a specific design customization job can use it to get the most suitable colors and choose the range.
 
+----------------------------------------------------------------
 
-### Documentación Parcial del Código:
-Documentación del progreso hasta el momento, incluyendo explicaciones de cómo se han implementado ciertas funcionalidades, estructuras de objetos, métodos y propiedades.
-Comentarios en el código para explicar secciones importantes o complejas, enfocándose en la lógica detrás de la estructura de objetos y la implementación de métodos y propiedades
-
-- Notas:
-
-Esta entrega es una oportunidad para mostrar cómo vuestra idea inicial está tomando forma. 
-
-Centraos en la calidad y claridad del código, así como en la implementación efectiva de las funcionalidades clave.
-Aseguraos de que la documentación refleje vuestro progreso y explique vuestras decisiones técnicas.
-Los comentarios en el código son importantes para entender vuestra lógica.
-
-- Estructura en carpetas, modulos, layouts,
-- Páginas de la app
-- Enrutamiento (Lazy load)
-- Página de contacto validada
-
------------------------------------------------------------------
 # Vue 3 + Vite
 
 This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
