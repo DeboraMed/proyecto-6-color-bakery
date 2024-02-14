@@ -26,15 +26,15 @@ export default {
       console.log(email)
       return re.test(email);
     },
-  },
-  submitForm() {
-    this.validateForm('email');
-    this.validateForm('password');
+    submitForm() {
+      this.validateForm('email');
+      this.validateForm('password');
 
-    if (!Object.values(this.errors).some(error => error !== '')) {
-      console.log('Formulario enviado:', this.email, this.password);
+      if (!Object.values(this.errors).some(error => error !== '')) {
+        console.log('Formulario enviado:', this.email, this.password);
+      }
     }
-  }
+  },
 }
 </script>
 
@@ -63,7 +63,7 @@ export default {
               placeholder="Contraseña"
               v-model="password"
               type="password"
-              @change="validateForm('password')">
+              @change="submitForm('password')">
           <p class="p__error">{{ errors.password }}</p>
         </fieldset>
         <button class="button" type="submit">Enviar</button>

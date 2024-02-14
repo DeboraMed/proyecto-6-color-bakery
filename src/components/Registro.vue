@@ -1,11 +1,31 @@
 <script>
+/**
+ * Este componente es el encargado de mostrar el formulario de registro de la aplicación,
+ * que permite al usuario introducir su nombre, correo electrónico y contraseña para
+ * crear una cuenta.
+ */
 export default {
   data() {
     return {
+      /**
+       * nombre: una cadena que almacena el nombre introducido por el usuario
+       */
       nombre: '',
+      /**
+       * email: cadena que almacena el correo electrónico introducido por el usuario.
+       */
       email: '',
+      /**
+       * password: una cadena que almacena la contraseña introducida por el usuario.
+       */
       password: '',
+      /**
+       * re_password: cadena que almacena la confirmación de la contraseña introducida por el usuario.
+       */
       re_password: '',
+      /**
+       * errors: Un objeto que almacena los mensajes de error de las validaciones de los campos del formulario, que son:
+       */
       errors: {
         nombre: '',
         email: '',
@@ -15,6 +35,12 @@ export default {
     }
   },
   methods: {
+    /**
+     * validateForm(field): método que recibe el nombre de un campo del formulario como parámetro
+     * y valida su valor según las reglas establecidas.
+     * Si el valor es inválido, muestra el mensaje de error correspondiente en la propiedad errors.
+     * @param field
+     */
     validateForm(field) {
       if (field === 'nombre' && (!this.nombre || typeof this.nombre !== 'string' || this.nombre.length < 3)) {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
@@ -28,14 +54,24 @@ export default {
         this.errors[field] = '';
       }
     },
+    /**
+     * validateEmail(email): método que recibe un correo electrónico como parámetro y
+     * devuelve un booleano que indica si tiene un formato válido o no. Utiliza una
+     * expresión regular para comprobar el formato.
+     * @param email
+     * @returns {boolean}
+     */
     validateEmail(email) {
       let re = /\w+@\w+\.+[a-z]/;
       return re.test(email);
     },
+    /**
+     * submitForm(): método que se ejecuta al enviar el formulario de registro.
+     * Llama a validateForm() para cada campo del formulario y si no hay errores,
+     * envía los datos al servidor. También muestra un mensaje en la consola con los datos enviados.
+     */
     submitForm() {
-      this.validateForm('nombre');
-      this.validateForm('email');
-      this.validateForm('password');
+      this.validateForm('nombre','email','password','re_password');
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.nombre, this.email, this.password, this.re_password);
@@ -61,7 +97,7 @@ export default {
               placeholder="Nombre"
               v-model="nombre"
               type="text"
-              @change="validateForm('nombre')">
+              @change="submitForm('nombre')">
           <p class="p__error">{{ errors.nombre }}</p>
         </fieldset>
         <fieldset>
@@ -71,7 +107,7 @@ export default {
               placeholder="email@email.com"
               v-model="email"
               type="text"
-              @change="validateForm('email')">
+              @change="submitForm('email')">
           <p class="p__error">{{ errors.email }}</p>
         </fieldset>
         <fieldset>
@@ -81,7 +117,7 @@ export default {
               placeholder="Contraseña"
               v-model="password"
               type="password"
-              @change="validateForm('password')">
+              @change="submitForm('password')">
           <p class="p__error">{{ errors.password }}</p>
         </fieldset>
         <fieldset>

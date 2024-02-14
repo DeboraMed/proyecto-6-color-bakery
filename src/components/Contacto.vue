@@ -33,10 +33,7 @@ export default {
       return re.test(email);
     },
     submitForm() {
-      this.validateForm('nombre');
-      this.validateForm('email');
-      this.validateForm('titulo');
-      this.validateForm('mensaje');
+      this.validateForm('nombre','email','titulo','mensaje');
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.nombre, this.email, this.titulo, this.mensaje);
@@ -62,7 +59,7 @@ export default {
               placeholder="Nombre"
               v-model="nombre"
               type="text"
-              @change="validateForm('nombre')">
+              @change="submitForm('nombre')">
           <p class="p__error">{{ errors.nombre }}</p>
         </fieldset>
         <fieldset>
@@ -72,7 +69,7 @@ export default {
               placeholder="email@email.com"
               v-model="email"
               type="text"
-              @change="validateForm('email')">
+              @change="submitForm('email')">
           <p class="p__error">{{ errors.email }}</p>
         </fieldset>
         <fieldset>
@@ -82,7 +79,7 @@ export default {
               placeholder="Titulo"
               v-model="titulo"
               type="text"
-              @change="validateForm('titulo')">
+              @change="submitForm('titulo')">
           <p class="p__error">{{ errors.titulo }}</p>
         </fieldset>
         <fieldset>
@@ -92,7 +89,7 @@ export default {
               placeholder="Escriba aqui su mensaje"
               v-model="mensaje"
               rows="6"
-              @change="validateForm('mensaje')"></textarea>
+              @change="submitForm('mensaje')"></textarea>
           <p class="p__error">{{ errors.mensaje }}</p>
         </fieldset>
         <button class="button" type="submit">Enviar</button>
