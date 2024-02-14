@@ -3,7 +3,7 @@ import ColorThief from 'colorthief'
 
 /* uso de la libreria ColorThief con la URL de la imagen dada */
 export default {
-  props: ['url'],
+  props: ['url','form'],
   data() {
     return {
       palette: [],
@@ -24,11 +24,13 @@ export default {
     onImageLoad() {
       this.imageLoaded = true;
       this.imageError = false;
+      /*this.getPaletteImageColor();*/
     },
     onImageError() {
       this.imageError = true;
     },
     getPaletteImageColor() {
+      this.hexPalette = [];
       let colorThief = new ColorThief();
       this.palette = colorThief.getPalette(this.$refs.img);
       this.color = colorThief.getColor(this.$refs.img);
@@ -66,19 +68,22 @@ export default {
 
 <template>
   <main class="main-content-color">
-    <section>
-      <article v-if="!url" class="main-img" title="Horno de colores"></article>
-      <article v-else>
-      <div class="resultado-imagen">
-          <div class="image-container">
-            <img :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
-            <!--https://loremflickr.com/420/340-->
+    <section v-if="!url" class="main-img" title="Horno de colores"></section>
+    <section class="section-content-color">
+      <article v-if="url" class="polaroid rotarIzq">
+        <div class="image-container">
+          <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
+          <img :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
+        </div>
+        <div class="color-palette">
+          <div v-if="imageError" >
+           <img src="../assets/img/magdalenas-quemadas-noimagen.png">
+            <p>Los siento...Tu imagen no se pudo cargar.</p>
           </div>
-          <div v-if="imageError">La imagen no se pudo cargar.</div>
-          <div v-if="!imageError" v-for="(color,i) in this.hexPalette"
+          <div class="color-swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
                :key="i"
                :style="`background-color: #${color}`"
-               class="tile">
+          >
             <span class="color">#{{color}}</span>
           </div>
         </div>
@@ -90,10 +95,12 @@ export default {
 <style scoped>
 .color {
   filter: invert(100%);
-  background-color: rgba(255,255,255,0.4);
 }
 .main-content-color{
-  /*padding-top: 4rem;*/
+  padding-top: 2rem;
+  display: flex; /* centrar */
+  justify-content: center; /* centrar */
+  align-items: center; /* centrar */
   position: relative;
   margin: auto;
   color: black;
@@ -113,7 +120,57 @@ export default {
 
   animation: fadein 2s ease 0s 1 normal forwards;
 }
+.section-content-color{
+  width: auto;
+  height: auto;
+}
+.polaroid {
+  display: flex; /* centrar */
+  flex-direction: column;
+  justify-content: center; /* centrar */
+  align-items: center; /* centrar */
+  width: auto;
+  height: auto;
+  min-width: 300px;
+  min-height: 300px;
+  padding:10px 10px 50px 10px;
+  border-radius: 10px;
+  background-color:white;
+  overflow: hidden;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.rotarIzq {
+  transform:rotate(5deg);
+  -ms-transform:rotate(5deg); /*!* IE9 *!*/
+  -webkit-transform:rotate(5deg); /*!* Safari y Chrome *!*/
+  -moz-transform:rotate(5deg);
+}
 
+.image-container {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  max-width: 480px;
+  max-height: 500px;
+  position: relative;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-error{
+  padding: 1rem;
+  text-align: center;
+}
+.color-palette {
+  display: flex;
+}
+.color-swatch {
+  width: 6rem;
+  height: 5rem;
+}
 /*animacion de imagen*/
 @keyframes fadein {
   0% {

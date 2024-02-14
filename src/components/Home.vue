@@ -6,7 +6,9 @@ export default {
   components: {ResultadoColor, ResultadoImagen},
   data() {
     return {
-      inputType: false, // flag para el formulario
+      showColor: true, // flag para el formulario
+      showImage: false,
+      form: '',
       text: '',
       selected: '',
       color: '',
@@ -89,33 +91,36 @@ export default {
     },
     /* submit si las entradas de los formularios son válidas */
     submitFormColor(){
-      this.validateFormColor();
+      try {
+        this.validateFormColor();
 
-      if (!Object.values(this.errors).some(error => error !== '')) {
-        console.log('Formulario enviado:', this.color);
-        this.inputType = false;
-        this.$refs.rescolor.fetchColorPalette()
+        if (!Object.values(this.errors).some(error => error !== '')) {
+          console.log('Formulario enviado:', this.color);
+          this.showColor = true;
+          this.showImage = false;
+          this.$refs.rescolor.fetchColorPalette()
+        }
+      } catch (error){
+        console.error('Ocurrio un error al enviar el formulario de color', error)
       }
     },
     async submitFormImage(){
-      await this.validateImageURL(this.url);
-      this.validateFormImage();
+      try {
+        await this.validateImageURL(this.url);
+        this.validateFormImage();
 
-      if (!Object.values(this.errors.url).some(error => error !== '')) {
-        console.log('Url enviada:', this.url);
-        this.inputType = true;
-        this.$refs.resimagen.getPaletteImageColor()
+        if (!Object.values(this.errors).some(error => error !== '')) {
+          console.log('Url enviada:', this.url);
+          this.showImage = true;
+          this.showColor = false;
+          this.$refs.resimagen.getPaletteImageColor();
+
+          //this.url = '';
+        }
+      } catch (error){
+        console.error('Ha ocurrido un error al enviar el formulario de imagen', error)
       }
     },
-   /* refreshErrors() {
-
-      if (!Object.values(this.errors.url).some(error => error !== '')) {
-        console.log('Url enviada:', this.url);
-        this.inputType = true;
-        this.$refs.resimagen.getPaletteImageColor()
-
-      }
-    },*/
   }
 }
 </script>
@@ -129,6 +134,8 @@ export default {
         <form @submit.prevent="submitFormColor">
           <article>
             <label for="color"></label>
+
+            <!-- Input del color -->
             <input
                 id="color"
                 placeholder="F28585"
@@ -156,10 +163,9 @@ export default {
               <option value="triad">Tríada</option>
               <option value="quad">Cuarteto</option>
             </select>
-            <p class="p-error">{{ errors.selected }}</p>
             <button class="button" type="submit">Hornear color</button>
-          <!--<span> Seleccionado: {{ selected }}</span>-->
           </article>
+          <p class="p-error">{{ errors.selected }}</p>
         </form>
       </section>
       <section class="main">
@@ -174,7 +180,7 @@ export default {
                 placeholder="http://midireccion.com/mi-imagen.jpg"
                 v-model="url"
                 type="url"
-                @change="submitFormImage('url')"
+                @submit="submitFormImage('url')"
             >
             <button class="button" type="submit">Hornear imagen</button>
             <p class="p-error">{{ errors.url }}</p>
@@ -183,10 +189,10 @@ export default {
       </section>
     </article>
     <section class="content-section">
-      <article v-if="!inputType">
-        <resultado-color :color="color" :selected="selected" ref="rescolor"/>
+      <article v-show="showColor">
+        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor"/>
       </article>
-      <article v-else>
+      <article v-show="showImage">
         <resultado-imagen :url="url" ref="resimagen"/>
       </article>
     </section>

@@ -41,7 +41,7 @@ export default {
 
 <template>
   <main class="main-content-color">
-  <section class="container-img">
+  <section>
     <article v-if="!colorPalette" class="main-img" title="Horno de colores"></article>
     <section>
       <article v-if="colorPalette" class="content-color">
@@ -77,7 +77,6 @@ export default {
   padding-bottom: 4rem;
   width: 100%;
   height: 35rem;
-
 
   background-image: url("../assets/img/horno-main.png");
   background-repeat: no-repeat;
