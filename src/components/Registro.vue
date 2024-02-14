@@ -46,12 +46,14 @@ export default {
 </script>
 
 <template>
-  <main class="main-content">
-    <section class="content-section"><img src="../assets/img/img-bolleria.png" alt="Bollitos de colores" title="Bollitos de colores"></section>
-    <article class="content-article">
+  <main class="main__content">
+    <figure class="content__section">
+      <img class="content__section__img" src="../assets/img/img-bolleria.png" alt="Bollitos de colores" title="Bollitos de colores">
+    </figure>
+    <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Registro_</h2>
-        <article>
+        <fieldset>
           <p> Regístrate en nuestra web.</p>
           <label for="name"></label>
           <input
@@ -60,9 +62,9 @@ export default {
               v-model="nombre"
               type="text"
               @change="validateForm('nombre')">
-          <p class="p-error">{{ errors.nombre }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.nombre }}</p>
+        </fieldset>
+        <fieldset>
           <label for="email"></label>
           <input
               id="email"
@@ -70,9 +72,9 @@ export default {
               v-model="email"
               type="text"
               @change="validateForm('email')">
-          <p class="p-error">{{ errors.email }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.email }}</p>
+        </fieldset>
+        <fieldset>
           <label for="contraseña"></label>
           <input
               id="password"
@@ -80,9 +82,9 @@ export default {
               v-model="password"
               type="password"
               @change="validateForm('password')">
-          <p class="p-error">{{ errors.password }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.password }}</p>
+        </fieldset>
+        <fieldset>
           <label for="contraseña"></label>
           <input
               id="re_password"
@@ -90,47 +92,35 @@ export default {
               v-model="re_password"
               type="password"
               @change="validateForm('re_password')">
-          <p class="p-error">{{ errors.re_password }}</p>
-        </article>
+          <p class="p__error">{{ errors.re_password }}</p>
+        </fieldset>
         <button class="button" type="submit">Enviar</button>
       </form>
-    </article>
+    </section>
   </main>
 </template>
 
 <style scoped>
-.main-content{
+.main__content{
   display: inline-flex;
   flex-wrap: wrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content-section{
+.content__section{
   margin: auto;
   width: 40%;
 }
-.content-section img{
+.content__section__img{
   width: 70%;
   margin: auto;
 }
-.content-article{
+.content__article{
   margin: auto;
   width: 60%;
 }
 h2{
   color: #4E3D90;
-}
-.p-validado{
-  color: darkgreen;
-}
-.p-error{
-  color: #C2431E;
-}
-
-.form{
-  justify-self: center;
-  padding: 0rem 2rem;
-  margin: 0rem 2rem;
 }
 form{
   text-align: left;
@@ -141,15 +131,5 @@ input {
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
-}
-
-button[type="submit"] {
-  background-color: #c2431e;
-  color: #fff;
-  cursor: pointer;
-  border: 0;
-  padding: 0.625rem 0.9375rem;
-  margin-top: 0.3125rem;
-  margin-right: 4rem;
 }
 </style>

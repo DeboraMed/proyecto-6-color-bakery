@@ -24,7 +24,7 @@ export default {
     onImageLoad() {
       this.imageLoaded = true;
       this.imageError = false;
-      /*this.getPaletteImageColor();*/
+      this.hexPalette = [];
     },
     onImageError() {
       this.imageError = true;
@@ -67,20 +67,20 @@ export default {
 </script>
 
 <template>
-  <main class="main-content-color">
-    <section v-if="!url" class="main-img" title="Horno de colores"></section>
-    <section class="section-content-color">
+  <main class="main__content">
+    <section v-if="!url" class="main__img" title="Horno de colores"></section>
+    <section class="content__image">
       <article v-if="url" class="polaroid rotarIzq">
-        <div class="image-container">
+        <picture class="image__container">
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
-          <img :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
-        </div>
-        <div class="color-palette">
+          <img class="image__container__img" :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
+        </picture>
+        <div class="color__palette">
           <div v-if="imageError" >
            <img src="../assets/img/magdalenas-quemadas-noimagen.png">
-            <p>Los siento...Tu imagen no se pudo cargar.</p>
+            <p class="image__error">Los siento...Tu imagen no se pudo cargar.</p>
           </div>
-          <div class="color-swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
+          <div class="color__swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
                :key="i"
                :style="`background-color: #${color}`"
           >
@@ -96,7 +96,7 @@ export default {
 .color {
   filter: invert(100%);
 }
-.main-content-color{
+.main__content{
   padding-top: 2rem;
   display: flex; /* centrar */
   justify-content: center; /* centrar */
@@ -107,7 +107,7 @@ export default {
   font-size: 1rem;
   text-shadow: #a4a4a4 1px 1px ;
 }
-.main-img{
+.main__img{
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: 100%;
@@ -120,33 +120,34 @@ export default {
 
   animation: fadein 2s ease 0s 1 normal forwards;
 }
-.section-content-color{
+.content__image{
   width: auto;
   height: auto;
+  animation: fadein 2s ease 0s 1 normal forwards;
 }
-.polaroid {
-  display: flex; /* centrar */
+/*.polaroid {
+  display: flex; !* centrar *!
   flex-direction: column;
-  justify-content: center; /* centrar */
-  align-items: center; /* centrar */
+  justify-content: center; !* centrar *!
+  align-items: center; !* centrar *!
   width: auto;
   height: auto;
   min-width: 300px;
   min-height: 300px;
   padding:10px 10px 50px 10px;
   border-radius: 10px;
-  background-color:white;
+  background-color: #f6f3eb;
   overflow: hidden;
   box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
 }
 .rotarIzq {
   transform:rotate(5deg);
-  -ms-transform:rotate(5deg); /*!* IE9 *!*/
-  -webkit-transform:rotate(5deg); /*!* Safari y Chrome *!*/
+  -ms-transform:rotate(5deg); !*!* IE9 *!*!
+  -webkit-transform:rotate(5deg); !*!* Safari y Chrome *!*!
   -moz-transform:rotate(5deg);
-}
+}*/
 
-.image-container {
+.image__container {
   width: auto;
   height: auto;
   display: flex;
@@ -155,21 +156,21 @@ export default {
   max-height: 500px;
   position: relative;
 }
-.image-container img {
+.image__container__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.image-error{
+.image__error{
   padding: 1rem;
   text-align: center;
 }
-.color-palette {
+.color__palette {
   display: flex;
 }
-.color-swatch {
+.color__swatch {
   width: 6rem;
-  height: 5rem;
+  height: 8rem;
 }
 /*animacion de imagen*/
 @keyframes fadein {

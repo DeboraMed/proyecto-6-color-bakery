@@ -40,12 +40,12 @@ export default {
 </script>
 
 <template>
-  <main class="main-content-color">
+  <main class="main__content__color">
   <section>
-    <article v-if="!colorPalette" class="main-img" title="Horno de colores"></article>
-    <section>
-      <article v-if="colorPalette" class="content-color">
-        <article v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
+    <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
+    <article>
+      <ul v-if="colorPalette" class="main__article">
+        <li v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
              :style="{
                 backgroundColor: color.hex.value,
                 boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
@@ -56,15 +56,15 @@ export default {
                 margin: '0 auto'
              }">
           {{ color.hex.value }}
-        </article>
-      </article>
-    </section>
+        </li>
+      </ul>
+    </article>
   </section>
   </main>
 </template>
 
 <style scoped>
-.main-content-color{
+.main__content__color{
   /*padding-top: 4rem;*/
   position: relative;
   margin: auto;
@@ -72,7 +72,7 @@ export default {
   font-size: 1rem;
   text-shadow: #a4a4a4 1px 1px ;
 }
-.main-img{
+.main__img{
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: 100%;
@@ -85,7 +85,7 @@ export default {
 
   animation: fadein 2s ease 0s 1 normal forwards;
 }
-.content-color{
+.main__article{
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: 100%;

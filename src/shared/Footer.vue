@@ -5,16 +5,16 @@
 <template>
   <footer>
     <!-- borde naranja -->
-    <section class="ft-init">
-        <div class="container-img">
-          <img class="background-img" src="../assets/img/color-bakery-texto.svg">
+    <section class="ft__init">
+        <div class="ft__init__img">
+          <img class="ft__init__background" src="../assets/img/color-bakery-texto.svg">
         </div>
 
     </section>
     <!-- Footer main -->
-    <section class="ft-main">
-      <div class="ft-main-item">
-        <img class="ft-title" src="../assets/img/color-bakery-texto-w.svg">
+    <section class="ft__main">
+      <div class="ft__main__item">
+        <img class="ft__title" src="../assets/img/color-bakery-texto-w.svg">
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Descubre</a></li>
@@ -22,8 +22,8 @@
           <li><a href="#">Logueate</a></li>
         </ul>
       </div>
-      <div class="ft-main-item">
-        <h2 class="ft-title">Sobre nosotros</h2>
+      <div class="ft__main__item">
+        <h2 class="ft__title">Sobre nosotros</h2>
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Explorar</a></li>
@@ -31,8 +31,8 @@
           <li><a href="#">Perfil</a></li>
         </ul>
       </div>
-      <div class="ft-main-item">
-        <h2 class="ft-title">Comentanos</h2>
+      <div class="ft__main__item">
+        <h2 class="ft__title">Comentanos</h2>
         <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
@@ -42,8 +42,8 @@
     </section>
 
     <!-- Footer legal -->
-    <section class="ft-legal">
-      <ul class="ft-legal-list">
+    <section class="ft__legal">
+      <ul class="ft__legal__list">
         <li><a href="#">Terminos y condiciones</a></li>
         <li><a href="#">Politica de privacidad</a></li>
         <li>&copy; 2024 Copyright Proyecto Vue/Laravel.</li>
@@ -53,13 +53,13 @@
 </template>
 
 <style scoped>
-.container-img{
+.ft__init__img{
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-end;
   background-color: #FFEFC9;
   }
-.background-img{
+.ft__init__background{
   margin-right: 1rem;
   margin-bottom: -1.1rem;
   width: 25%;
@@ -67,38 +67,48 @@
   right: 0;
 }
 /*footer general*/
-  .ft-main {
-    padding: 0.25rem 4.875rem;
-    display: flex;
-    flex-wrap: wrap;
-    bottom: 0;
-    background-color: #4E3D90;
-    text-decoration: none;
-  }
-  .ft-main-item {
-    padding: 1.25rem;
-    min-width: 12.5rem /*200px*/;
-  }
-  /*footer medias*/
+footer {
+  flex-shrink: 0;
+  bottom: 0;
+  width: 100%;
+  color: #bbb;
+  line-height: 1.5;
+}
+footer a {
+  text-decoration: none;
+  color: #eee;
+}
+footer a:hover {
+  color: #747bff;
+}
+.ft__title {
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.375rem;
+  padding-bottom: 0.625rem;
+}
+.ft__main {
+  padding: 0.25rem 4.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  bottom: 0;
+  background-color: #4E3D90;
+  text-decoration: none;
+}
+.ft__main__item {
+  padding: 1.25rem;
+  min-width: 12.5rem /*200px*/;
+}
+/*footer medias*/
 @media only screen and (min-width: 29.8125rem /*477px*/) {
-  .ft-main {
+  .ft__main {
     justify-content: space-around;
   }
 }
 @media only screen and (min-width: 77.5rem /*1240px*/ ) {
-  .ft-main {
+  .ft__main {
     justify-content: space-evenly;
   }
-}
-/*legal footer*/
-.ft-init {
-  /*background-color: #FFF8E8;*/
-  border-bottom-width: 4rem;
-  border-bottom-style: solid;
-  border-bottom-color: #FCBD7A;
-}
-a{
-  text-decoration: none;
 }
 /*contacto footer*/
 form {
@@ -115,21 +125,26 @@ input[type="button"] {
   margin-top: 0.3125rem;
 }
 /*legal footer*/
-.ft-legal {
+.ft__init {
+  border-bottom-width: 4rem;
+  border-bottom-style: solid;
+  border-bottom-color: #FCBD7A;
+}
+.ft__legal {
   padding: 0.05rem 1.5rem;
   background-color: #2E2067;
 }
-.ft-legal-list {
+.ft__legal__list {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-.ft-legal-list li {
+.ft__legal__list li {
   margin: 0.125rem 0.625rem;
   white-space: nowrap;
 }
 /* one before the last child */
-.ft-legal-list li:nth-last-child(2) {
+.ft__legal__list li:nth-last-child(2) {
   flex: 1;       /* same as flex-grow: 1; */
 }
 </style>

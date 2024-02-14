@@ -10,7 +10,7 @@ export default {
 <template>
   <Navbar/>
   <main class="container">
-    <section class="container-div">
+    <section class="container__section">
     <router-view />
     </section>
   </main>

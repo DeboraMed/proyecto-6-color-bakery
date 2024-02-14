@@ -2,8 +2,9 @@
   import axios from 'axios';
   import ResultadoColor from "./ResultadoColor.vue";
   import ResultadoImagen from "./ResultadoImagen.vue";
+  import HomeSection from "./HomeSection.vue";
 export default {
-  components: {ResultadoColor, ResultadoImagen},
+  components: {ResultadoColor, ResultadoImagen, HomeSection},
   data() {
     return {
       showColor: true, // flag para el formulario
@@ -126,10 +127,11 @@ export default {
 </script>
 
 <template>
-  <main class="main-content">
-    <article class="content-article">
-      <section class="main">
-        <h2>Hornea tu paleta de <span class="main-color">color</span> favorita_</h2>
+  <main class="main__content">
+    <section>
+    <article class="content__article">
+      <section class="main__section">
+        <h2>Hornea tu paleta de <span class="main__h2__color">color</span> favorita_</h2>
         <p>Introduce un color en formato RGB o HEX y elige el estilo de tu paleta de color.</p>
         <form @submit.prevent="submitFormColor">
           <article>
@@ -143,33 +145,33 @@ export default {
                 type="text"
                 @change="submitFormColor('color')"
                 >
-            <p class="p-error">{{ errors.color }}</p>
+            <p class="p__error">{{ errors.color }}</p>
           </article>
-          <article class="article-content">
+          <article class="section__article">
 
             <!--Dropdown menu-->
-            <select class="home-select"
+            <select class="home__select"
                 v-model="selected"
                 id="selected"
                 @change="submitFormColor('selected')"
                 >
-              <option disabled value="">Selecciona un modo</option>
-              <option value="monochrome">Monocromo</option>
-              <option value="monochrome-dark">Monocromo oscuro</option>
-              <option value="monochrome-light">Monocromo claro</option>
-              <option value="analogic">Analogico</option>
-              <option value="complement">Complementario</option>
-              <option value="analogic-complement">Analogico-Complementario</option>
-              <option value="triad">Tríada</option>
-              <option value="quad">Cuarteto</option>
+              <option class="home__select__option" disabled value="">Selecciona un modo</option>
+              <option class="home__select__option" value="monochrome">Monocromo</option>
+              <option class="home__select__option" value="monochrome-dark">Monocromo oscuro</option>
+              <option class="home__select__option" value="monochrome-light">Monocromo claro</option>
+              <option class="home__select__option" value="analogic">Analogico</option>
+              <option class="home__select__option" value="complement">Complementario</option>
+              <option class="home__select__option" value="analogic-complement">Analogico-Complementario</option>
+              <option class="home__select__option" value="triad">Tríada</option>
+              <option class="home__select__option" value="quad">Cuarteto</option>
             </select>
             <button class="button" type="submit">Hornear color</button>
           </article>
-          <p class="p-error">{{ errors.selected }}</p>
+          <p class="p__error">{{ errors.selected }}</p>
         </form>
       </section>
-      <section class="main">
-        <h2>O elige una <span class="main-color">imagen_</span></h2>
+      <section class="main__section">
+        <h2>O elige una <span class="main__h2__color">imagen_</span></h2>
         <p>Introduce la URL de la imagen jpg o png.</p>
         <form @submit.prevent="submitFormImage">
           <article>
@@ -183,12 +185,13 @@ export default {
                 @submit="submitFormImage('url')"
             >
             <button class="button" type="submit">Hornear imagen</button>
-            <p class="p-error">{{ errors.url }}</p>
+            <p class="p__error">{{ errors.url }}</p>
           </article>
         </form>
       </section>
     </article>
-    <section class="content-section">
+    </section>
+    <section class="content__section">
       <article v-show="showColor">
         <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor"/>
       </article>
@@ -197,54 +200,40 @@ export default {
       </article>
     </section>
   </main>
+  <section class="container background__home__section">
+    <home-section></home-section>
+  </section>
 </template>
 
 <style scoped>
-.main{
+.main__section{
   justify-self: center;
   padding: 0 2rem;
   margin: 0 2rem;
 }
-.main-color{
+.main__h2__color{
   color:#c2431e;
 }
-.main-content{
+.main__content{
   display: inline-flex;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content-section{
-  /*padding-top: 2rem;*/
+.content__section{
   width: 50%;
   margin: auto;
 }
-section option{
-  border: 1px #797474;
-  padding: 0.625rem;
-  margin-top: 0.3125rem;
+.content__section__img{
+  margin: 0 auto;
 }
-.content-section img{
-  margin: auto;
+.content__article{
+  margin: 4rem auto;
+  width: 80%;
 }
-.content-article{
-  margin: auto;
-  width: 50%;
-}
-.article-content{
+.section__article{
   display:inline-flex;
 }
-.main-img{
-  width: 100%;
-  margin: 0 2rem;
-  padding: 0 2rem;
-}
-h2{
-  color: #4E3D90;
-}
-form{
-  text-align: left;
-}
-.home-select{
+.home__select{
   width:11.5rem;
   height:fit-content;
   border: 1px #797474;
@@ -252,13 +241,20 @@ form{
   padding: 0.625rem 0.625rem;
   margin: 0.625rem 0;
 }
-.home-select option{
+.home__select__option{
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
 }
+h2{
+  color: #4E3D90;
+}
+form{
+  text-align: left;
+}
+
 input {
   width: 50%;
   border: 1px #797474;
@@ -267,19 +263,6 @@ input {
   margin-top: 0.3125rem;
 
 }
-.custom-file {
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.custom-file :hover {
-  background-color: #45a049;
-}
-
 button[type="submit"] {
   text-overflow: ellipsis;
   overflow: hidden;

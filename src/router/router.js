@@ -1,10 +1,18 @@
 import Home from "../components/Home.vue";
 
 import {createRouter, createWebHashHistory} from "vue-router";
+import HomeSection from "../components/HomeSection.vue";
 
 const routes = [
-    { path: '/', component: Home },
-    {
+    {   /*rutas anidadas*/
+        path: '/',
+        component: Home,
+        children: [
+            {
+                path: '',
+                component: () => import('../components/HomeSection.vue') }
+        ]},
+    {   /*lazy loading*/
         path: '/registro',
         component: () => import('../components/Registro.vue')
     },

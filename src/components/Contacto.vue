@@ -47,14 +47,14 @@ export default {
 </script>
 
 <template>
-  <main class="main-content">
-    <section class="content-section">
-      <img src="../assets/img/img-horno.png" alt="Horno de colores" title="Horno de colores">
-    </section>
-    <article class="content-article">
+  <main class="main__content">
+    <figure class="content__section">
+      <img class="content__section__img" src="../assets/img/img-horno.png" alt="Horno de colores" title="Horno de colores">
+    </figure>
+    <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Contacto_</h2>
-        <article>
+        <fieldset>
           <p> Gracias por ponerte en contacto con nosotros.</p>
           <label for="name"></label>
           <input
@@ -63,9 +63,9 @@ export default {
               v-model="nombre"
               type="text"
               @change="validateForm('nombre')">
-          <p class="p-error">{{ errors.nombre }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.nombre }}</p>
+        </fieldset>
+        <fieldset>
           <label for="email"></label>
           <input
               id="email"
@@ -73,9 +73,9 @@ export default {
               v-model="email"
               type="text"
               @change="validateForm('email')">
-          <p class="p-error">{{ errors.email }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.email }}</p>
+        </fieldset>
+        <fieldset>
           <label for="title"></label>
           <input
               id="title"
@@ -83,9 +83,9 @@ export default {
               v-model="titulo"
               type="text"
               @change="validateForm('titulo')">
-          <p class="p-error">{{ errors.titulo }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.titulo }}</p>
+        </fieldset>
+        <fieldset>
           <label for="message"></label>
           <textarea
               id="message"
@@ -93,43 +93,35 @@ export default {
               v-model="mensaje"
               rows="6"
               @change="validateForm('mensaje')"></textarea>
-          <p class="p-error">{{ errors.mensaje }}</p>
-        </article>
+          <p class="p__error">{{ errors.mensaje }}</p>
+        </fieldset>
         <button class="button" type="submit">Enviar</button>
       </form>
-    </article>
+    </section>
   </main>
 </template>
 
 <style scoped>
-.main-content{
+.main__content{
   display: inline-flex;
   flex-wrap: wrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content-section{
+.content__section{
   margin: auto;
   width: 40%;
 }
-.content-section img{
+.content__section__img{
   width: 60%;
   margin: auto;
 }
-.content-article{
+.content__article{
   margin: auto;
   width: 60%;
 }
 h2{
   color: #4E3D90;
-}
-.form{
-  justify-self: center;
-  padding: 2rem 2rem;
-  margin: 2rem 2rem;
-}
-form{
-  text-align: left;
 }
 input {
   width: 25%;
@@ -144,14 +136,5 @@ textarea {
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
-}
-button[type="submit"] {
-  background-color: #c2431e;
-  color: #fff;
-  cursor: pointer;
-  border: 0;
-  padding: 0.625rem 0.9375rem;
-  margin-top: 0.3125rem;
-  margin-right: 4rem;
 }
 </style>

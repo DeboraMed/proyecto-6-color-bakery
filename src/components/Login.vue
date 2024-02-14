@@ -39,18 +39,14 @@ export default {
 </script>
 
 <template>
-  <main class="main-content">
-    <article class="content-article">
+  <main class="main__content">
+    <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Logueate_</h2>
-        <!--id="contacto"
-            @submit="checkForm"
-            action="url"
-            method="post"-->
-        <article>
+        <div>
           <p> Logueate en la web.</p>
-        </article>
-        <article>
+        </div>
+        <fieldset>
           <label for="email"></label>
           <input
               id="email"
@@ -58,9 +54,9 @@ export default {
               v-model="email"
               type="text"
               @change="validateForm('email')">
-          <p class="p-error">{{ errors.email }}</p>
-        </article>
-        <article>
+          <p class="p__error">{{ errors.email }}</p>
+        </fieldset>
+        <fieldset>
           <label for="contraseña"></label>
           <input
               id="password"
@@ -68,53 +64,38 @@ export default {
               v-model="password"
               type="password"
               @change="validateForm('password')">
-          <p class="p-error">{{ errors.password }}</p>
-        </article>
+          <p class="p__error">{{ errors.password }}</p>
+        </fieldset>
         <button class="button" type="submit">Enviar</button>
       </form>
-    </article>
-    <section class="content-section">
-      <img src="../assets/img/img-colores.png" alt="Ruedas de colores" title="Ruedas de colores">
     </section>
+    <figure class="content__section">
+      <img class="content__section__img" src="../assets/img/img-colores.png" alt="Ruedas de colores" title="Ruedas de colores">
+    </figure>
   </main>
 </template>
 
 <style scoped>
-.main-content{
+.main__content{
   display: inline-flex;
   flex-wrap: wrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content-section{
+.content__section{
   margin: auto;
   width: 40%;
 }
-.content-section img{
+.content__section__img{
   width: 50%;
   margin: auto;
 }
-.content-article{
+.content__article{
   margin: auto;
   width: 60%;
 }
 h2{
   color: #4E3D90;
-}
-.p-validado{
-  color: darkgreen;
-}
-.p-error{
-  color: #C2431E;
-}
-
-.form{
-  justify-self: center;
-  padding: 0rem 2rem;
-  margin: 0rem 2rem;
-}
-form{
-  text-align: left;
 }
 input {
   width: 50%;
@@ -122,15 +103,5 @@ input {
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
-}
-
-button[type="submit"] {
-  background-color: #c2431e;
-  color: #fff;
-  cursor: pointer;
-  border: 0;
-  padding: 0.625rem 0.9375rem;
-  margin-top: 0.3125rem;
-  margin-right: 4rem;
 }
 </style>
