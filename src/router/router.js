@@ -1,7 +1,6 @@
 import Home from "../components/Home.vue";
 
 import {createRouter, createWebHashHistory} from "vue-router";
-import HomeSection from "../components/HomeSection.vue";
 
 const routes = [
     {   /*rutas anidadas*/

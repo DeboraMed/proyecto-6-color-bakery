@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 /**
  * Este componente es el encargado de mostrar el formulario de registro de la aplicación,
  * que permite al usuario introducir su nombre, correo electrónico y contraseña para
@@ -46,7 +47,7 @@ export default {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
       } else if (field === 'email' && (!this.email || !this.validateEmail(this.email))) {
         this.errors.email = 'Introduce un correo electrónico válido.';
-      } else if (!this.password || this.password.length < 3) {
+      } else if (field === 'password' && (!this.password || this.password.length < 3)) {
         this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
       } else if (!this.re_password || this.re_password!== this.password) {
         this.errors.re_password = 'Introduce la misma contraseña.';
@@ -75,7 +76,34 @@ export default {
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.nombre, this.email, this.password, this.re_password);
+        let json = {
+          'name': this.nombre,
+          'email': this.email,
+          'password' : this.password,
+        };
+        axios.post('http://localhost:8000/api/user/registry',json)
+            .then(data => {
+              if(data.statusText === "OK"){
+                console.log('Solicitud procesada correctamente',data);
+                this.resetForm();
+              }
+            })
+            .catch(error => {
+              console.error('Error en la solicitud:', error);
+            });
       }
+    },
+    resetForm() {
+      this.nombre = '';
+      this.email = '';
+      this.password = '';
+      this.re_password = '';
+      this.errors = {
+        nombre:'',
+        email: '',
+        password: '',
+        re_password: ''
+      };
     },
   }
 }
@@ -97,7 +125,7 @@ export default {
               placeholder="Nombre"
               v-model="nombre"
               type="text"
-              @change="submitForm('nombre')">
+              @change="validateForm('nombre')">
           <p class="p__error">{{ errors.nombre }}</p>
         </fieldset>
         <fieldset>
@@ -107,7 +135,7 @@ export default {
               placeholder="email@email.com"
               v-model="email"
               type="text"
-              @change="submitForm('email')">
+              @change="validateForm('email')">
           <p class="p__error">{{ errors.email }}</p>
         </fieldset>
         <fieldset>
@@ -117,7 +145,7 @@ export default {
               placeholder="Contraseña"
               v-model="password"
               type="password"
-              @change="submitForm('password')">
+              @change="validateForm('password')">
           <p class="p__error">{{ errors.password }}</p>
         </fieldset>
         <fieldset>

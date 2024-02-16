@@ -1,4 +1,6 @@
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -23,7 +25,6 @@ export default {
     },
     validateEmail(email) {
       let re = /\w+@\w+\.+[a-z]/;
-      console.log(email)
       return re.test(email);
     },
     submitForm() {
@@ -32,9 +33,31 @@ export default {
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.email, this.password);
-      }
-    }
-  },
+      };
+      let json = {
+        'email': this.email,
+        'password': this.password,
+      };
+      axios.post('http://localhost:8000/api/user/login',json)
+          .then(data => {
+            if(data.statusText === "OK"){
+              console.log('Solicitud procesada correctamente',data);
+              this.resetForm();
+            }
+          })
+          .catch(error => {
+            console.error('Error en la solicitud:', error);
+          });
+    },
+    resetForm() {
+      this.email = '';
+      this.password = '';
+      this.errors = {
+        email: '',
+        password: ''
+      };
+    },
+  }
 }
 </script>
 
@@ -63,7 +86,7 @@ export default {
               placeholder="Contraseña"
               v-model="password"
               type="password"
-              @change="submitForm('password')">
+              @change="validateForm('password')">
           <p class="p__error">{{ errors.password }}</p>
         </fieldset>
         <button class="button" type="submit">Enviar</button>
