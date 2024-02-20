@@ -1,8 +1,10 @@
 <script>
 import ColorThief from 'colorthief'
+import BorderFooter from "../shared/BorderFooter.vue";
 
 /* uso de la libreria ColorThief con la URL de la imagen dada */
 export default {
+  components: {BorderFooter},
   props: ['url','form'],
   data() {
     return {
@@ -67,17 +69,17 @@ export default {
 </script>
 
 <template>
-  <main class="main__content">
+  <section class="main__content">
     <section v-if="!url" class="main__img" title="Horno de colores"></section>
-    <section class="content__image">
+    <article class="content__image">
       <article v-if="url" class="polaroid rotarIzq">
         <picture class="image__container">
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
-          <img class="image__container__img" :src="url" ref="img" alt="image" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
+          <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
         </picture>
         <div class="color__palette">
           <div v-if="imageError" >
-           <img src="../assets/img/magdalenas-quemadas-noimagen.png">
+           <img alt="Tu imagen no se pudo cargar" src="../assets/img/magdalenas-quemadas-noimagen.png">
             <p class="image__error">Los siento...Tu imagen no se pudo cargar.</p>
           </div>
           <div class="color__swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
@@ -88,8 +90,8 @@ export default {
           </div>
         </div>
       </article>
-    </section>
-  </main>
+    </article>
+  </section>
 </template>
 
 <style scoped>

@@ -4,14 +4,11 @@
   font-weight: 400;
   display: flex;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #FFF8E8;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all 0.5s ease-out;
 }
 html{
   min-height: 100%;
@@ -33,7 +30,6 @@ body {
   width: 100%;
   min-height: 100vh;
   margin: 0;
-  background-color: #FFF8E8;
   place-items: center;
 }
 body:not(:-moz-handler-blocked) fieldset {
@@ -49,18 +45,17 @@ body:not(:-moz-handler-blocked) fieldset {
 .container {
   flex: 1 0 auto;
   flex-grow: 1;
-  padding: 5px 5px;
+ /* padding: 5px 5px;*/
   text-decoration: none;
   margin-top: 5rem;
-  background-color:#FFEFC9;
-
+  background: linear-gradient(to bottom, #FFF8E8 50%, #FFEFC9 50%);
 }
 .container__section{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 1rem 1rem;
-  background: linear-gradient(to bottom, #FFF8E8 50%, #FFEFC9 50%);
+  background: #FCBD7A;
 }
 /* estilo del formulario */
 .form{
@@ -112,7 +107,7 @@ button[type="submit"] {
   z-index: -1;
 }
 .button:hover {
-  color: #fff;
+  color: var(--bt-color-1-hover);
 }
 .button:hover:before {
   width: 100%;
@@ -131,6 +126,34 @@ ul {
   color: #C2431E;
   font-size: small;
 }
+/* Dark Mode CSS*/
+[data-theme="dark"] {
+  --font-color: #ffffff;
+  --font-color-h2-pri: #ffffff;
+  --font-color-h2-sec: #ffffff;
+
+  --link-color: #ffffff;
+  --link-white-color: #c5bde7;
+
+  --bt-color-1: #333;
+  --bt-color-1-hover: #333;
+  --bt-color-2: #333;
+
+  --bg-color-1: #333;
+  --bg-color-2: #333;
+  --bg-color-3: #333;
+  --bg-color-4: #333;
+}
+[data-theme="light"] {
+  --font-color: #ffffff;
+  --link-color: #7563c7;
+  --link-white-color: #c5bde7;
+  --bg-color-1: #333;
+  --bg-color-2: #333;
+  --bg-color-3: #333;
+  --bg-color-4: #333;
+}
+
 /*medias generales*/
 @media (prefers-color-scheme: light) {
   :root {
@@ -149,3 +172,4 @@ ul {
     width: 100%;
   }
 }
+

@@ -1,11 +1,13 @@
 <script>
 import axios from "axios";
+import BorderFooter from "../shared/BorderFooter.vue";
 /**
  * Este componente es el encargado de mostrar el formulario de registro de la aplicación,
  * que permite al usuario introducir su nombre, correo electrónico y contraseña para
  * crear una cuenta.
  */
 export default {
+  components: {BorderFooter},
   data() {
     return {
       /**

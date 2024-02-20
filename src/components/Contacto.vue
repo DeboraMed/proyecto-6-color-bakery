@@ -1,5 +1,8 @@
 <script>
+import BorderFooter from "../shared/BorderFooter.vue";
+
 export default {
+  components: {BorderFooter},
   data() {
     return {
       nombre: '',
@@ -106,8 +109,11 @@ export default {
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  margin: auto;
-  width: 40%;
+  width: 60%;
+  margin: 0 auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 .content__section__img{
   width: 60%;

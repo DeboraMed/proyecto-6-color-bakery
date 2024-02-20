@@ -1,19 +1,20 @@
 <script>
 import Navbar from "./shared/Navbar.vue";
 import Footer from "./shared/Footer.vue";
+import BorderFooter from "./shared/BorderFooter.vue";
+
 export default {
   nombre:"App",
-  components: {Navbar, Footer}
+  components: {BorderFooter, Navbar, Footer}
 }
 </script>
 
 <template>
   <Navbar/>
   <main class="container">
-    <section class="container__section">
     <router-view />
-    </section>
   </main>
+  <BorderFooter></BorderFooter>
   <Footer />
 </template>
 

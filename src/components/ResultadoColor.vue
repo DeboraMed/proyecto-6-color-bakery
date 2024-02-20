@@ -1,9 +1,11 @@
 <script>
 import axios from 'axios';
 import theColorApi from '../api/theColorApi';
+import BorderFooter from "../shared/BorderFooter.vue";
 
 /* llamada a la api TheColorApi para obtener las paletas de color a partir de un color */
 export default {
+  components: {BorderFooter},
   props:{
     color: {
       type: String,
@@ -40,27 +42,23 @@ export default {
 </script>
 
 <template>
-  <main class="main__content__color">
+  <section class="main__content__color">
   <section>
     <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
     <article>
       <ul v-if="colorPalette" class="main__article">
-        <li v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
+        <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
              :style="{
                 backgroundColor: color.hex.value,
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                border: '1px solid rgba(0,0,0,0.1)',
-                borderRadius: '5px',
-                padding: '1.42rem',
-                width: 35 + index + 'rem',
-                margin: '0 auto'
+                width: 70 + index + '%',
+                height: 14 + index + '%',
              }">
           {{ color.hex.value }}
         </li>
       </ul>
     </article>
   </section>
-  </main>
+  </section>
 </template>
 
 <style scoped>
@@ -75,7 +73,7 @@ export default {
 .main__img{
   padding-top: 4rem;
   padding-bottom: 4rem;
-  width: 100%;
+  width: auto;
   height: 35rem;
 
   background-image: url("../assets/img/horno-main.png");
@@ -97,6 +95,14 @@ export default {
   background-position: center center;
 
   animation: fadein 2s ease 0s 1 normal forwards;
+}
+
+.main__article__li {
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 5px;
+  padding: 1.42rem;
+  margin: 0 auto;
 }
 
 /*animacion de imagen*/

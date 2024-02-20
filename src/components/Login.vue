@@ -1,7 +1,9 @@
 <script>
 import axios from "axios";
+import BorderFooter from "../shared/BorderFooter.vue";
 
 export default {
+  components: {BorderFooter},
   data() {
     return {
       email: '',

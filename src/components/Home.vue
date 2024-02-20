@@ -8,12 +8,13 @@
   import ResultadoColor from "./ResultadoColor.vue";
   import ResultadoImagen from "./ResultadoImagen.vue";
   import HomeSection from "./HomeSection.vue";
+import BorderFooter from "../shared/BorderFooter.vue";
 export default {
   /**
    * components: Registra los componentes hijos que se utilizan en este componente,
    * que son ResultadoColor, ResultadoImagen y HomeSection.
    */
-  components: {ResultadoColor, ResultadoImagen, HomeSection},
+  components: {BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
   data() {
     return {
       /**
@@ -279,9 +280,7 @@ export default {
       </article>
     </section>
   </main>
-  <section class="container background__home__section">
-    <home-section></home-section>
-  </section>
+  <home-section></home-section>
 </template>
 
 <style scoped>
@@ -299,12 +298,13 @@ export default {
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  width: 50%;
-  margin: auto;
-}
-.content__section__img{
+  width: 60%;
   margin: 0 auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
+
 .content__article{
   margin: 4rem auto;
   width: 80%;
@@ -325,7 +325,7 @@ export default {
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 99;
+  z-index: 4;
 }
 h2{
   color: #4E3D90;

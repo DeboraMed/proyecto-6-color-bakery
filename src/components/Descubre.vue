@@ -1,5 +1,6 @@
 <script setup>
 
+import BorderFooter from "../shared/BorderFooter.vue";
 </script>
 
 <template>

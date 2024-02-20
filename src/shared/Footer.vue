@@ -4,17 +4,11 @@
 
 <template>
   <footer>
-    <!-- borde naranja -->
-    <section class="ft__init">
-        <div class="ft__init__img">
-          <img class="ft__init__background" src="../assets/img/color-bakery-texto.svg">
-        </div>
 
-    </section>
     <!-- Footer main -->
     <section class="ft__main">
       <div class="ft__main__item">
-        <img class="ft__title" src="../assets/img/color-bakery-texto-w.svg">
+        <img class="ft__title" src="../assets/img/color-bakery-texto-w.svg" alt="ColorBakery">
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Descubre</a></li>
@@ -53,19 +47,6 @@
 </template>
 
 <style scoped>
-.ft__init__img{
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-end;
-  background-color: #FFEFC9;
-  }
-.ft__init__background{
-  margin-right: 1rem;
-  margin-bottom: -1.1rem;
-  width: 25%;
-  bottom: -4rem;
-  right: 0;
-}
 /*footer general*/
 footer {
   flex-shrink: 0;
@@ -125,11 +106,7 @@ input[type="button"] {
   margin-top: 0.3125rem;
 }
 /*legal footer*/
-.ft__init {
-  border-bottom-width: 4rem;
-  border-bottom-style: solid;
-  border-bottom-color: #FCBD7A;
-}
+
 .ft__legal {
   padding: 0.05rem 1.5rem;
   background-color: #2E2067;
