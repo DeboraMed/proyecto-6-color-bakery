@@ -69,10 +69,10 @@ export default {
 </script>
 
 <template>
-  <section class="main__content">
+  <section>
     <section v-if="!url" class="main__img" title="Horno de colores"></section>
     <article class="content__image">
-      <article v-if="url" class="polaroid rotarIzq">
+      <article v-if="url">
         <picture class="image__container">
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
           <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
@@ -86,7 +86,7 @@ export default {
                :key="i"
                :style="`background-color: #${color}`"
           >
-            <span class="color">#{{color}}</span>
+            <span class="color__text">#{{color}}</span>
           </div>
         </div>
       </article>
@@ -95,22 +95,14 @@ export default {
 </template>
 
 <style scoped>
-.color {
+.color__text {
+  padding: 1rem;
+  align-content: baseline;
+  margin: 0 auto;
   filter: invert(100%);
 }
-.main__content{
-  padding-top: 2rem;
-  display: flex; /* centrar */
-  justify-content: center; /* centrar */
-  align-items: center; /* centrar */
-  position: relative;
-  margin: auto;
-  color: black;
-  font-size: 1rem;
-  text-shadow: #a4a4a4 1px 1px ;
-}
+
 .main__img{
-  padding-top: 4rem;
   padding-bottom: 4rem;
   width: 100%;
   height: 35rem;
@@ -123,44 +115,26 @@ export default {
   animation: fadein 2s ease 0s 1 normal forwards;
 }
 .content__image{
+  margin: 4rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: auto;
   height: auto;
   animation: fadein 2s ease 0s 1 normal forwards;
 }
-/*.polaroid {
-  display: flex; !* centrar *!
-  flex-direction: column;
-  justify-content: center; !* centrar *!
-  align-items: center; !* centrar *!
-  width: auto;
-  height: auto;
-  min-width: 300px;
-  min-height: 300px;
-  padding:10px 10px 50px 10px;
-  border-radius: 10px;
-  background-color: #f6f3eb;
-  overflow: hidden;
-  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.1);
-}
-.rotarIzq {
-  transform:rotate(5deg);
-  -ms-transform:rotate(5deg); !*!* IE9 *!*!
-  -webkit-transform:rotate(5deg); !*!* Safari y Chrome *!*!
-  -moz-transform:rotate(5deg);
-}*/
-
 .image__container {
   width: auto;
   height: auto;
   display: flex;
   align-items: center;
-  max-width: 480px;
-  max-height: 500px;
   position: relative;
 }
 .image__container__img {
   width: 100%;
   height: 100%;
+  max-width: 580px;
+  max-height: 500px;
   object-fit: cover;
 }
 .image__error{
@@ -171,7 +145,7 @@ export default {
   display: flex;
 }
 .color__swatch {
-  width: 6rem;
+  width: 7.25rem;
   height: 8rem;
 }
 /*animacion de imagen*/

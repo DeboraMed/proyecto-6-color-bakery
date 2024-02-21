@@ -1,4 +1,4 @@
-import Home from "../components/Home.vue";
+import Home from "../pages/Home.vue";
 
 import {createRouter, createWebHashHistory} from "vue-router";
 
@@ -9,35 +9,35 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import('../components/HomeSection.vue') }
+                component: () => import('../pages/HomeSection.vue') }
         ]},
     {   /*lazy loading*/
         path: '/registro',
-        component: () => import('../components/Registro.vue')
+        component: () => import('../pages/Registro.vue')
     },
     {
         path: '/perfil',
-        component: () => import('../components/Perfil.vue')
+        component: () => import('../pages/Perfil.vue')
     },
     {
         path: '/login',
-        component: () => import('../components/Login.vue')
+        component: () => import('../pages/Login.vue')
     },
     {
         path: '/proyectos',
-        component: () => import('../components/Proyectos.vue')
+        component: () => import('../pages/Proyectos.vue')
     },
     {
         path: '/descubre',
-        component: () => import('../components/Descubre.vue')
+        component: () => import('../pages/Descubre.vue')
     },
     {
         path: '/contacto',
-        component: () => import('../components/Contacto.vue')
+        component: () => import('../pages/Contacto.vue')
     },
     {
         path: '/:pathMach(.*)*',
-        component: () => import('../components/404.vue')
+        component: () => import('../pages/404.vue')
     },
 
 ]

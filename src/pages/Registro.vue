@@ -113,9 +113,9 @@ export default {
 
 <template>
   <main class="main__content">
-    <figure class="content__section">
+    <section class="content__section">
       <img class="content__section__img" src="../assets/img/img-bolleria.png" alt="Bollitos de colores" title="Bollitos de colores">
-    </figure>
+    </section>
     <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Registro_</h2>
@@ -169,16 +169,16 @@ export default {
 <style scoped>
 .main__content{
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  margin: auto;
-  width: 40%;
+  display: block;
+  width: 50%;
 }
 .content__section__img{
-  width: 70%;
+  width: 60%;
   margin: auto;
 }
 .content__article{

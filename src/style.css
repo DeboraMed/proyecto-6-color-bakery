@@ -14,11 +14,10 @@ html{
   min-height: 100%;
   position: relative;
 }
-/*generico*/
-* {
+html {
   box-sizing: border-box;
-  font-family: "IBM Plex Mono", monospace;
 }
+
 *,
 *::before,
 *::after {
@@ -64,25 +63,33 @@ body:not(:-moz-handler-blocked) fieldset {
   margin: 0rem 2rem;
   text-align: left;
 }
-button[type="submit"] {
+/*button[type="submit"] {
   color: #fff;
   cursor: pointer;
   border: 0;
   padding: 0.625rem 0.9375rem;
   margin-top: 0.3125rem;
   margin-right: 4rem;
-}
-/*animacion boton*/
+}*/
+/*boton principal*/
 .button {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: pre;
+  display: inline-flex;
   color: #fff;
+  cursor: pointer;
+  border: 0;
+  padding: 0.625rem 0.9375rem;
+  margin-top: 0.3125rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+
   transition: all 0.3s;
   position: relative;
-  overflow: hidden;
   z-index: 1;
 }
+/*animacion boton*/
 .button:after {
   content: "";
   position: absolute;
@@ -112,6 +119,53 @@ button[type="submit"] {
 .button:hover:before {
   width: 100%;
 }
+
+/*boton secundario*/
+.button__sec {
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+  padding: 0.625rem 0.9375rem;
+  margin-top: 0.3125rem;
+  margin-right: 5rem;
+  display: inline-block;
+  border-radius: 1rem;
+
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.button__sec:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e76c49;
+  border-radius: 1rem;
+  z-index: -2;
+}
+.button__sec:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #C2431E;
+  transition: all 0.3s;
+  border-radius: 1rem;
+  z-index: -1;
+}
+.button__sec:hover {
+  color: var(--bt-color-1-hover);
+}
+.button__sec:hover:before {
+  width: 100%;
+}
+
 fieldset {
   border: 0;
   margin: 0;
@@ -125,33 +179,6 @@ ul {
 .p__error{
   color: #C2431E;
   font-size: small;
-}
-/* Dark Mode CSS*/
-[data-theme="dark"] {
-  --font-color: #ffffff;
-  --font-color-h2-pri: #ffffff;
-  --font-color-h2-sec: #ffffff;
-
-  --link-color: #ffffff;
-  --link-white-color: #c5bde7;
-
-  --bt-color-1: #333;
-  --bt-color-1-hover: #333;
-  --bt-color-2: #333;
-
-  --bg-color-1: #333;
-  --bg-color-2: #333;
-  --bg-color-3: #333;
-  --bg-color-4: #333;
-}
-[data-theme="light"] {
-  --font-color: #ffffff;
-  --link-color: #7563c7;
-  --link-white-color: #c5bde7;
-  --bg-color-1: #333;
-  --bg-color-2: #333;
-  --bg-color-3: #333;
-  --bg-color-4: #333;
 }
 
 /*medias generales*/

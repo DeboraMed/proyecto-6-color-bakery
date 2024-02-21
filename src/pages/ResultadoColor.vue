@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import theColorApi from '../api/theColorApi';
+import theColorApi from '../api/theColorApi.js';
 import BorderFooter from "../shared/BorderFooter.vue";
 
 /* llamada a la api TheColorApi para obtener las paletas de color a partir de un color */
@@ -50,7 +50,7 @@ export default {
         <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
              :style="{
                 backgroundColor: color.hex.value,
-                width: 70 + index + '%',
+                width: 47 + index + '%',
                 height: 14 + index + '%',
              }">
           {{ color.hex.value }}
@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 .main__content__color{
-  /*padding-top: 4rem;*/
+  padding-top: 4rem;
   position: relative;
   margin: auto;
   color: black;

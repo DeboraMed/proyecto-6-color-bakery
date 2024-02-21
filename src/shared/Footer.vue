@@ -30,7 +30,7 @@
         <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
-          <input type="button" class="button" value="Contacto">
+          <button class="button__sec"> Contacto</button>
         </form>
       </div>
     </section>
@@ -95,15 +95,6 @@ footer a:hover {
 form {
   display: flex;
   flex-wrap: wrap;
-}
-input[type="button"] {
-  background-color: #C2431E;
-  color: #fff;
-  border-radius: 1rem;
-  cursor: pointer;
-  border: 0;
-  padding: 0.625rem 0.9375rem;
-  margin-top: 0.3125rem;
 }
 /*legal footer*/
 

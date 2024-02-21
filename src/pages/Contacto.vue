@@ -48,9 +48,9 @@ export default {
 
 <template>
   <main class="main__content">
-    <figure class="content__section">
+    <section class="content__section">
       <img class="content__section__img" src="../assets/img/img-horno.png" alt="Horno de colores" title="Horno de colores">
-    </figure>
+    </section>
     <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
         <h2>Formulario de Contacto_</h2>
@@ -104,19 +104,16 @@ export default {
 <style scoped>
 .main__content{
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  width: 60%;
-  margin: 0 auto;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  display: block;
+  width: 50%;
 }
 .content__section__img{
-  width: 60%;
+  width: 50%;
   margin: auto;
 }
 .content__article{

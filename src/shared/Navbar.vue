@@ -1,5 +1,8 @@
 <script>
+import DarkMode from "../pages/DarkMode.vue";
+
 export default {
+  components: {DarkMode},
   data() {
     return {
       darkMode: false,
@@ -32,7 +35,6 @@ export default {
       <router-link to="/"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></router-link>
       <!-- Menu normal-->
       <ul class="navbar__content" v-if="!windowSmall">
-        <input type="checkbox" class="toggle">
         <router-link v-show="!isMenuOpen" class="nav__router" to="/"><p>Inicio</p></router-link >
         <router-link v-show="!isMenuOpen" class="nav__router" to="/login"><p>Logueate</p></router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/registro"><p>Registrate</p></router-link>
@@ -40,6 +42,7 @@ export default {
         <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto"><p>Contacto</p></router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos"><p>Proyectos</p></router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
+        <dark-mode />
       </ul>
       <!-- Menu hamburguesa-->
       <ul v-else class="burger__menu">
@@ -62,6 +65,7 @@ export default {
 <style scoped>
 /* menu hamburguesa*/
 .burger__menu {
+  position: sticky;
   display: flex;
   align-items: center;
   float: right;
@@ -85,44 +89,9 @@ export default {
     display: block;
   }
 }
-/* boton Toggle */
-.toggle {
-  margin-top: 0.8rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 60px;
-  height: 30px;
-  border-radius: 30px;
-  background-color: #333;
-  position: absolute;
-  transition: all 0.5s ease-in;
-  cursor: pointer;
-  z-index: 1;
-}
-.toggle::before {
-  content: "";
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #EEE;
-  position: absolute;
-  top: 50%;
-  left: 3px;
-  transform: translateY(-50%);
-  transition: all 0.5s ease-in;
-}
-.toggle:checked {
-  background: #7563c7;
-}
-.toggle:checked::before {
-  background: #333;
-  left: 32px;
-}
-
 /* barra de navegacion */
 .nav {
-  z-index: 1;
+  z-index: 3;
   position:fixed ;
   width: 100%;
   height: 5.5rem;
@@ -142,7 +111,7 @@ export default {
   padding: 5px 5px;
   font-weight: bold;
   justify-content: right;
-  flex-grow: 1;
+  /*flex-grow: 1;*/
 }
 .nav__router {
   text-decoration: none;
@@ -162,16 +131,6 @@ img{
 p{
   padding: 0rem;
   margin-right: 3rem;
-}
-button{
-  background-color: #4c3b9a;
-  color: #fff;
-  border-radius: 1rem;
-  cursor: pointer;
-  border: 0;
-  padding: 0.625rem 0.9375rem;
-  margin-top: 0.3125rem;
-  margin-right: 4rem;
 }
 /* animación del logotipo */
 @keyframes palpito {

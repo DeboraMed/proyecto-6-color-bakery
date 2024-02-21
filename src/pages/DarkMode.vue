@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 
 export default {
   setup() {
+    /* guarda el tema en el localStorage */
     const theme = ref(localStorage.getItem('theme') || 'light');
     const toggleSwitchChecked = ref(theme.value === 'dark');
 
@@ -10,25 +11,45 @@ export default {
       document.documentElement.setAttribute('data-theme', theme.value);
     });
 
+    /* metodo que cambia el tema */
     const switchTheme = () => {
       theme.value = toggleSwitchChecked.value ? 'dark' : 'light';
       localStorage.setItem('theme', theme.value);
       document.documentElement.setAttribute('data-theme', theme.value);
     };
-
-    return { switchTheme, toggleSwitchChecked };
+    return {
+      switchTheme, toggleSwitchChecked
+    };
   },
 };
 </script>
 
 <template>
   <section>
-    <input type="checkbox" id="toggle" v-model="toggleSwitchChecked" @change="switchTheme"/>
+    <input type="checkbox" class="toggle" v-model="toggleSwitchChecked" @change="switchTheme"/>
   </section>
 </template>
 
 <style>
 /* Dark Mode CSS*/
+[data-theme="light"] {
+  --font-color: #ffffff;
+  --font-color-h2-pri: #ffffff;
+  --font-color-h2-sec: #ffffff;
+
+  --link-color: #7563c7;
+  --link-white-color: #c5bde7;
+
+  --bt-color-1: #333;
+  --bt-color-1-hover: #333;
+  --bt-color-2: #333;
+  --bt-color-2-hover: #333;
+
+  --bg-color-1: #333;
+  --bg-color-2: #333;
+  --bg-color-3: #333;
+  --bg-color-4: #333;
+}
 [data-theme="dark"] {
   --font-color: #ffffff;
   --font-color-h2-pri: #ffffff;
@@ -40,26 +61,17 @@ export default {
   --bt-color-1: #333;
   --bt-color-1-hover: #333;
   --bt-color-2: #333;
+  --bt-color-2-hover: #333;
 
-  --bg-color-1: #333;
-  --bg-color-2: #333;
-  --bg-color-3: #333;
-  --bg-color-4: #333;
-
-}
-
-[data-theme="light"] {
-  --font-color: #ffffff;
-  --link-color: #7563c7;
-  --link-white-color: #c5bde7;
   --bg-color-1: #333;
   --bg-color-2: #333;
   --bg-color-3: #333;
   --bg-color-4: #333;
 }
 
-/* Toggle Button */
-#toggle {
+/* boton Toggle */
+.toggle {
+  margin-top: 1rem ;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -68,34 +80,26 @@ export default {
   border-radius: 30px;
   background-color: #333;
   position: absolute;
-  top: 50px;
-  right: 50px;
   transition: all 0.5s ease-in;
   cursor: pointer;
   z-index: 1;
 }
-
-/* Making a dot switch inside the Toggle Button */
-#toggle::before {
+.toggle::before {
   content: "";
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: #EEE;
+  background: #efce97;
   position: absolute;
   top: 50%;
   left: 3px;
   transform: translateY(-50%);
   transition: all 0.5s ease-in;
 }
-
-/* Changing toggle button background when checked */
-#toggle:checked {
+.toggle:checked {
   background: #7563c7;
 }
-
-/* Changing dot switch color and moving to the right side when checked */
-#toggle:checked::before {
+.toggle:checked::before {
   background: #333;
   left: 32px;
 }

@@ -94,25 +94,25 @@ export default {
         <button class="button" type="submit">Enviar</button>
       </form>
     </section>
-    <figure class="content__section">
+    <section class="content__section">
       <img class="content__section__img" src="../assets/img/img-colores.png" alt="Ruedas de colores" title="Ruedas de colores">
-    </figure>
+    </section>
   </main>
 </template>
 
 <style scoped>
 .main__content{
   display: inline-flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  margin: auto;
-  width: 40%;
+  display: block;
+  width: 50%;
 }
 .content__section__img{
-  width: 50%;
+  width: 60%;
   margin: auto;
 }
 .content__article{
