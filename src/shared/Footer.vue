@@ -73,7 +73,7 @@ footer a:hover {
   display: flex;
   flex-wrap: wrap;
   bottom: 0;
-  background-color: #4E3D90;
+  background-color: var(--ft-bg-color-medium);
   text-decoration: none;
 }
 .ft__main__item {
@@ -100,7 +100,7 @@ form {
 
 .ft__legal {
   padding: 0.05rem 1.5rem;
-  background-color: #2E2067;
+  background-color: var(--ft-bg-color-dark);
 }
 .ft__legal__list {
   width: 100%;

@@ -16,13 +16,13 @@
 .border__ft__init {
   border-bottom-width: 4rem;
   border-bottom-style: solid;
-  border-bottom-color: #FCBD7A;
+  border-bottom-color: var(--bg-color-dark);
 }
 .border__ft__init__img{
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-end;
-  background-color: #FFEFC9;
+  background-color: var(--bg-color-medium);
 }
 .border__ft__init__background{
   margin-right: 1rem;

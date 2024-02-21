@@ -33,40 +33,50 @@ export default {
 <style>
 /* Dark Mode CSS*/
 [data-theme="light"] {
-  --font-color: #ffffff;
-  --font-color-h2-pri: #ffffff;
-  --font-color-h2-sec: #ffffff;
+  --font-color: #000000;
+  --font-color-h2-pri: #4c3b9a;
+  --font-color-h2-sec: #c2431e;
 
-  --link-color: #7563c7;
-  --link-white-color: #c5bde7;
+  --a-color: #4c3b9a;
+  --a-color-hover: #747bff;
 
-  --bt-color-1: #333;
-  --bt-color-1-hover: #333;
-  --bt-color-2: #333;
-  --bt-color-2-hover: #333;
+  --bt-color-1: #ffffff;
+  --bt-color-1-after: #7563c7;
+  --bt-color-1-before: #4c3b9a;
 
-  --bg-color-1: #333;
-  --bg-color-2: #333;
-  --bg-color-3: #333;
-  --bg-color-4: #333;
+  --bt-color-2: #fff;
+  --bt-color-2-after: #e76c49;
+  --bt-color-2-before: #C2431E;
+
+  --bg-color-clear: #FFF8E8;
+  --bg-color-medium: #FFEFC9;
+  --bg-color-dark: #FCBD7A;
+
+  --ft-bg-color-medium: #4E3D90;
+  --ft-bg-color-dark: #2E2067;
+
 }
 [data-theme="dark"] {
   --font-color: #ffffff;
   --font-color-h2-pri: #ffffff;
-  --font-color-h2-sec: #ffffff;
+  --font-color-h2-sec: #efce97;
 
-  --link-color: #ffffff;
-  --link-white-color: #c5bde7;
+  --a-color: #ffffff;
+  --a-color-hover: #c5bde7;
 
-  --bt-color-1: #333;
-  --bt-color-1-hover: #333;
-  --bt-color-2: #333;
-  --bt-color-2-hover: #333;
+  --bt-color-1: #ffffff;
+  --bt-color-1-after: #7563c7;
+  --bt-color-1-before: #4c3b9a;
 
-  --bg-color-1: #333;
-  --bg-color-2: #333;
-  --bg-color-3: #333;
-  --bg-color-4: #333;
+  --bt-color-2: #fff;
+  --bt-color-2-after: #e76c49;
+  --bt-color-2-before: #C2431E;
+  --bg-color-clear: #645c81;
+  --bg-color-medium: #524b6e;
+  --bg-color-dark: #3F3661;
+
+  --ft-bg-color-medium: #292147;
+  --ft-bg-color-dark: #1c1634;
 }
 
 /* boton Toggle */
@@ -97,7 +107,7 @@ export default {
   transition: all 0.5s ease-in;
 }
 .toggle:checked {
-  background: #7563c7;
+  background: #c5bde7;
 }
 .toggle:checked::before {
   background: #333;

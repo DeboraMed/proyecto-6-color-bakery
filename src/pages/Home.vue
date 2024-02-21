@@ -211,7 +211,7 @@ export default {
     <section>
     <article class="content__article">
       <section class="main__section">
-        <h2>Hornea tu paleta de <span class="main__h2__color">color</span> favorita_</h2>
+        <h2>Hornea tu paleta de <span class="h2__color__sec">color</span> favorita_</h2>
         <p>Introduce un color en formato RGB o HEX y elige el estilo de tu paleta de color.</p>
         <form @submit.prevent="submitFormColor">
           <fieldset>
@@ -251,7 +251,7 @@ export default {
         </form>
       </section>
       <section class="main__section">
-        <h2>O elige una <span class="main__h2__color">imagen_</span></h2>
+        <h2>O elige una <span class="h2__color__sec">imagen_</span></h2>
         <p>Introduce la URL de la imagen jpg o png.</p>
         <form @submit.prevent="submitFormImage">
           <article>
@@ -289,9 +289,6 @@ export default {
   padding: 0 2rem;
   margin: 0 2rem;
 }
-.main__h2__color{
-  color:#c2431e;
-}
 .main__content{
   display: inline-flex;
   width: 100%;
@@ -328,7 +325,7 @@ export default {
   z-index: 4;
 }
 h2{
-  color: #4E3D90;
+  color: var(--font-color-h2-pri);
 }
 form{
   text-align: left;
@@ -342,6 +339,7 @@ input {
   margin-top: 0.3125rem;
 
 }
+/*TODO: normalizar los buttons (un solo tipo) y cambiar la imagen con el dark mode */
 button[type="submit"] {
   text-overflow: ellipsis;
   overflow: hidden;

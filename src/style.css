@@ -14,10 +14,6 @@ html{
   min-height: 100%;
   position: relative;
 }
-html {
-  box-sizing: border-box;
-}
-
 *,
 *::before,
 *::after {
@@ -47,7 +43,7 @@ body:not(:-moz-handler-blocked) fieldset {
  /* padding: 5px 5px;*/
   text-decoration: none;
   margin-top: 5rem;
-  background: linear-gradient(to bottom, #FFF8E8 50%, #FFEFC9 50%);
+  background: linear-gradient(to bottom, var(--bg-color-clear) 50%, var(--bg-color-medium) 50%);
 }
 .container__section{
   display: flex;
@@ -77,7 +73,7 @@ body:not(:-moz-handler-blocked) fieldset {
   overflow: hidden;
   white-space: pre;
   display: inline-flex;
-  color: #fff;
+  color: var(--bt-color-1);
   cursor: pointer;
   border: 0;
   padding: 0.625rem 0.9375rem;
@@ -97,7 +93,7 @@ body:not(:-moz-handler-blocked) fieldset {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #7563c7;
+  background-color: var(--bt-color-1-after);
   border-radius: 1rem;
   z-index: -2;
 }
@@ -108,13 +104,13 @@ body:not(:-moz-handler-blocked) fieldset {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #4c3b9a;
+  background-color: var(--bt-color-1-before);
   transition: all 0.3s;
   border-radius: 1rem;
   z-index: -1;
 }
 .button:hover {
-  color: var(--bt-color-1-hover);
+  color: var(--font-color);
 }
 .button:hover:before {
   width: 100%;
@@ -122,7 +118,7 @@ body:not(:-moz-handler-blocked) fieldset {
 
 /*boton secundario*/
 .button__sec {
-  color: #fff;
+  color: var(--bt-color-2);
   cursor: pointer;
   border: 0;
   padding: 0.625rem 0.9375rem;
@@ -143,7 +139,7 @@ body:not(:-moz-handler-blocked) fieldset {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #e76c49;
+  background-color: var(--bt-color-2-after);
   border-radius: 1rem;
   z-index: -2;
 }
@@ -154,13 +150,13 @@ body:not(:-moz-handler-blocked) fieldset {
   left: 0;
   width: 0%;
   height: 100%;
-  background-color: #C2431E;
+  background-color: var(--bt-color-2-before);
   transition: all 0.3s;
   border-radius: 1rem;
   z-index: -1;
 }
 .button__sec:hover {
-  color: var(--bt-color-1-hover);
+  color: var(--font-color);
 }
 .button__sec:hover:before {
   width: 100%;
@@ -180,20 +176,15 @@ ul {
   color: #C2431E;
   font-size: small;
 }
+h2{
+  color: var(--font-color-h2-pri);
+}
+.h2__color__sec{
+  color:var(--font-color-h2-sec);
+}
 
 /*medias generales*/
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+
 @media only screen and (max-width: 480px) {
   img {
     width: 100%;

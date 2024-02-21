@@ -49,12 +49,12 @@ export default {
         <button @click="toggleMenu" class="burger__button">&#9776;</button>
         <div v-if="openBurgerMenu" class="burger__menu__items">
         <button v-show="isMenuOpen" class="navbar-toggle" @click="toggleMenu">☰</button>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/"><p>Inicio</p></router-link >
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/login"><p>Logueate</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/registro"><p>Registrate</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil"><p>Perfil</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto"><p>Contacto</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos"><p>Proyectos</p></router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil">Perfil</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
       </div>
       </ul>
@@ -99,25 +99,32 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  background-color: #FFF8E8;
-  margin: 0rem auto;
+  background-color: var(--bg-color-clear);
+  margin: 0 auto;
 
   align-items: center;
 }
+a:hover {
+
+}
 .navbar__content{
   display: flex;
-  color: #f2f2f2;
   text-align: right;
   padding: 5px 5px;
   font-weight: bold;
   justify-content: right;
-  /*flex-grow: 1;*/
+  flex-grow: 0.85;
 }
 .nav__router {
   text-decoration: none;
   display: flex;
   align-items: center;
-
+}
+.nav__router a{
+  color: var(--a-color);
+}
+.nav__router a:hover{
+  color: var(--a-color-hover);
 }
 
 .nav__logo{
@@ -129,7 +136,8 @@ img{
   margin-left: 4rem;
 }
 p{
-  padding: 0rem;
+  color: var(--font-color);
+  padding: 0;
   margin-right: 3rem;
 }
 /* animación del logotipo */
