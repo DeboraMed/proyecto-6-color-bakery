@@ -1,4 +1,5 @@
 <script setup>
+// el codigo tiene que esta en un script setup
 import {useThemeStore} from '../stores/ThemeStore';
 const store = useThemeStore();
 </script>
