@@ -1,33 +1,12 @@
-<script>
-import { ref, onMounted } from 'vue';
-
-export default {
-  setup() {
-    /* recupera el tema en el localStorage, sino se puede light */
-    const theme = ref(localStorage.getItem('theme') || 'light');
-    const toggleSwitchChecked = ref(theme.value === 'dark');
-
-    onMounted(() => {
-      document.documentElement.setAttribute('data-theme', theme.value);
-    });
-
-    /* metodo que cambia el tema */
-    const switchTheme = () => {
-      theme.value = toggleSwitchChecked.value ? 'dark' : 'light';
-      // guarda el tema en el localStorage
-      localStorage.setItem('theme', theme.value);
-      document.documentElement.setAttribute('data-theme', theme.value);
-    };
-    return {
-      switchTheme, toggleSwitchChecked
-    };
-  },
-};
+<script setup>
+import {useThemeStore} from '../stores/ThemeStore';
+const store = useThemeStore();
+document.documentElement.setAttribute('data-theme', store.theme);
 </script>
 
 <template>
   <section>
-    <input type="checkbox" class="toggle" v-model="toggleSwitchChecked" @change="switchTheme"/>
+    <input type="checkbox" class="toggle" @change="store.toggleTheme()"/>
   </section>
 </template>
 

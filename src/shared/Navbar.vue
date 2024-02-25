@@ -1,3 +1,8 @@
+<script setup>
+import {useThemeStore} from '../stores/ThemeStore';
+const store = useThemeStore();
+</script>
+
 <script>
 import DarkMode from "../pages/DarkMode.vue";
 
@@ -5,7 +10,6 @@ export default {
   components: {DarkMode},
   data() {
     return {
-      darkMode: false,
       isMenuOpen: false,
       openBurgerMenu: false,
       windowSmall: false
@@ -19,15 +23,6 @@ export default {
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize);
   },
-  watch: {
-    // observo el cambio en el tema
-    darkMode: {
-      handler() {
-        this.handleTheme();
-      },
-      deep: true,
-    },
-  },
   methods: {
     handleResize() {
       this.windowSmall = window.innerWidth <= 1200; // Cambia el tamaño
@@ -35,21 +30,15 @@ export default {
     toggleMenu() {
       this.openBurgerMenu = !this.openBurgerMenu;
     },
-    // obtengo el tema del localstorage
-    handleTheme(){
-      const actualTheme = localStorage.getItem('theme');
-      console.log(actualTheme);
-      return actualTheme;
-    }
-  }
+  },
 }
 </script>
 
 <template>
-  <section :class="{ 'dark-mode': darkMode }">
+  <section>
     <nav class="nav">
       <router-link to="/">
-        <div v-if="handleTheme() === 'light'"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></div>
+        <div v-if="store.theme === 'dark'"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></div>
         <div v-else><img src="../assets/color-bakery-logo.svg" class="nav__logo"></div>
       </router-link>
       <!-- Menu normal-->
@@ -61,7 +50,7 @@ export default {
         <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto"><p>Contacto</p></router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos"><p>Proyectos</p></router-link>
         <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
-        <dark-mode />
+        <dark-mode/>
       </ul>
       <!-- Menu hamburguesa-->
       <ul v-else class="burger__menu">
