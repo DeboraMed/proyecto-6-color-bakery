@@ -12,18 +12,34 @@ export default {
     }
   },
   mounted() {
+    // escucha el cambio de tamaño y llama al metodo
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize);
   },
+  watch: {
+    // observo el cambio en el tema
+    darkMode: {
+      handler() {
+        this.handleTheme();
+      },
+      deep: true,
+    },
+  },
   methods: {
     handleResize() {
-      this.windowSmall = window.innerWidth <= 1200; // Cambia el tamaño según tus necesidades
+      this.windowSmall = window.innerWidth <= 1200; // Cambia el tamaño
     },
     toggleMenu() {
       this.openBurgerMenu = !this.openBurgerMenu;
+    },
+    // obtengo el tema del localstorage
+    handleTheme(){
+      const actualTheme = localStorage.getItem('theme');
+      console.log(actualTheme);
+      return actualTheme;
     }
   }
 }
@@ -32,7 +48,10 @@ export default {
 <template>
   <section :class="{ 'dark-mode': darkMode }">
     <nav class="nav">
-      <router-link to="/"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></router-link>
+      <router-link to="/">
+        <div v-if="handleTheme() === 'light'"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></div>
+        <div v-else><img src="../assets/color-bakery-logo.svg" class="nav__logo"></div>
+      </router-link>
       <!-- Menu normal-->
       <ul class="navbar__content" v-if="!windowSmall">
         <router-link v-show="!isMenuOpen" class="nav__router" to="/"><p>Inicio</p></router-link >
@@ -46,17 +65,17 @@ export default {
       </ul>
       <!-- Menu hamburguesa-->
       <ul v-else class="burger__menu">
-        <button @click="toggleMenu" class="burger__button">&#9776;</button>
         <div v-if="openBurgerMenu" class="burger__menu__items">
-        <button v-show="isMenuOpen" class="navbar-toggle" @click="toggleMenu">☰</button>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil">Perfil</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
-      </div>
+          <button v-show="isMenuOpen" class="navbar-toggle" @click="toggleMenu">☰</button>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil">Perfil</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
+          <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
+        </div>
+        <button @click="toggleMenu" class="burger__button">&#9776;</button>
       </ul>
     </nav>
   </section>
@@ -65,11 +84,15 @@ export default {
 <style scoped>
 /* menu hamburguesa*/
 .burger__menu {
-  position: sticky;
+  position: absolute;
+  align-items: flex-start;
   display: flex;
-  align-items: center;
-  float: right;
+  right: 5px;
   margin: 0 15px 0 0;
+}
+.burger__menu__items {
+  padding: 1rem;
+  display: none;
 }
 .burger__button {
   background: none;
@@ -78,9 +101,7 @@ export default {
   font-size: 2rem;
   cursor: pointer;
 }
-.burger__menu__items {
-  display: none;
-}
+
 @media screen and (max-width: 1200px) {
   .toggle {
     display: none;
@@ -102,7 +123,7 @@ export default {
   background-color: var(--bg-color-clear);
   margin: 0 auto;
 
-  align-items: center;
+  align-items: flex-start;
 }
 a:hover {
 
@@ -116,6 +137,7 @@ a:hover {
   flex-grow: 0.85;
 }
 .nav__router {
+  padding: 0.2rem;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -128,6 +150,7 @@ a:hover {
 }
 
 .nav__logo{
+  margin-top: 1rem;
   animation: palpito 2s ease 0s 1 normal forwards;
 }
 
@@ -135,11 +158,7 @@ img{
   height: 4rem;
   margin-left: 4rem;
 }
-p{
-  color: var(--font-color);
-  padding: 0;
-  margin-right: 3rem;
-}
+
 /* animación del logotipo */
 @keyframes palpito {
   0% {

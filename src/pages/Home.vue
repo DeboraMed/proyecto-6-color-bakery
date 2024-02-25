@@ -98,11 +98,11 @@ export default {
       let green = g.toString(16);
       let blue = b.toString(16);
 
-      if (red.length == 1)
+      if (red.length === 1)
         red = "0" + red;
-      if (green.length == 1)
+      if (green.length === 1)
         green = "0" + green;
-      if (blue.length == 1)
+      if (blue.length === 1)
         blue = "0" + blue;
 
       this.color = red + green + blue;
@@ -341,14 +341,17 @@ input {
 }
 /*TODO: normalizar los buttons (un solo tipo) y cambiar la imagen con el dark mode */
 button[type="submit"] {
+  border: none; /* Asegúrate de que el botón no tenga borde */
+  overflow: hidden; /* Oculta cualquier contenido que se desborde */
+  position: relative; /* Establece el contexto de apilamiento para los pseudo-elementos */
   text-overflow: ellipsis;
-  overflow: hidden;
+  /*overflow: hidden;*/
   white-space: pre;
   display: inline-flex;
   color: #fff;
   cursor: pointer;
-  border: 0;
   padding: 0.625rem 0.9375rem;
   margin: 0.625rem;
+  
 }
 </style>

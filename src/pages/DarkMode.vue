@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue';
 
 export default {
   setup() {
-    /* guarda el tema en el localStorage */
+    /* recupera el tema en el localStorage, sino se puede light */
     const theme = ref(localStorage.getItem('theme') || 'light');
     const toggleSwitchChecked = ref(theme.value === 'dark');
 
@@ -14,6 +14,7 @@ export default {
     /* metodo que cambia el tema */
     const switchTheme = () => {
       theme.value = toggleSwitchChecked.value ? 'dark' : 'light';
+      // guarda el tema en el localStorage
       localStorage.setItem('theme', theme.value);
       document.documentElement.setAttribute('data-theme', theme.value);
     };
