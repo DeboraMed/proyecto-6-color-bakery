@@ -1,7 +1,9 @@
 <script setup>
 // el codigo tiene que esta en un script setup
 import {useThemeStore} from '../stores/ThemeStore';
-const store = useThemeStore();
+import {useUserStore} from '../stores/UserStore';
+const themeStore = useThemeStore();
+const userStore = useUserStore();
 </script>
 
 <script>
@@ -39,7 +41,7 @@ export default {
   <section>
     <nav class="nav">
       <router-link to="/">
-        <div v-if="store.theme === 'dark'"><img src="../assets/color-bakery-logo-hor-dark.svg" class="nav__logo" alt="ColorBakery"></div>
+        <div v-if="themeStore.theme === 'dark'"><img src="../assets/color-bakery-logo-hor-dark.svg" class="nav__logo" alt="ColorBakery"></div>
         <div v-else><img src="../assets/color-bakery-logo-hor-light.svg" class="nav__logo" alt="ColorBakery"></div>
       </router-link>
       <!-- Menu normal-->
@@ -47,7 +49,7 @@ export default {
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/">Inicio</router-link >
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/login">Logueate</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/registro">Registrate</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/perfil">Perfil</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre"><button class="button">Descubre</button></router-link>
@@ -60,7 +62,7 @@ export default {
           <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
           <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
-          <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil">Perfil</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil">Perfil</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>

@@ -30,7 +30,7 @@
         <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
-          <button class="button__sec"> Contacto</button>
+          <router-link to="/contacto"><button class="button__sec"> Contacto</button></router-link>
         </form>
       </div>
     </section>

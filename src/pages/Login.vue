@@ -1,9 +1,15 @@
 <script>
-import axios from "axios";
+import { useUserStore } from '../stores/userStore';
 import BorderFooter from "../shared/BorderFooter.vue";
 
 export default {
   components: {BorderFooter},
+  setup(){
+    const userStore = useUserStore();
+    return {
+      userStore,
+    }
+  },
   data() {
     return {
       email: '',
@@ -29,27 +35,16 @@ export default {
       let re = /\w+@\w+\.+[a-z]/;
       return re.test(email);
     },
-    submitForm() {
+    async submitForm() {
       this.validateForm('email');
       this.validateForm('password');
 
       if (!Object.values(this.errors).some(error => error !== '')) {
         console.log('Formulario enviado:', this.email, this.password);
       };
-      let json = {
-        'email': this.email,
-        'password': this.password,
-      };
-      axios.post('http://localhost:8000/api/user/login',json)
-          .then(data => {
-            if(data.statusText === "OK"){
-              console.log('Solicitud procesada correctamente',data);
-              this.resetForm();
-            }
-          })
-          .catch(error => {
-            console.error('Error en la solicitud:', error);
-          });
+
+      // aqui llamar el UserStore
+      this.userStore.login(this.email,this.password)
     },
     resetForm() {
       this.email = '';
