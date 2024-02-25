@@ -39,24 +39,24 @@ export default {
   <section>
     <nav class="nav">
       <router-link to="/">
-        <div v-if="store.theme === 'dark'"><img src="../assets/color-bakery-logo-hor.svg" class="nav__logo"></div>
-        <div v-else><img src="../assets/color-bakery-logo.svg" class="nav__logo"></div>
+        <div v-if="store.theme === 'dark'"><img src="../assets/color-bakery-logo-hor-dark.svg" class="nav__logo" alt="ColorBakery"></div>
+        <div v-else><img src="../assets/color-bakery-logo-hor-light.svg" class="nav__logo" alt="ColorBakery"></div>
       </router-link>
       <!-- Menu normal-->
-      <ul class="navbar__content" v-if="!windowSmall">
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/"><p>Inicio</p></router-link >
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/login"><p>Logueate</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/registro"><p>Registrate</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/perfil"><p>Perfil</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto"><p>Contacto</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos"><p>Proyectos</p></router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
+      <div class="navbar__content" v-if="!windowSmall">
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/">Inicio</router-link >
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/login">Logueate</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/registro">Registrate</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/perfil">Perfil</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre"><button class="button">Descubre</button></router-link>
         <dark-mode/>
-      </ul>
+      </div>
       <!-- Menu hamburguesa-->
       <ul v-else class="burger__menu">
-        <div v-if="openBurgerMenu" class="burger__menu__items">
-          <button v-show="isMenuOpen" class="navbar-toggle" @click="toggleMenu">☰</button>
+        <li v-if="openBurgerMenu" class="burger__menu__items">
+          <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
           <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
@@ -64,7 +64,7 @@ export default {
           <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
-        </div>
+        </li>
         <button @click="toggleMenu" class="burger__button">&#9776;</button>
       </ul>
     </nav>
@@ -79,6 +79,8 @@ export default {
   display: flex;
   right: 5px;
   margin: 0 15px 0 0;
+  font-weight: bold;
+  background-color: var(--burguer-bg-color);
 }
 .burger__menu__items {
   padding: 1rem;
@@ -90,6 +92,9 @@ export default {
   border: none;
   font-size: 2rem;
   cursor: pointer;
+}
+.navbar__toggle{
+  color:var(--font-color) ;
 }
 
 @media screen and (max-width: 1200px) {
@@ -115,32 +120,35 @@ export default {
 
   align-items: flex-start;
 }
-a:hover {
 
-}
 .navbar__content{
   display: flex;
   text-align: right;
-  padding: 5px 5px;
   font-weight: bold;
   justify-content: right;
   flex-grow: 0.85;
 }
 .nav__router {
-  padding: 0.2rem;
+  padding: 0.5rem;
   text-decoration: none;
   display: flex;
   align-items: center;
 }
-.nav__router a{
+.nav__router__pri{
+  padding: 0.8rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+a{
   color: var(--a-color);
 }
-.nav__router a:hover{
+a:hover{
   color: var(--a-color-hover);
 }
 
 .nav__logo{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   animation: palpito 2s ease 0s 1 normal forwards;
 }
 

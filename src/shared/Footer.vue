@@ -8,7 +8,7 @@
     <!-- Footer main -->
     <section class="ft__main">
       <div class="ft__main__item">
-        <img class="ft__title" src="../assets/img/color-bakery-texto-w.svg" alt="ColorBakery">
+        <img class="ft__title" src="../assets/img/color-bakery-texto-footer.svg" alt="ColorBakery">
         <ul>
           <li><a href="#">Inicio</a></li>
           <li><a href="#">Descubre</a></li>
@@ -57,10 +57,13 @@ footer {
 }
 footer a {
   text-decoration: none;
-  color: #eee;
+  color: var(--a-color-ft);
 }
 footer a:hover {
-  color: #747bff;
+  color: var(--a-color-hover);
+}
+footer p{
+  color: #bbb;
 }
 .ft__title {
   color: #fff;

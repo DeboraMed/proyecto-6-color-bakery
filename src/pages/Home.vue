@@ -339,19 +339,6 @@ input {
   margin-top: 0.3125rem;
 
 }
-/*TODO: normalizar los buttons (un solo tipo) y cambiar la imagen con el dark mode */
-button[type="submit"] {
-  border: none; /* Asegúrate de que el botón no tenga borde */
-  overflow: hidden; /* Oculta cualquier contenido que se desborde */
-  position: relative; /* Establece el contexto de apilamiento para los pseudo-elementos */
-  text-overflow: ellipsis;
-  /*overflow: hidden;*/
-  white-space: pre;
-  display: inline-flex;
-  color: #fff;
-  cursor: pointer;
-  padding: 0.625rem 0.9375rem;
-  margin: 0.625rem;
-  
-}
+/*button[type="submit"] {
+}*/
 </style>

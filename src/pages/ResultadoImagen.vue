@@ -80,7 +80,7 @@ export default {
         <div class="color__palette">
           <div v-if="imageError" >
            <img alt="Tu imagen no se pudo cargar" src="../assets/img/magdalenas-quemadas-noimagen.png">
-            <p class="image__error">Los siento...Tu imagen no se pudo cargar.</p>
+            <p class="image__error">Tu imagen no ha podido ser procesada<br>Revisa la <a class="image__error__a" href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS"> politica CORS</a> del host.</p>
           </div>
           <div class="color__swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
                :key="i"
@@ -140,6 +140,11 @@ export default {
 .image__error{
   padding: 1rem;
   text-align: center;
+}
+.image__error__a{
+  text-decoration: none;
+  color: var(--font-color);
+  font-weight: bold;
 }
 .color__palette {
   display: flex;

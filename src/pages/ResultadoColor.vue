@@ -56,6 +56,7 @@ export default {
           {{ color.hex.value }}
         </li>
       </ul>
+      <img src="">
     </article>
   </section>
   </section>
@@ -63,7 +64,7 @@ export default {
 
 <style scoped>
 .main__content__color{
-  padding-top: 4rem;
+  /*padding-top: 4rem;*/
   position: relative;
   margin: auto;
   color: black;

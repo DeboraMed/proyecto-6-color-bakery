@@ -185,9 +185,6 @@ export default {
   margin: auto;
   width: 60%;
 }
-h2{
-  color: #4E3D90;
-}
 form{
   text-align: left;
 }

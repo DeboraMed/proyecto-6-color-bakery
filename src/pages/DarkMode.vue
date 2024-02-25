@@ -17,7 +17,10 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --font-color-h2-pri: #4c3b9a;
   --font-color-h2-sec: #c2431e;
 
+  --font-color-p-error: #c2431e;
+
   --a-color: #4c3b9a;
+  --a-color-ft: #ffffff;
   --a-color-hover: #747bff;
 
   --bt-color-1: #ffffff;
@@ -28,6 +31,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --bt-color-2-after: #e76c49;
   --bt-color-2-before: #C2431E;
 
+  --burguer-bg-color:#FFF8E8;
   --bg-color-clear: #FFF8E8;
   --bg-color-medium: #FFEFC9;
   --bg-color-dark: #FCBD7A;
@@ -41,16 +45,20 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --font-color-h2-pri: #ffffff;
   --font-color-h2-sec: #efce97;
 
+  --font-color-p-error: #f18465;
+
   --a-color: #ffffff;
-  --a-color-hover: #c5bde7;
+  --a-color-hover: #747bff;
 
   --bt-color-1: #ffffff;
-  --bt-color-1-after: #7563c7;
-  --bt-color-1-before: #4c3b9a;
+  --bt-color-1-after: #e76c49;
+  --bt-color-1-before: #C2431E;
 
   --bt-color-2: #fff;
   --bt-color-2-after: #e76c49;
   --bt-color-2-before: #C2431E;
+
+  --burguer-bg-color:#645c81;
   --bg-color-clear: #645c81;
   --bg-color-medium: #524b6e;
   --bg-color-dark: #3F3661;

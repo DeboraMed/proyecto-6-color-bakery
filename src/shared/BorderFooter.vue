@@ -1,12 +1,15 @@
 <script setup>
-
+// el codigo tiene que esta en un script setup
+import {useThemeStore} from '../stores/ThemeStore';
+const store = useThemeStore();
 </script>
 
 <template>
   <!-- borde naranja del footer-->
   <section class="border__ft__init">
     <div class="border__ft__init__img">
-      <img class="border__ft__init__background" src="../assets/img/color-bakery-texto.svg">
+      <img v-if="store.theme === 'dark'" class="border__ft__init__background" src="../assets/img/color-bakery-texto-dark.svg" alt="ColorBakery">
+      <img v-else class="border__ft__init__background" src="../assets/img/color-bakery-texto-light.svg" alt="ColorBakery">
     </div>
   </section>
 </template>

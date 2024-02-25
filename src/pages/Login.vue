@@ -119,9 +119,6 @@ export default {
   margin: auto;
   width: 60%;
 }
-h2{
-  color: #4E3D90;
-}
 input {
   width: 50%;
   border: 1px #797474;
