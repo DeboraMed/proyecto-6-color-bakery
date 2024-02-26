@@ -14,7 +14,7 @@
 html{
   min-height: 100%;
   position: relative;  transition: background-color 0.5s ease, color 0.5s ease;
-
+  color: var(--font-color);
 }
 *,
 *::before,
@@ -61,6 +61,10 @@ body:not(:-moz-handler-blocked) fieldset {
   justify-content: center;
   align-items: center;
   padding: 1rem 1rem;
+}
+.content__article{
+  margin: auto;
+  width: 60%;
 }
 /* estilo del formulario */
 .form{

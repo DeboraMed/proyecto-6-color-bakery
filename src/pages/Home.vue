@@ -1,57 +1,21 @@
 <script>
-/**
- * Este componente es el encargado de mostrar la interfaz principal de la aplicación
- * que permite al usuario introducir un color o una imagen y obtener una paleta de
- * colores relacionada.
- */
   import axios from 'axios';
   import ResultadoColor from "./ResultadoColor.vue";
   import ResultadoImagen from "./ResultadoImagen.vue";
   import HomeSection from "./HomeSection.vue";
 import BorderFooter from "../shared/BorderFooter.vue";
 export default {
-  /**
-   * components: Registra los componentes hijos que se utilizan en este componente,
-   * que son ResultadoColor, ResultadoImagen y HomeSection.
-   */
   components: {BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
   data() {
     return {
-      /**
-       *  showColor: indica si se muestra el formulario y el resultado del color.
-       */
       showColor: true,
-      /**
-       * showImage: booleano que indica si se muestra el formulario y el resultado de la imagen
-       */
       showImage: false,
-      /**
-       * form: almacena el valor del button que selecciona el tipo de entrada (color o imagen).
-       */
       form: '',
-      /**
-       * text: almacena el valor del input de texto que muestra el color o la url introducida por el usuario.
-       */
       text: '',
-      /**
-       * selected: almacena el valor del select que elige el esquema de color a generar.
-       */
       selected: '',
-      /**
-       * color: almacena el color introducido por el usuario en formato hexadecimal.
-       */
       color: '',
-      /**
-       * url: almacena la url de la imagen introducida por el usuario.
-       */
       url: '',
-      /**
-       * isValidImage: indica si la url introducida por el usuario carga una imagen válida o no.
-       */
       isValidImage: false,
-      /**
-       * errors: objeto que almacena los mensajes de error de las validaciones de los formularios, que son:
-       */
       errors: {
         color: '',
         selected: '',
@@ -60,13 +24,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * validateColor(color): Método que recibe un color como parámetro y devuelve un booleano que
-     * indica si el color tiene un formato válido (HEX o RGB). Si el color es RGB, lo convierte a
-     * HEX y lo almacena en la propiedad color.
-     * @param color
-     * @returns {default.methods.color|boolean}
-     */
     validateColor(color){
       const regexHex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       const regexRgb = /^([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5])$/;
@@ -84,15 +41,6 @@ export default {
         return this.convertRGBtoHex(r,g,b)
       }
     },
-    /**
-     * convertRGBtoHex(r, g, b): método que recibe los valores de rojo, verde y azul de un
-     * color RGB como parámetros y devuelve el color equivalente en formato hexadecimal.
-     * También almacena el color en la propiedad color.
-     * @param r
-     * @param g
-     * @param b
-     * @returns {string}
-     */
     convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
@@ -109,13 +57,6 @@ export default {
       console.log(this.color)
       return this.color
     },
-    /**
-     * validateImageURL(url): métodoe que rcibe una url como parámetro y devuelve la promesa
-     * que se resuelve si la url carga una imagen válida o se rechaza si no.
-     * También actualiza la propiedad isValidImage segun el resultado.
-     * @param url
-     * @returns {Promise<unknown>}
-     */
     validateImageURL(url) {
       return new Promise((resolve, reject) => {
         let img = new Image();
@@ -130,10 +71,6 @@ export default {
         img.src = url;
       });
     },
-    /**
-     * validateFormColor(): Un método que valida el formulario del color y muestra los mensajes
-     * de error correspondientes en la propiedad errors si hay algún campo no valido.
-     */
     validateFormColor() {
       if (!this.color || !this.validateColor(this.color)) {
         this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
@@ -144,10 +81,6 @@ export default {
         this.errors.selected = '';
       }
     },
-    /**
-     * validateFormImage(): Un método que valida el formulario de la imagen y muestra el
-     * mensaje de error en la propiedad errors si hay algún campo no valido.
-     */
     validateFormImage() {
       if (!this.isValidImage){
         this.errors.url = 'Indica una URL válida.';
@@ -155,13 +88,6 @@ export default {
         this.errors.url = '';
       }
     },
-    /**
-     * submitFormColor(): este método se ejecuta al enviar el formulario del color.
-     * Llama al método validateFormColor() y si no hay errores, envía el color a través de
-     * una 'referencia' al componente ResultadoColor para que genere la paleta de colores.
-     * También actualiza las propiedades showColor y showImage para mostrar el resultado del
-     * color y ocultar el de la imagen.
-     */
     submitFormColor(){
       try {
         this.validateFormColor();
@@ -176,15 +102,6 @@ export default {
         console.error('Ocurrio un error al enviar el formulario de color', error)
       }
     },
-    /**
-     * submitFormImage(): se ejecuta al enviar el formulario de la imagen.
-     * Llama al método validateImageURL() y espera su resultado.
-     * Luego llama al método validateFormImage() y si no hay errores, envía la url a través
-     * de una referencia al componente ResultadoImagen para que genere la paleta de colores.
-     * También actualiza las propiedades showImage y showColor para mostrar el resultado de
-     * la imagen y ocultar el del color.
-     * @returns {Promise<void>}
-     */
     async submitFormImage(){
       try {
         await this.validateImageURL(this.url);
@@ -301,7 +218,6 @@ export default {
   object-fit: cover;
   object-position: center center;
 }
-
 .content__article{
   margin: 4rem auto;
   width: 80%;
@@ -339,6 +255,4 @@ input {
   margin-top: 0.3125rem;
 
 }
-/*button[type="submit"] {
-}*/
 </style>

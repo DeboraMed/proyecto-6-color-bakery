@@ -1,19 +1,19 @@
  import { defineStore } from 'pinia';
  import axios from "axios";
  import router from "../router/router.js";
+ import {useAlertStore} from "./AlertStore.js";
 
 export const useUserStore = defineStore( 'user',{
     state: () => ({
         token: localStorage.getItem('token'),
         userData: []
     }),
-
     actions: {
-
         isLogged() {
             return this.token !== null
         },
         register(name,email,password){
+            const alertStore = useAlertStore();
             let json = {
                 'name': name,
                 'email': email,
@@ -23,13 +23,20 @@ export const useUserStore = defineStore( 'user',{
                 .then(data => {
                     if(data.statusText === "OK"){
                         console.log('Solicitud procesada correctamente',data);
-
+                        alertStore.success('Se ha registrado correctamente.');
                         // redirigir al login
                         router.push({ path: '/login'})
                     }
                 })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                    alertStore.error('Ha ocurrido un error en la solicitud.');
+                });
+            // se borra la alerta
+            alertStore.clear();
         },
         login(email,password) {
+            const alertStore = useAlertStore();
             let json = {
                 'email': email,
                 'password': password,
@@ -42,12 +49,14 @@ export const useUserStore = defineStore( 'user',{
                         // guarda el token en el localstorage
                         localStorage.setItem('token', this.token);
                         console.log(this.token)
+                        alertStore.success('Se ha logueado correctamente.');
                         // redirigir al perfil
                         router.push({ path: '/perfil'})
                     }
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
+                    alertStore.error('Ha ocurrido un error en la solicitud.');
                 });
 
         },
@@ -66,9 +75,9 @@ export const useUserStore = defineStore( 'user',{
                     console.error('Error en la solicitud:', error);
                 });
         },
-        getProjects(){
+        /*getProjects(){
             // llamada a la Api con autenticacion
-            /*const config = {
+            /!*const config = {
               headers: { Authorization: `Bearer ${token}` }
             };
 
@@ -87,8 +96,8 @@ export const useUserStore = defineStore( 'user',{
               }
             }).catch(error => {
               console.error('Error en la solicitud:', error);
-            });*/
-        },
+            });*!/
+        },*/
         logout() {
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }

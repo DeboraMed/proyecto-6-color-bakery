@@ -110,10 +110,6 @@ export default {
   width: 60%;
   margin: auto;
 }
-.content__article{
-  margin: auto;
-  width: 60%;
-}
 input {
   width: 50%;
   border: 1px #797474;

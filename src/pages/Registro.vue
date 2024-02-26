@@ -3,11 +3,6 @@ import { useUserStore } from '../stores/userStore';
 import BorderFooter from "../shared/BorderFooter.vue";
 import Alert from "../shared/Alert.vue";
 import {useAlertStore} from "../stores/AlertStore.js";
-/**
- * Este componente es el encargado de mostrar el formulario de registro de la aplicación,
- * que permite al usuario introducir su nombre, correo electrónico y contraseña para
- * crear una cuenta.
- */
 export default {
   components: {Alert, BorderFooter},  setup(){
     const userStore = useUserStore();
@@ -17,25 +12,10 @@ export default {
   },
   data() {
     return {
-      /**
-       * nombre: una cadena que almacena el nombre introducido por el usuario
-       */
       nombre: '',
-      /**
-       * email: cadena que almacena el correo electrónico introducido por el usuario.
-       */
       email: '',
-      /**
-       * password: una cadena que almacena la contraseña introducida por el usuario.
-       */
       password: '',
-      /**
-       * re_password: cadena que almacena la confirmación de la contraseña introducida por el usuario.
-       */
       re_password: '',
-      /**
-       * errors: Un objeto que almacena los mensajes de error de las validaciones de los campos del formulario, que son:
-       */
       errors: {
         nombre: '',
         email: '',
@@ -45,12 +25,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * validateForm(field): método que recibe el nombre de un campo del formulario como parámetro
-     * y valida su valor según las reglas establecidas.
-     * Si el valor es inválido, muestra el mensaje de error correspondiente en la propiedad errors.
-     * @param field
-     */
     validateForm(field) {
       if (field === 'nombre' && (!this.nombre || typeof this.nombre !== 'string' || this.nombre.length < 3)) {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
@@ -64,32 +38,17 @@ export default {
         this.errors[field] = '';
       }
     },
-    /**
-     * validateEmail(email): método que recibe un correo electrónico como parámetro y
-     * devuelve un booleano que indica si tiene un formato válido o no. Utiliza una
-     * expresión regular para comprobar el formato.
-     * @param email
-     * @returns {boolean}
-     */
     validateEmail(email) {
       let re = /\w+@\w+\.+[a-z]/;
       return re.test(email);
     },
-    /**
-     * submitForm(): método que se ejecuta al enviar el formulario de registro.
-     * Llama a validateForm() para cada campo del formulario y si no hay errores,
-     * envía los datos al servidor. También muestra un mensaje en la consola con los datos enviados.
-     */
     async submitForm() {
       this.validateForm('nombre','email','password','re_password');
       const alertStore = useAlertStore();
-      try  {
-        // aqui llamar el UserStore
-        await this.userStore.register(this.nombre,this.email,this.password);
-        alertStore.success('Se ha registrado correctamente.');
-      } catch (error) {
-        alertStore.error(error);
-      }
+
+      // aqui llamar el UserStore
+      this.userStore.register(this.nombre,this.email,this.password);
+
     },
     resetForm() {
       this.nombre = '';
@@ -177,10 +136,6 @@ export default {
 .content__section__img{
   width: 60%;
   margin: auto;
-}
-.content__article{
-  margin: auto;
-  width: 60%;
 }
 form{
   text-align: left;

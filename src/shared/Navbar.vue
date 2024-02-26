@@ -47,11 +47,11 @@ export default {
       <!-- Menu normal-->
       <div class="navbar__content" v-if="!windowSmall">
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/">Inicio</router-link >
-        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/login">Logueate</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/registro">Registrate</router-link>
+        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/login">Logueate</router-link>
+        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/registro">Registrate</router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre"><button class="button">Descubre</button></router-link>
         <dark-mode/>
       </div>
@@ -60,11 +60,11 @@ export default {
         <li v-if="openBurgerMenu" class="burger__menu__items">
           <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
-          <router-link v-show="!isMenuOpen" class="nav__router" to="/login">Logueate</router-link>
-          <router-link v-show="!isMenuOpen" class="nav__router" to="/registro">Registrate</router-link>
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/login">Logueate</router-link>
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/registro">Registrate</router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil">Perfil</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
-          <router-link v-show="!isMenuOpen" class="nav__router" to="/proyectos">Proyectos</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/proyectos">Proyectos</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
         </li>
         <button @click="toggleMenu" class="burger__button">&#9776;</button>
