@@ -65,8 +65,8 @@ body:not(:-moz-handler-blocked) fieldset {
 /* estilo del formulario */
 .form{
   justify-self: center;
-  padding: 0rem 2rem;
-  margin: 0rem 2rem;
+  padding: 0 2rem;
+  margin: 0 2rem;
   text-align: left;
 }
 /*boton principal*/
@@ -105,7 +105,7 @@ body:not(:-moz-handler-blocked) fieldset {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 100%;
   background-color: var(--bt-color-1-before);
   transition: all 0.3s;
@@ -152,7 +152,7 @@ body:not(:-moz-handler-blocked) fieldset {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0%;
+  width: 0;
   height: 100%;
   background-color: var(--bt-color-2-before);
   transition: all 0.3s;

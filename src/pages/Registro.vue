@@ -1,6 +1,5 @@
 <script>
 import { useUserStore } from '../stores/userStore';
-import axios from "axios";
 import BorderFooter from "../shared/BorderFooter.vue";
 import Alert from "../shared/Alert.vue";
 import {useAlertStore} from "../stores/AlertStore.js";

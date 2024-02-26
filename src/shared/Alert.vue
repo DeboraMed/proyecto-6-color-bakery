@@ -46,7 +46,7 @@ button {
 .alert__danger{
   color: #893232;
   background-color: #fadddd;
-  border: 1px solid ##f7cbcb;
+  border: 1px solid #f7cbcb;
 }
 
 </style>
