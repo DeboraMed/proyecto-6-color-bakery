@@ -13,7 +13,22 @@ export const useUserStore = defineStore( 'user',{
         isLogged() {
             return this.token !== null
         },
+        register(name,email,password){
+            let json = {
+                'name': name,
+                'email': email,
+                'password': password,
+            };
+            axios.post('/api/v1/register',json)
+                .then(data => {
+                    if(data.statusText === "OK"){
+                        console.log('Solicitud procesada correctamente',data);
 
+                        // redirigir al login
+                        router.push({ path: '/login'})
+                    }
+                })
+        },
         login(email,password) {
             let json = {
                 'email': email,
@@ -24,6 +39,7 @@ export const useUserStore = defineStore( 'user',{
                     if(data.statusText === "OK"){
                         console.log('Solicitud procesada correctamente',data);
                         this.token = data.data.token;
+                        // guarda el token en el localstorage
                         localStorage.setItem('token', this.token);
                         console.log(this.token)
                         // redirigir al perfil
@@ -34,6 +50,23 @@ export const useUserStore = defineStore( 'user',{
                     console.error('Error en la solicitud:', error);
                 });
 
+        },
+        async fetchUser() {
+            const config = {
+                headers: { Authorization: `Bearer ${this.token}` }
+            };
+            await axios.get('/api/v1/user',config)
+                .then(data => {
+                    if(data.statusText === "OK"){
+                        console.log('Solicitud procesada correctamente',data);
+                        this.userData = data.data
+                    }
+                })
+                .catch(error => {
+                    console.error('Error en la solicitud:', error);
+                });
+        },
+        getProjects(){
             // llamada a la Api con autenticacion
             /*const config = {
               headers: { Authorization: `Bearer ${token}` }
@@ -56,21 +89,6 @@ export const useUserStore = defineStore( 'user',{
               console.error('Error en la solicitud:', error);
             });*/
         },
-        async fetchUser() {
-            const config = {
-                headers: { Authorization: `Bearer ${this.token}` }
-            };
-            await axios.get('/api/v1/user',config)
-                .then(data => {
-                    if(data.statusText === "OK"){
-                        console.log('Solicitud procesada correctamente',data);
-                        this.userData = data.data
-                    }
-                })
-                .catch(error => {
-                    console.error('Error en la solicitud:', error);
-                });
-        },
         logout() {
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
@@ -80,9 +98,10 @@ export const useUserStore = defineStore( 'user',{
                     if(data.statusText === "OK"){
                         console.log('Solicitud procesada correctamente',data);
                         this.token = null;
+                        // borra el token del localstorage
                         localStorage.removeItem('token');
 
-                        // redirigir al inicio
+                        // redirige al inicio
                         router.push({ path: '/'})
                     }
                 })

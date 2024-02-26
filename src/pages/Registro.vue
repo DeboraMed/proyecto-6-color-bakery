@@ -1,13 +1,21 @@
 <script>
+import { useUserStore } from '../stores/userStore';
 import axios from "axios";
 import BorderFooter from "../shared/BorderFooter.vue";
+import Alert from "../shared/Alert.vue";
+import {useAlertStore} from "../stores/AlertStore.js";
 /**
  * Este componente es el encargado de mostrar el formulario de registro de la aplicación,
  * que permite al usuario introducir su nombre, correo electrónico y contraseña para
  * crear una cuenta.
  */
 export default {
-  components: {BorderFooter},
+  components: {Alert, BorderFooter},  setup(){
+    const userStore = useUserStore();
+    return {
+      userStore,
+    }
+  },
   data() {
     return {
       /**
@@ -73,26 +81,15 @@ export default {
      * Llama a validateForm() para cada campo del formulario y si no hay errores,
      * envía los datos al servidor. También muestra un mensaje en la consola con los datos enviados.
      */
-    submitForm() {
+    async submitForm() {
       this.validateForm('nombre','email','password','re_password');
-
-      if (!Object.values(this.errors).some(error => error !== '')) {
-        console.log('Formulario enviado:', this.nombre, this.email, this.password, this.re_password);
-        let json = {
-          'name': this.nombre,
-          'email': this.email,
-          'password' : this.password,
-        };
-        axios.post('http://localhost:8000/api/user/registry',json)
-            .then(data => {
-              if(data.statusText === "OK"){
-                console.log('Solicitud procesada correctamente',data);
-                this.resetForm();
-              }
-            })
-            .catch(error => {
-              console.error('Error en la solicitud:', error);
-            });
+      const alertStore = useAlertStore();
+      try  {
+        // aqui llamar el UserStore
+        await this.userStore.register(this.nombre,this.email,this.password);
+        alertStore.success('Se ha registrado correctamente.');
+      } catch (error) {
+        alertStore.error(error);
       }
     },
     resetForm() {
@@ -161,6 +158,7 @@ export default {
           <p class="p__error">{{ errors.re_password }}</p>
         </fieldset>
         <button class="button" type="submit">Enviar</button>
+        <alert></alert>
       </form>
     </section>
   </main>

@@ -1,5 +1,5 @@
 <script setup>
-// el codigo tiene que esta en un script setup
+// el codigo del store tiene que esta en un script setup
 import {useThemeStore} from '../stores/ThemeStore';
 import {useUserStore} from '../stores/UserStore';
 const themeStore = useThemeStore();

@@ -52,7 +52,15 @@ body:not(:-moz-handler-blocked) fieldset {
   flex-wrap: wrap;
   justify-content: space-evenly;
   padding: 1rem 1rem;
-  background: #FCBD7A;
+}
+.container__center{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem;
 }
 /* estilo del formulario */
 .form{
