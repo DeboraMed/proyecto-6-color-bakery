@@ -18,6 +18,7 @@ const favoriteData = computed(() => {
 
 <template>
   <section class="container__center">
+    <alert></alert>
     <h2>Favoritos</h2>
     <!--itera favoritos-->
     <div v-if="favoriteData && favoriteData.favorites" v-for="favorite in favoriteData.favorites" :key="favorite.id">
@@ -34,7 +35,6 @@ const favoriteData = computed(() => {
         {{ favorite.color.name }} <br> #{{ favorite.color.hex }}
         </li>
       </ul>
-      <alert></alert>
     </div>
   </section>
 </template>

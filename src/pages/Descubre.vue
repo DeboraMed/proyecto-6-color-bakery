@@ -53,7 +53,7 @@ data(){
     <div>
       color generado: #{{this.color}} <br>
       <button class="button" @click="getRandomColor()" >Generar color</button>
-      <button class="like__button" :class="{ liked: isLiked }" @click="toggleLike"><font-awesome-icon icon="fa-solid fa-heart" class="icon"/></button>
+      <button class="like__button" v-if="this.color" :class="{ liked: isLiked }" @click="toggleLike"><font-awesome-icon icon="fa-solid fa-heart" class="icon"/></button>
     <alert></alert>
     </div>
   </section>

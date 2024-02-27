@@ -6,9 +6,9 @@ import {createPinia} from "pinia";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faHeart,faXmark} from '@fortawesome/free-solid-svg-icons';
+import {faHeart, faPenToSquare, faXmark} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHeart,faXmark);
+library.add(faHeart,faXmark,faPenToSquare);
 
 const pinia = createPinia()
 

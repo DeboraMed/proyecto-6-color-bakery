@@ -61,12 +61,12 @@ export const useFavoriteStore = defineStore( 'favorite',{
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             };
-            axios.delete('/api/v1/favorites/',json,config)
-                .then(data => {
-                    if(data.statusText === "OK"){
-                        console.log('Solicitud procesada correctamente',data);
+            axios.delete(`/api/v1/favorites/${id}`,config)
+                .then(async data => {
+                    if (data.statusText === "OK") {
+                        console.log('Solicitud procesada correctamente', data);
                         alertStore.success('Se ha borrado de favoritos correctamente.');
-                        this.favoriteData = data.data
+                        await this.getFavorites()
                     }
                 }).catch(error => {
                 console.error('Error en la solicitud:', error);
