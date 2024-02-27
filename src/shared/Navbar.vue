@@ -101,14 +101,14 @@ export default {
   color:var(--font-color) ;
 }
 
-@media screen and (max-width: 1200px) {
+/*@media screen and (max-width: 1200px) {
   .toggle {
     display: none;
   }
   .burger__menu__items {
     display: block;
   }
-}
+}*/
 /* barra de navegacion */
 .nav {
   z-index: 3;

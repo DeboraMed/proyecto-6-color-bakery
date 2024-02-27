@@ -61,7 +61,7 @@ export const useFavoriteStore = defineStore( 'favorite',{
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
             };
-            axios.delete('/api/v1/favorites/',id,config)
+            axios.delete('/api/v1/favorites/',json,config)
                 .then(data => {
                     if(data.statusText === "OK"){
                         console.log('Solicitud procesada correctamente',data);
