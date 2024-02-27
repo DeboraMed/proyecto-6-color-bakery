@@ -1,5 +1,5 @@
 <script setup>
-import {useThemeStore} from '../stores/ThemeStore';
+import {useThemeStore} from '../stores/ThemeStore.js';
 const store = useThemeStore();
 document.documentElement.setAttribute('data-theme', store.theme);
 </script>

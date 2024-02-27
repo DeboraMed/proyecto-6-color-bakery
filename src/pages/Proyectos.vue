@@ -1,6 +1,6 @@
 <script setup>
 import {computed, onMounted} from "vue";
-import {useProjectStore} from '../stores/ProjectStore';
+import {useProjectStore} from '../stores/ProjectStore.js';
 import Alert from "../shared/Alert.vue";
 
 const projectStore = useProjectStore();

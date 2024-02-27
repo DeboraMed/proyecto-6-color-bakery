@@ -10,7 +10,7 @@ const { alert } = storeToRefs(alertStore);
 <template>
   <section v-if="alert">
       <article class="alert" :class="alert.type">
-        <button @click="alertStore.clear()">X</button>
+        <button @click="alertStore.clear()"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
         {{alert.message}}
       </article>
   </section>

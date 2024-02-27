@@ -75,29 +75,6 @@ export const useUserStore = defineStore( 'user',{
                     console.error('Error en la solicitud:', error);
                 });
         },
-        /*getProjects(){
-            // llamada a la Api con autenticacion
-            /!*const config = {
-              headers: { Authorization: `Bearer ${token}` }
-            };
-
-            const bodyParameters = {
-              key: "value"
-            };
-
-            axios.post(
-                'http://localhost:8000/api/v1/get_token_payloads',
-                bodyParameters,
-                config
-            ).then(data => {
-              if(data.statusText === "OK"){
-                console.log('Solicitud procesada correctamente',data);
-                this.resetForm();
-              }
-            }).catch(error => {
-              console.error('Error en la solicitud:', error);
-            });*!/
-        },*/
         logout() {
             const config = {
                 headers: { Authorization: `Bearer ${this.token}` }
