@@ -36,6 +36,10 @@ const routes = [
         component: () => import('../pages/Contacto.vue')
     },
     {
+        path: '/favoritos',
+        component: () => import('../pages/Favoritos.vue')
+    },
+    {
         path: '/:pathMach(.*)*',
         component: () => import('../pages/404.vue')
     },

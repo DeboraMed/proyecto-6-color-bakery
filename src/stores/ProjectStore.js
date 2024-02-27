@@ -5,7 +5,7 @@ import {useAlertStore} from "./AlertStore.js";
 export const useProjectStore = defineStore( 'project',{
     state: () => ({
         token: localStorage.getItem('token'),
-        projectData: []
+        projectData: [],
     }),
     actions: {
         async getProjects(){
@@ -27,6 +27,6 @@ export const useProjectStore = defineStore( 'project',{
                 alertStore.error('Ha ocurrido un error en la solicitud.');
             });
             alertStore.clear();
-        }
+        },
     }
 })

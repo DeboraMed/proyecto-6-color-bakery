@@ -52,6 +52,7 @@ export default {
         <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos">Favoritos</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre"><button class="button">Descubre</button></router-link>
         <dark-mode/>
       </div>
@@ -65,6 +66,7 @@ export default {
           <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil">Perfil</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
           <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/proyectos">Proyectos</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos">Favoritos</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
         </li>
         <button @click="toggleMenu" class="burger__button">&#9776;</button>

@@ -8,12 +8,11 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*transition: all 0.5s ease-out;*/
-  transition: background-color 0.5s ease, color 0.5s ease;
+
 }
 html{
   min-height: 100%;
-  position: relative;  transition: background-color 0.5s ease, color 0.5s ease;
+  position: relative;
   color: var(--font-color);
 }
 *,
@@ -28,6 +27,7 @@ body {
   min-height: 100vh;
   margin: 0;
   place-items: center;
+
 }
 body:not(:-moz-handler-blocked) fieldset {
   display: table-cell;
@@ -38,6 +38,7 @@ body:not(:-moz-handler-blocked) fieldset {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
 }
 .container {
   flex: 1 0 auto;
@@ -46,6 +47,8 @@ body:not(:-moz-handler-blocked) fieldset {
   text-decoration: none;
   margin-top: 5rem;
   background: linear-gradient(to bottom, var(--bg-color-clear) 50%, var(--bg-color-medium) 50%);
+  transition: background 0.5s ease, color 0.5s ease;
+
 }
 .container__section{
   display: flex;
@@ -187,13 +190,18 @@ ul {
 p{
   color: var(--font-color);
   padding: 0;
-  /*margin-right: 3rem;*/
+  transition: color 0.5s ease;
+}
+a{
+  transition: color 0.5s ease;
 }
 h2{
   color: var(--font-color-h2-pri);
+  transition: color 0.5s ease;
 }
 .h2__color__sec{
   color:var(--font-color-h2-sec);
+  transition: color 0.5s ease;
 }
 
 /*medias generales*/

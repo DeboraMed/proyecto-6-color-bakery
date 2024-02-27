@@ -33,8 +33,8 @@ const projectData = computed(() => {
         <li class="main__article__li" v-for="color in palette.colors" :key="color.id"
             :style="{
               backgroundColor: '#'+color.hex,
-              width: 47 + index + '%',
-              height: 14 + index + '%',
+              width: 47 + '%',
+              height: 14 + '%',
            }">
           {{ color.name }}
         </li>
