@@ -16,7 +16,7 @@ onClickOutside(target, ()=>emit('modal-close'))
 <template>
   <div v-if="isOpen" class="modal__mask">
     <div class="modal-wrapper">
-      <div class="modal__container" :ref="target">
+      <div class="modal__container" ref="target">
         <div class="modal-header">
           <slot name="header"> default header </slot>
         </div>
