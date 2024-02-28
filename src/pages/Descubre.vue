@@ -8,7 +8,7 @@ export default {
   components: {Alert},
 data(){
   const favoriteStore = useFavoriteStore();
-  const alertStore = useAlertStore();
+  // const alertStore = useAlertStore();
     return{
       color: '',
       isLiked: false,

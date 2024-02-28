@@ -65,7 +65,7 @@ export default {
           {{ color.hex.value }}
         </li>
       </ul>
-      <img src="">
+<!-- Pendiente de añadir imagen  <img src="">-->
     </article>
   </section>
   </section>

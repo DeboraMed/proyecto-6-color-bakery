@@ -50,7 +50,7 @@ const projectData = computed(() => {
               :style="{
                 backgroundColor: '#'+color.hex,
                 width: 47 + '%',
-                height: 14 + '%',
+                height: 14 + '%'
              }">
             {{ color.name }}
           </li>
