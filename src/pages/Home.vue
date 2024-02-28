@@ -5,15 +5,16 @@
   import BorderFooter from "../shared/BorderFooter.vue";
   import Modal from "../shared/Modal.vue";
   import { ref } from "vue";
+  import {useProjectStore} from "../stores/ProjectStore.js";
+
 
   /* para que el Modal sea reactivo */
-  const isModalOpened = ref(false);
-
 export default {
   components: {Modal, BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
   data() {
     return {
-      isModalOpened: isModalOpened,
+      listProjects: [],
+      isModalOpened: false,
       showColor: true,
       showImage: false,
       form: '',
@@ -28,6 +29,9 @@ export default {
         url: '',
       },
     }
+  },
+  computed: {
+    projectStore: () => useProjectStore()
   },
   methods: {
     validateColor(color){
@@ -124,21 +128,22 @@ export default {
         console.error('Ha ocurrido un error al enviar el formulario de imagen', error)
       }
     },
-    // metodos del modal
-    openModal() {
-      this.isModalOpened = true;
-    },
     closeModal() {
       this.isModalOpened = false;
     },
     submitHandler() {
       // manejo del modal
     },
-    handleLikedPalette(palette) {
+    async handleLikedPalette(palette) {
       // Haz algo con la paleta de colores
       console.log(palette)
       // Abre el modal
       this.isModalOpened = true;
+      console.log(this.isModalOpened)
+      await this.projectStore.getProjects();
+      console.log(this.projectStore.projectData)
+
+
     },
   }
 }
@@ -232,7 +237,6 @@ export default {
                     @change="submitFormColor('selected')"
             >
               <option class="home__select__option" disabled value="">Selecciona un proyecto</option>
-
 <!--              <option v-for="proyecto in proyectos" :key="proyecto.id">
                 {{ proyecto.nombre }}
               </option>-->
