@@ -63,7 +63,12 @@ export default {
 
       this.color = red + green + blue;
       return this.color
-    }
+    },
+    // evento personalizado para manejar el like
+    likeButtonClicked() {
+      console.log(this.hexPalette)
+      this.$emit('palette-photo-liked', this.hexPalette);
+    },
   }
 }
 </script>
@@ -73,11 +78,10 @@ export default {
     <section v-if="!url" class="main__img" title="Horno de colores"></section>
     <article class="content__image">
 
-      <!-- TODO: hacer que se puedan añadir las paletas a proyectos-->
       <article v-if="url">
         <picture class="image__container">
           <div>
-            <button class="like__button" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+            <button class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
           </div>
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
           <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">

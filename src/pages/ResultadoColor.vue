@@ -50,9 +50,6 @@ export default {
       <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
       <article>
         <ul v-if="colorPalette" class="main__article">
-
-          <!--TODO: hacer que se puedan añadir las paletas a proyectos-->
-
           <div>
             <button class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
           </div>

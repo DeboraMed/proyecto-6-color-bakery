@@ -75,5 +75,30 @@ export const useProjectStore = defineStore( 'project',{
             alertStore.clear();
 
         },
+        addPaletteToProject(project_id,color_palette){
+            let json =  {
+                "name": "Mi Paleta",
+                "project_id": project_id,
+                "colors": color_palette
+            };
+            console.log(json)
+            const alertStore = useAlertStore();
+            // llamada a la Api con autenticacion
+            const config = {
+                headers: {Authorization: `Bearer ${this.token}`}
+            };
+            axios.post(`/api/v1/palettes/`,json,config)
+                .then(async data => {
+                    if (data.statusText === "Created") {
+                        console.log('Solicitud procesada correctamente', data);
+                        alertStore.success('Se ha editado el proyecto correctamente.');
+                        await this.getProjects()
+                    }
+                }).catch(error => {
+                console.error('Error en la solicitud:', error);
+                alertStore.error('Ha ocurrido un error en la solicitud.');
+            });
+            alertStore.clear();
+        },
     }
 })

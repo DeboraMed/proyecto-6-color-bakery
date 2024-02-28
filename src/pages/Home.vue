@@ -14,6 +14,8 @@ export default {
   data() {
     return {
       listProjects: [],
+      colourPayload: [],
+      colourPayloadImage: [],
       isModalOpened: false,
       showColor: true,
       showImage: false,
@@ -135,19 +137,51 @@ export default {
     submitHandler() {
       // manejo del modal
     },
-    async handleLikedPalette(palette) {
-      // Haz algo con la paleta de colores
+    handleSubmission(selectedProject) {
+      if (this.isHandlingColor) {
+        this.projectStore.addPaletteToProject(selectedProject, this.colourPayload);
+      } else {
+        this.projectStore.addPaletteToProject(selectedProject, this.colourPayloadImage);
+      }
+    },
+    async handleLikedColor(palette) {
+
+      console.log(palette.colors)
+      /*let colourAPI = palette.colors;*/
+
+      this.colourPayload = palette.colors.map(color => ({ hex: color.hex.clean }))
+
+      console.log(this.colourPayload);
+      this.isHandlingColor = true;
+      // Abre el modal
+      this.isModalOpened = true;
+
+      console.log(this.isModalOpened)
+      // flag que define el payload de la llamada a la api
+      await this.projectStore.getProjects();
+
+      this.listProjects = this.projectStore.projectData;
+      console.log(this.listProjects.projects)
+    },
+    async handleLikedPalette(palette){
       console.log(palette)
+      let paletteFive = palette.slice(0, 5);
+      // convierto para pasar el dato a la API
+      this.colourPayloadImage =  paletteFive.map(color => {
+        return {"hex": color};
+      });
+      console.log(this.colourPayloadImage)
+      // flag que define el payload de la llamada a la api
+      this.isHandlingColor = false;
 
       // Abre el modal
       this.isModalOpened = true;
 
       console.log(this.isModalOpened)
       await this.projectStore.getProjects();
-      console.log(this.projectStore.projectData)
-
 
       this.listProjects = this.projectStore.projectData;
+      console.log(this.listProjects.projects)
     },
   }
 }
@@ -220,10 +254,10 @@ export default {
     </section>
     <section class="content__section">
       <article v-show="showColor">
-        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor" @palette-liked="handleLikedPalette"/>
+        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor" @palette-liked="handleLikedColor"/>
       </article>
       <article v-show="showImage">
-        <resultado-imagen :url="url" ref="resimagen"/>
+        <resultado-imagen :url="url" ref="resimagen" @palette-photo-liked="handleLikedPalette"/>
       </article>
     </section>
 
@@ -231,17 +265,18 @@ export default {
     <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
       <template #header><h2>Tus proyectos_</h2></template>
       <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo proyecto:</p>
-        <form>
+      <!-- select con los proyectos del usuario -->
+        <form @submit.prevent="selectedProject && handleSubmission(selectedProject)">
           <fieldset class="section__article">
 
             <!--Dropdown menu de seleccion de proyecto-->
             <select class="home__select"
                     v-model="selectedProject"
-                    id="selected"
+                    id="selectedProject"
                     @change="submitFormColor('selectedProject')"
             >
-              <option class="home__select__option" disabled value="">Selecciona un proyecto</option>
-              <option v-for="project in listProjects" :key="project.id">
+              <option class="home__select__option__projects" disabled value="">Selecciona un proyecto</option>
+              <option v-for="project in this.listProjects.projects" :key="project.id" :value="project.id">
                 {{ project.name }}
               </option>
 
@@ -296,6 +331,9 @@ export default {
   left: 0;
   right: 0;
   z-index: 4;
+}
+.home__select__option__projects{
+  width:20rem;
 }
 h2{
   color: var(--font-color-h2-pri);

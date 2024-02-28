@@ -103,7 +103,7 @@ export default {
             <label>Descripción:</label><br>
             <textarea v-model="project_description" id="project_description" name="project_description" rows="5" cols="50" required></textarea>
             <br>
-            <button class="button" type="submit">Nuevo Proyecto</button>
+            <button class="button" type="submit">Crear proyecto</button>
           </fieldset>
         </form>
       </template>
@@ -177,12 +177,9 @@ button {
   transition: 0.3s;
 }
 
-/* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
-
-/* Add some padding inside the card container */
 .container_project {
   padding: 2px 16px;
 }
