@@ -1,5 +1,5 @@
 <script>
-import { useUserStore } from '../stores/userStore.js';
+import { useUserStore } from '../stores/UserStore.js';
 import BorderFooter from "../shared/BorderFooter.vue";
 
 export default {

@@ -20,6 +20,7 @@ export default {
       form: '',
       text: '',
       selected: '',
+      selectedProject: '',
       color: '',
       url: '',
       isValidImage: false,
@@ -137,13 +138,15 @@ export default {
     async handleLikedPalette(palette) {
       // Haz algo con la paleta de colores
       console.log(palette)
+
       // Abre el modal
       this.isModalOpened = true;
+
       console.log(this.isModalOpened)
       await this.projectStore.getProjects();
       console.log(this.projectStore.projectData)
 
-
+      this.listProjects = this.projectStore.projectData;
     },
   }
 }
@@ -232,14 +235,14 @@ export default {
 
             <!--Dropdown menu de seleccion de proyecto-->
             <select class="home__select"
-                    v-model="selected"
+                    v-model="selectedProject"
                     id="selected"
-                    @change="submitFormColor('selected')"
+                    @change="submitFormColor('selectedProject')"
             >
               <option class="home__select__option" disabled value="">Selecciona un proyecto</option>
-<!--              <option v-for="proyecto in proyectos" :key="proyecto.id">
-                {{ proyecto.nombre }}
-              </option>-->
+              <option v-for="project in listProjects" :key="project.id">
+                {{ project.name }}
+              </option>
 
             </select>
             <button class="button" type="submit">Elegir proyecto</button>
