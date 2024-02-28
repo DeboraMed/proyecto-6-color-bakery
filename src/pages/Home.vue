@@ -146,6 +146,7 @@ export default {
       await this.projectStore.getProjects();
       console.log(this.projectStore.projectData)
 
+
       this.listProjects = this.projectStore.projectData;
     },
   }
