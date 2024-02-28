@@ -60,16 +60,5 @@ data(){
 </template>
 
 <style scoped>
-.like__button {
-  font-size: 2em;
-  color: gray;
-  transition: color 0.5s ease-in-out;
-  border: none;
-  background: none;
-}
 
-.like__button:hover,
-.like__button.liked {
-  color: red;
-}
 </style>

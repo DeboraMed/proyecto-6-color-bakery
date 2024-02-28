@@ -3,7 +3,6 @@ import axios from 'axios';
 import theColorApi from '../api/theColorApi.js';
 import BorderFooter from "../shared/BorderFooter.vue";
 
-/* llamada a la api TheColorApi para obtener las paletas de color a partir de un color */
 export default {
   components: {BorderFooter},
   props:{
@@ -28,7 +27,7 @@ export default {
   methods: {
     fetchColorPalette() {
       axios
-          theColorApi.get('scheme?hex=' + this.color + '&mode='+ this.selected)
+      theColorApi.get('scheme?hex=' + this.color + '&mode='+ this.selected)
           .then(response => {
             this.colorPalette = response.data;
             console.log(this.colorPalette)
@@ -37,16 +36,26 @@ export default {
             console.error(error);
           });
     },
+    // evento personalizado para manejar el like
+    likeButtonClicked() {
+      this.$emit('palette-liked', this.colorPalette);
+    },
   },
 };
 </script>
 
 <template>
   <section class="main__content__color">
-  <section>
-    <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
-    <article>
-      <ul v-if="colorPalette" class="main__article">
+    <section>
+      <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
+      <article>
+        <ul v-if="colorPalette" class="main__article">
+
+          <!--TODO: hacer que se puedan añadir las paletas a proyectos-->
+
+          <div>
+            <button class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+          </div>
         <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
              :style="{
                 backgroundColor: color.hex.value,
@@ -63,8 +72,13 @@ export default {
 </template>
 
 <style scoped>
+.like__button{
+  position: absolute;
+  padding: 1rem;
+  top: 0;
+}
 .main__content__color{
-  /*padding-top: 4rem;*/
+  padding-top: 1rem;
   position: relative;
   margin: auto;
   color: black;
@@ -75,7 +89,7 @@ export default {
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: auto;
-  height: 35rem;
+  height: 30rem;
 
   background-image: url("../assets/img/horno-main.png");
   background-repeat: no-repeat;

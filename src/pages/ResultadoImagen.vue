@@ -72,8 +72,13 @@ export default {
   <section>
     <section v-if="!url" class="main__img" title="Horno de colores"></section>
     <article class="content__image">
+
+      <!-- TODO: hacer que se puedan añadir las paletas a proyectos-->
       <article v-if="url">
         <picture class="image__container">
+          <div>
+            <button class="like__button" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+          </div>
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
           <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
         </picture>
@@ -95,6 +100,11 @@ export default {
 </template>
 
 <style scoped>
+.like__button{
+  position: absolute;
+  padding: 1rem;
+  top: 0;
+}
 .color__text {
   padding: 1rem;
   align-content: baseline;

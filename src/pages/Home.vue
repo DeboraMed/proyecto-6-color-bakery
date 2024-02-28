@@ -1,13 +1,19 @@
 <script>
-  import axios from 'axios';
   import ResultadoColor from "./ResultadoColor.vue";
   import ResultadoImagen from "./ResultadoImagen.vue";
   import HomeSection from "./HomeSection.vue";
-import BorderFooter from "../shared/BorderFooter.vue";
+  import BorderFooter from "../shared/BorderFooter.vue";
+  import Modal from "../shared/Modal.vue";
+  import { ref } from "vue";
+
+  /* para que el Modal sea reactivo */
+  const isModalOpened = ref(false);
+
 export default {
-  components: {BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
+  components: {Modal, BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
   data() {
     return {
+      isModalOpened: isModalOpened,
       showColor: true,
       showImage: false,
       form: '',
@@ -88,7 +94,7 @@ export default {
         this.errors.url = '';
       }
     },
-    submitFormColor(){
+    submitFormColor() {
       try {
         this.validateFormColor();
 
@@ -96,9 +102,10 @@ export default {
           console.log('Formulario enviado:', this.color);
           this.showColor = true;
           this.showImage = false;
+          // llama al metodo para que se actualice
           this.$refs.rescolor.fetchColorPalette()
         }
-      } catch (error){
+      } catch (error) {
         console.error('Ocurrio un error al enviar el formulario de color', error)
       }
     },
@@ -112,12 +119,26 @@ export default {
           this.showImage = true;
           this.showColor = false;
           this.$refs.resimagen.getPaletteImageColor();
-
-          //this.url = '';
         }
       } catch (error){
         console.error('Ha ocurrido un error al enviar el formulario de imagen', error)
       }
+    },
+    // metodos del modal
+    openModal() {
+      this.isModalOpened = true;
+    },
+    closeModal() {
+      this.isModalOpened = false;
+    },
+    submitHandler() {
+      // manejo del modal
+    },
+    handleLikedPalette(palette) {
+      // Haz algo con la paleta de colores
+      console.log(palette)
+      // Abre el modal
+      this.isModalOpened = true;
     },
   }
 }
@@ -190,12 +211,40 @@ export default {
     </section>
     <section class="content__section">
       <article v-show="showColor">
-        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor"/>
+        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor" @palette-liked="handleLikedPalette"/>
       </article>
       <article v-show="showImage">
         <resultado-imagen :url="url" ref="resimagen"/>
       </article>
     </section>
+
+    <!-- modal con la eleccion de proyecto para la paleta color-->
+    <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
+      <template #header><h2>Tus proyectos_</h2></template>
+      <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo proyecto:</p>
+        <form>
+          <fieldset class="section__article">
+
+            <!--Dropdown menu de seleccion de proyecto-->
+            <select class="home__select"
+                    v-model="selected"
+                    id="selected"
+                    @change="submitFormColor('selected')"
+            >
+              <option class="home__select__option" disabled value="">Selecciona un proyecto</option>
+
+<!--              <option v-for="proyecto in proyectos" :key="proyecto.id">
+                {{ proyecto.nombre }}
+              </option>-->
+
+            </select>
+            <button class="button" type="submit">Elegir proyecto</button>
+            <button class="button" >Nuevo proyecto</button>
+          </fieldset>
+        </form>
+      </template>
+      <template >sin el #footer, cargaria el boton del componente modal</template>
+    </modal>
   </main>
   <home-section></home-section>
 </template>

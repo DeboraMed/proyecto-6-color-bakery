@@ -10,7 +10,7 @@ onMounted(async () => {
   await projectStore.getProjects();
   console.log(projectStore.projectData)
 });
-// llama a la api con el token del usuario logueado
+
 const projectData = computed(() => {
   return projectStore.projectData;
 });
