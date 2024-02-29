@@ -7,7 +7,7 @@
 
     <!-- Footer main -->
     <section class="ft__main">
-      <div class="ft__main__item">
+      <article class="ft__main__item">
         <img class="ft__title" src="../assets/img/color-bakery-texto-footer.svg" alt="ColorBakery">
         <ul>
           <li><a href="#">Inicio</a></li>
@@ -15,8 +15,8 @@
           <li><a href="#">Regístrate</a></li>
           <li><a href="#">Logueate</a></li>
         </ul>
-      </div>
-      <div class="ft__main__item">
+      </article>
+      <article class="ft__main__item">
         <h2 class="ft__title">Sobre nosotros</h2>
         <ul>
           <li><a href="#">Inicio</a></li>
@@ -24,15 +24,15 @@
           <li><a href="#">Favoritos</a></li>
           <li><a href="#">Perfil</a></li>
         </ul>
-      </div>
-      <div class="ft__main__item">
+      </article>
+      <article class="ft__main__item">
         <h2 class="ft__title">Comentanos</h2>
         <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
           <router-link to="/contacto"><button class="button__sec"> Contacto</button></router-link>
         </form>
-      </div>
+      </article>
     </section>
 
     <!-- Footer legal -->
@@ -84,14 +84,22 @@ footer p{
   min-width: 12.5rem /*200px*/;
 }
 /*footer medias*/
+@media only screen and (max-width: 29.8125rem /*477px*/) {
+  .ft__main {
+    justify-content: space-around;
+    padding: 0.25rem 0.25rem;
+  }
+}
 @media only screen and (min-width: 29.8125rem /*477px*/) {
   .ft__main {
     justify-content: space-around;
+    padding: 0.25rem 0.25rem;
   }
 }
 @media only screen and (min-width: 77.5rem /*1240px*/ ) {
   .ft__main {
     justify-content: space-evenly;
+    padding: 0.25rem 0.25rem;
   }
 }
 /*contacto footer*/

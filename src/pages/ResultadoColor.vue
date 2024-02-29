@@ -2,6 +2,7 @@
 import axios from 'axios';
 import theColorApi from '../api/theColorApi.js';
 import BorderFooter from "../shared/BorderFooter.vue";
+import {useUserStore} from "../stores/UserStore.js";
 
 export default {
   components: {BorderFooter},
@@ -23,6 +24,9 @@ export default {
     return {
       colorPalette: null,
     };
+  },
+  computed: {
+    userStore: () => useUserStore(),
   },
   methods: {
     fetchColorPalette() {
@@ -50,9 +54,9 @@ export default {
       <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
       <article>
         <ul v-if="colorPalette" class="main__article">
-          <div>
-            <button class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
-          </div>
+
+            <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+
         <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
              :style="{
                 backgroundColor: color.hex.value,

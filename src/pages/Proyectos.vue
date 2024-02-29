@@ -29,6 +29,7 @@ export default {
       editProjectModal: false,
       project_name: '',
       project_description: '',
+      project_palettes: [],
       project_id: ''
     }
   },
@@ -120,7 +121,7 @@ export default {
             <label>Descripción:</label><br>
             <textarea v-model="project_description" id="project_description" name="project_description" rows="5" cols="50" required></textarea>
             <br>
-            <button class="button" type="submit">Editar Proyecto</button>
+            <button class="button" type="submit">Aceptar cambios</button>
           </fieldset>
         </form>
       </template>
@@ -134,7 +135,7 @@ export default {
 
         <h3>{{ project.name }}</h3>
         <p>{{ project.description }}</p>
-        <p>Creado en: {{ project.created_at }}</p>
+        <p>Creado en: {{ new Date(project.created_at).toISOString().replace('T', ' - ').substring(0, 21) }}</p>
         <!--itera paletas-->
         <ul v-for="palette in project.palettes" :key="palette.id">
 

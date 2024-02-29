@@ -34,7 +34,7 @@ export default {
     }
   },
   computed: {
-    projectStore: () => useProjectStore()
+    projectStore: () => useProjectStore(),
   },
   methods: {
     validateColor(color){

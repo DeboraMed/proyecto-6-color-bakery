@@ -21,7 +21,7 @@ button {
   background: none;
   border: 0;
   color: inherit;
-  cursor: default;
+  cursor: pointer;
   font: inherit;
   line-height: normal;
   overflow: visible;

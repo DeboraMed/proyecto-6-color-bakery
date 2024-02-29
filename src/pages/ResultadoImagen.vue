@@ -1,6 +1,7 @@
 <script>
 import ColorThief from 'colorthief'
 import BorderFooter from "../shared/BorderFooter.vue";
+import {useUserStore} from "../stores/UserStore.js";
 
 /* uso de la libreria ColorThief con la URL de la imagen dada */
 export default {
@@ -21,6 +22,9 @@ export default {
         this.getPaletteImageColor();
       }
     }
+  },
+  computed: {
+    userStore: () => useUserStore(),
   },
   methods: {
     onImageLoad() {
@@ -80,9 +84,9 @@ export default {
 
       <article v-if="url">
         <picture class="image__container">
-          <div>
-            <button class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
-          </div>
+
+            <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
           <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
         </picture>

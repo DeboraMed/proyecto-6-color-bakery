@@ -1,14 +1,12 @@
 <script>
 import axios from "axios";
 import {useFavoriteStore} from "../stores/FavoriteStore.js";
-import {useAlertStore} from "../stores/AlertStore.js";
 import Alert from "../shared/Alert.vue";
 
 export default {
   components: {Alert},
 data(){
   const favoriteStore = useFavoriteStore();
-  // const alertStore = useAlertStore();
     return{
       color: '',
       isLiked: false,
@@ -40,7 +38,7 @@ data(){
         // llama al favoriteStore
         this.favoriteStore.addFavorites(this.color)
       }else{
-
+        console.error('Error en la solicitud:', error);
       }
     }
   },

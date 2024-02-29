@@ -69,7 +69,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
 
 /* boton Toggle */
 .toggle {
-  margin-top: 1rem ;
+  margin-top: 1.5rem ;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;

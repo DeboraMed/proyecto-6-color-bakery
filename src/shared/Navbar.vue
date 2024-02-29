@@ -101,14 +101,11 @@ export default {
   color:var(--font-color) ;
 }
 
-/*@media screen and (max-width: 1200px) {
-  .toggle {
-    display: none;
-  }
+@media screen and (max-width: 1200px) {
   .burger__menu__items {
     display: block;
   }
-}*/
+}
 /* barra de navegacion */
 .nav {
   z-index: 3;
@@ -159,6 +156,16 @@ a:hover{
 img{
   height: 4rem;
   margin-left: 4rem;
+}
+/*navbar medias*/
+@media only screen and (max-width: 29.8125rem /*477px*/) {
+  .nav__router {
+    padding: 0.25rem 0.25rem;
+  }
+  img{
+    height: 3rem;
+    margin-left: 0.25rem;
+  }
 }
 
 /* animación del logotipo */
