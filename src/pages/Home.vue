@@ -341,7 +341,6 @@ h2{
 form{
   text-align: left;
 }
-
 input {
   width: 50%;
   border: 1px #797474;

@@ -225,9 +225,26 @@ h2{
 }
 
 /*medias generales*/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 29.8125rem /*477px*/){
   img {
     width: 100%;
+  }
+  .main__content {
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0.25rem 0.25rem;
+  }
+}
+@media only screen and (min-width: 29.8125rem /*477px*/) {
+  .main__content {
+    justify-content: space-around;
+    padding: 0.25rem 0.25rem;
+  }
+}
+@media only screen and (min-width: 77.5rem /*1240px*/ ) {
+  .main__content {
+    justify-content: space-evenly;
+    padding: 0.25rem 0.25rem;
   }
 }
 
