@@ -1,5 +1,7 @@
 <script setup>
+import {useUserStore} from "../stores/UserStore.js";
 
+const userStore = useUserStore();
 </script>
 
 <template>
@@ -10,27 +12,27 @@
       <article class="ft__main__item">
         <img class="ft__title" src="../assets/img/color-bakery-texto-footer.svg" alt="ColorBakery">
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Descubre</a></li>
-          <li><a href="#">Regístrate</a></li>
-          <li><a href="#">Logueate</a></li>
+          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/login">Logueate</router-link></li>
+          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/registro">Registrate</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/perfil">Perfil</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/favoritos">Favoritos</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/proyectos">Proyectos</router-link></li>
         </ul>
       </article>
       <article class="ft__main__item">
         <h2 class="ft__title">Sobre nosotros</h2>
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Explorar</a></li>
-          <li><a href="#">Favoritos</a></li>
-          <li><a href="#">Perfil</a></li>
+          <li><router-link class="footer__a" to="/">Inicio</router-link></li>
+          <li><router-link class="footer__a" to="/descubre">Descubre</router-link></li>
+          <li><router-link class="footer__a" to="/contacto">Contacto</router-link></li>
         </ul>
       </article>
       <article class="ft__main__item">
         <h2 class="ft__title">Comentanos</h2>
-        <p>¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
+        <p class="footer__p">¿Tienes alguna pregunta, comentario o sugerencia? <br>¡Nos encantaría saber de ti! Utiliza nuestro formulario de contacto.</p>
         <form>
           <!-- <input type="email" name="email" placeholder="Enter email address">-->
-          <router-link to="/contacto"><button class="button__sec"> Contacto</button></router-link>
+          <router-link  to="/contacto"><button class="button__sec"> Contacto</button></router-link>
         </form>
       </article>
     </section>
@@ -38,8 +40,8 @@
     <!-- Footer legal -->
     <section class="ft__legal">
       <ul class="ft__legal__list">
-        <li><a href="#">Terminos y condiciones</a></li>
-        <li><a href="#">Politica de privacidad</a></li>
+        <li><router-link class="footer__a" to="#">Terminos y condiciones</router-link></li>
+        <li><router-link class="footer__a"  to="#">Politica de privacidad</router-link></li>
         <li>&copy; 2024 Copyright Proyecto Vue/Laravel.</li>
       </ul>
     </section>
@@ -55,14 +57,14 @@ footer {
   color: #bbb;
   line-height: 1.5;
 }
-footer a {
+.footer__a {
   text-decoration: none;
   color: var(--a-color-ft);
 }
-footer a:hover {
+.footer__a:hover {
   color: var(--a-color-hover);
 }
-footer p{
+.footer__p{
   color: #bbb;
 }
 .ft__title {

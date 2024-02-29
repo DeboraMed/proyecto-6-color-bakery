@@ -135,7 +135,7 @@ export default {
 
         <h3>{{ project.name }}</h3>
         <p>{{ project.description }}</p>
-        <p>Creado en: {{ new Date(project.created_at).toISOString().replace('T', ' - ').substring(0, 21) }}</p>
+        <p>Creado en: {{ new Date(project.created_at).toISOString().replace('T', ' - ').substring(0, 18) }}</p>
         <!--itera paletas-->
         <ul v-for="palette in project.palettes" :key="palette.id">
 

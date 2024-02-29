@@ -24,7 +24,7 @@ const favoriteData = computed(() => {
     <div v-if="favoriteData && favoriteData.favorites" v-for="favorite in favoriteData.favorites" :key="favorite.id">
       <button @click="favoriteStore.deleteFavorites(favorite.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
       <h3>{{ favorite.name }}</h3>
-      <p>Creado en: {{ favorite.created_at }}</p>
+      <p>Creado en: {{ new Date(favorite.created_at).toISOString().replace('T', ' - ').substring(0, 18)  }}</p>
       <ul>
         <li class="main__article__li"
             :style="{

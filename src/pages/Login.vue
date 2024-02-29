@@ -97,18 +97,25 @@ export default {
 
 <style scoped>
 .main__content{
+  margin: 4rem  auto;
   display: inline-flex;
   flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
 .content__section{
-  display: block;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
   width: 50%;
 }
 .content__section__img{
-  width: 60%;
+  width: 50%;
   margin: auto;
+}
+.content__article{
+  text-align: center;
 }
 input {
   width: 50%;
