@@ -123,5 +123,27 @@ export const useProjectStore = defineStore( 'project',{
             });
             alertStore.clear();
         },
+        deletePalette(id) {
+            // logica para borrar
+            console.log(id)
+            const alertStore = useAlertStore();
+            // llamada a la Api con autenticacion
+            const config = {
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
+            };
+            axios.delete(`/api/v1/palettes/${id}`, config)
+                .then(async data => {
+                    if (data.statusText === "OK") {
+                        console.log('Solicitud procesada correctamente', data);
+                        alertStore.success('Se ha borrado la paleta correctamente.');
+                        await this.getProjects()
+                    }
+                }).catch(error => {
+                console.error('Error en la solicitud:', error);
+                alertStore.error('Ha ocurrido un error en la solicitud.');
+            });
+            alertStore.clear();
+
+        },
     }
 })

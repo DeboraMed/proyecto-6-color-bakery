@@ -108,6 +108,8 @@ export default {
       </template>
     </modal>
 
+    <alert></alert>
+
     <!--itera proyectos-->
     <article v-for="project in projectData.projects" :key="project.id" class="card container_project">
 
@@ -120,6 +122,9 @@ export default {
         <!--itera paletas-->
         <ul v-for="palette in project.palettes" :key="palette.id">
 
+          <!--boton: eliminar paleta-->
+          <button class="button__reset" @click="projectStore.deletePalette(palette.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar paleta"/></button>
+
           <!--itera colores de paletas-->
           <li class="main__article__li" v-for="color in palette.colors" :key="color.id"
               :style="{
@@ -130,7 +135,6 @@ export default {
             {{ color.name }}
           </li>
         </ul>
-        <alert></alert>
     </article>
 
   </section>
