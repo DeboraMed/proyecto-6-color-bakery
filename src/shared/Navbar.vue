@@ -2,6 +2,7 @@
 // el codigo del store tiene que esta en un script setup
 import {useThemeStore} from '../stores/ThemeStore';
 import {useUserStore} from '../stores/UserStore';
+import authGuard from "../router/guard.js";
 const themeStore = useThemeStore();
 const userStore = useUserStore();
 </script>
@@ -47,12 +48,12 @@ export default {
       <!-- Menu normal-->
       <div class="navbar__content" v-if="!windowSmall">
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/">Inicio</router-link >
-        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/login">Logueate</router-link>
-        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/registro">Registrate</router-link>
-        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil">Perfil</router-link>
+        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/login" :before-enter="authGuard">Logueate</router-link>
+        <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router__pri" to="/registro" :before-enter="authGuard">Registrate</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/perfil" :before-enter="authGuard">Perfil</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
-        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
-        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos">Favoritos</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/proyectos" :before-enter="authGuard">Proyectos</router-link>
+        <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos" :before-enter="authGuard">Favoritos</router-link>
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre">
           <button title="descubre nuevos colores" class="button">
             <font-awesome-icon icon="fa-solid fa-star" class="icon"/>Descubre
@@ -64,12 +65,12 @@ export default {
         <li v-if="openBurgerMenu" class="burger__menu__items">
           <button v-show="isMenuOpen" class="navbar__toggle" @click="toggleMenu">☰</button>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/">Inicio</router-link >
-          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/login">Logueate</router-link>
-          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/registro">Registrate</router-link>
-          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil">Perfil</router-link>
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/login" :before-enter="authGuard">Logueate</router-link>
+          <router-link v-show="!isMenuOpen && !userStore.isLogged()" class="nav__router" to="/registro" :before-enter="authGuard">Registrate</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/perfil" :before-enter="authGuard">Perfil</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/contacto">Contacto</router-link>
-          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/proyectos">Proyectos</router-link>
-          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos">Favoritos</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router" to="/proyectos" :before-enter="authGuard">Proyectos</router-link>
+          <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos" :before-enter="authGuard">Favoritos</router-link>
           <router-link v-show="!isMenuOpen" class="nav__router" to="/descubre"><button class="button">Descubre</button></router-link>
         </li>
         <button @click="toggleMenu" class="burger__button">&#9776;</button>

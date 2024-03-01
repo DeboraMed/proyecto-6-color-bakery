@@ -1,5 +1,6 @@
 <script setup>
 import {useUserStore} from "../stores/UserStore.js";
+import authGuard from "../router/guard.js";
 
 const userStore = useUserStore();
 </script>
@@ -12,11 +13,11 @@ const userStore = useUserStore();
       <article class="ft__main__item">
         <img class="ft__title" src="../assets/img/color-bakery-texto-footer.svg" alt="ColorBakery">
         <ul>
-          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/login">Logueate</router-link></li>
-          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/registro">Registrate</router-link></li>
-          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/perfil">Perfil</router-link></li>
-          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/favoritos">Favoritos</router-link></li>
-          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/proyectos">Proyectos</router-link></li>
+          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/login" :before-enter="authGuard">Logueate</router-link></li>
+          <li><router-link v-show="!userStore.isLogged()" class="footer__a" to="/registro" :before-enter="authGuard">Registrate</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/perfil" :before-enter="authGuard">Perfil</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/favoritos" :before-enter="authGuard">Favoritos</router-link></li>
+          <li><router-link v-show="userStore.isLogged()" class="footer__a" to="/proyectos" :before-enter="authGuard">Proyectos</router-link></li>
         </ul>
       </article>
       <article class="ft__main__item">

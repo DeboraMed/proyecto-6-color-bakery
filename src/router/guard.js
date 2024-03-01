@@ -1,15 +1,16 @@
 
 import router from './router';
 
+import { useUserStore } from '../stores/userStore.js';
+
 const authGuard = (to, from, next) => {
-    let authService;
-    authService.isAuthenticated = function () {
-        return false;
-    };
-    if (authService.isAuthenticated()) {
-        next();
+    const userStore = useUserStore();
+
+    if (userStore.isLogged()) {
+        next(); // permite el acceso si el usuario esta logueado
     } else {
-        next('/login');
+        next('/login'); // sino, redirige al login
     }
 };
+
 export default authGuard;

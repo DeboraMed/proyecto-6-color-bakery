@@ -50,7 +50,7 @@ export const useProjectStore = defineStore( 'project',{
             alertStore.clear();
 
         },
-        editProjects(id,name,description) {
+        /*editProjects(id,name,description) {
             let json =  {
                 "name": name,
                 "description": description
@@ -74,7 +74,7 @@ export const useProjectStore = defineStore( 'project',{
             });
             alertStore.clear();
 
-        },
+        },*/
         addPaletteToProject(project_id,color_palette){
             let json =  {
                 "name": "Mi Paleta",

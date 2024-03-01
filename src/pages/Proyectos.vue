@@ -61,7 +61,7 @@ export default {
           await useProjectStore().getProjects();
           this.closeModal()
 
-          console.log(response.data); // Hacer algo con la respuesta del servidor si es necesario
+          console.log(response.data);
         } catch (error) {
           console.error('Error al crear proyecto:', error);
         }
@@ -78,11 +78,11 @@ export default {
         await useProjectStore().getProjects();
         this.closeModal()
 
-        console.log(response.data); // Hacer algo con la respuesta del servidor si es necesario
+        console.log(response.data);
       } catch (error) {
         console.error('Error al crear proyecto:', error);
       }
-    }
+    },
   }
 }
 </script>
@@ -176,8 +176,8 @@ export default {
   line-height: normal;
   overflow: visible;
   padding: 0.3rem;
-  -webkit-user-select: none; /* for button */
-  -webkit-appearance: button; /* for input */
+  -webkit-user-select: none;
+  -webkit-appearance: button;
   -moz-user-select: none;
   -ms-user-select: none;
 }

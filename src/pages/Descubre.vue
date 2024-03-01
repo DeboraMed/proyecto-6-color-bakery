@@ -7,11 +7,16 @@ import {useProjectStore} from "../stores/ProjectStore.js";
 import axios from "axios";
 import {useFavoriteStore} from "../stores/FavoriteStore.js";
 import Alert from "../shared/Alert.vue";
-
+import {useUserStore} from "../stores/UserStore.js";
 
 /* para que el Modal sea reactivo */
 export default {
   components: {Alert,Modal, BorderFooter, ResultadoColor, HomeSection},
+  setup() {
+    const userStore = useUserStore();
+
+    return { userStore };
+  },
   data() {
     const favoriteStore = useFavoriteStore();
     return {
@@ -205,7 +210,7 @@ export default {
             </fieldset>
             <p class="p__error">{{ errors.selected }}</p>
           </form>
-          <article>
+          <article v-show="userStore.isLogged()">
             <h2> Añade tu <span class="h2__color__sec">nuevo color</span> a favoritos</h2>
           <button v-bind:disabled="!this.color" title="Añadir a favoritos" class="button" :class="{ liked: isLiked }" @click="toggleLike">
             <font-awesome-icon icon="fa-solid fa-heart" class="icon"/>Añadir a favoritos

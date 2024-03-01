@@ -30,7 +30,7 @@ export default {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
       } else if (field === 'email' && (!this.email || !this.validateEmail(this.email))) {
         this.errors.email = 'Introduce un correo electrónico válido.';
-      } else if (field === 'password' && (!this.password || this.password.length < 3)) {
+      } else if (field === 'password' && (!this.password || this.password.length < 2)) {
         this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
       } else if (!this.re_password || this.re_password!== this.password) {
         this.errors.re_password = 'Introduce la misma contraseña.';
@@ -49,18 +49,6 @@ export default {
       // aqui llamar el UserStore
       this.userStore.register(this.nombre,this.email,this.password);
 
-    },
-    resetForm() {
-      this.nombre = '';
-      this.email = '';
-      this.password = '';
-      this.re_password = '';
-      this.errors = {
-        nombre:'',
-        email: '',
-        password: '',
-        re_password: ''
-      };
     },
   }
 }
