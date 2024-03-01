@@ -1,7 +1,6 @@
 
 # 🎨 Color Bakery
 
-
 ### Documentación de la aplicación
 ## Idea de la Aplicación
 La aplicación que he desarrollado, ColorBakery, trata sobre colores, busca las paletas de colores facilitando  un color base y ademas
@@ -41,6 +40,65 @@ En el desarrollo he usado dos IDES de JetBrains, WebStorm para el desarrollo del
 ## Público Objetivo
 ColorBakery está dirigido principalmente a profesionales del diseño, incluyendo diseñadores web, diseñadores gráficos, artistas digitales e ilustradores.
 También es útil para cualquier persona que necesite trabajar con colores en proyectos creativos, proporcionando herramientas y recursos para facilitar la exploración y selección de colores adecuados.
+
+# Estructura de la aplicación
+
+## Home
+La aplicación ColorBakery comienza en la página de inicio. Aquí se encuentra la lógica para ingresar colores y URLs de imágenes, así como para mostrar los resultados 
+de las paletas de colores generadas.
+
+Función de Validación de Color: Verifica si el color ingresado es válido en formato HEX o RGB.
+Conversión de RGB a HEX: Convierte un color de formato RGB a HEX.
+Validación de URL de Imagen: Comprueba si la URL de la imagen ingresada es válida.
+Envío de Formularios: Maneja el envío de formularios tanto para colores como para imágenes.
+Selección de Proyectos: Permite al usuario seleccionar un proyecto existente para guardar la paleta generada o crear uno nuevo.
+Interacción con Resultados: Muestra los resultados de las paletas de colores generadas, permitiendo al usuario guardarlas en proyectos seleccionados.
+El home utiliza otros componentes secundarios como ResultadoColor y ResultadoImagen para mostrar los resultados de las paletas de colores generadas a partir de colores ingresados manualmente o imágenes cargadas por el usuario. Además, utiliza un modal para seleccionar proyectos donde se guardarán las paletas generadas.
+
+![Home de ColorBakery](img.png)
+
+![Paleta de color generada](img_1.png)
+
+![Imagen de color generada](img_2.png)
+
+## Formulario de registro y login
+
+ColorBakey permite al usuario loguarse y acceder a diferentes funcionalidades. Para ello dispone de un formulario validado
+
+![Formulario de registro](img_3.png)
+
+![Formulario de login](img_4.png)
+
+## Sección Descubre
+
+Una vez logueado el usuario, ademas de tener acceso a su perfil, en Descubre podrá guardar los colores generados en favoritos y ademas podra generar paletas de color a partir de ellos.
+
+![Dscubre genera colores y hace paletas a partir de ellos](img_5.png)
+
+## Proyectos
+
+En el apartado de proyectos el usuario podra crear nuevos proyectos y modificar los ya existentes
+![nuevo proyecto](img_8.png)
+
+Nuevo proyecto
+
+![proyectos](img_7.png)
+
+Edicion de proyecto
+
+![img_9.png](img_9.png)
+
+## Formulario de contacto
+
+![img_10.png](img_10.png)
+
+## Favoritos
+
+En el apartado de favoritos el usuario podra guardar los colores de descubre
+
+![Favoritos](img_6.png)
+
+# Desarrollo de la aplicación
 
 
 
