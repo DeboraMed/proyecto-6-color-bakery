@@ -63,7 +63,7 @@ export default {
 
 <template>
   <section class="container__center">
-    <article >
+    <article>
     <h2>Crea tu nuevo proyecto y <span class="h2__color__sec">añade tus paletas</span> favoritas_</h2>
     <p>Desde aqui puedes añadir un nuevo proyecto o editar los existentes. Tambien puedes añadir nuevas paletas.</p>
 
@@ -111,7 +111,7 @@ export default {
 
     <alert></alert>
 
-    <article v-for="project in projectData.projects" :key="project.id" style="padding: 1rem">
+    <article v-for="project in projectData.projects" :key="project.id" class="project__container">
       <!--itera proyectos-->
       <section class="container__center card_project container_project">
         <article>
@@ -147,8 +147,9 @@ export default {
 </template>
 
 <style scoped>
-.content__article{
-  padding-top: 4rem;
+.project__container{
+  padding-top: 1rem;
+  width: 80%;
 }
 /* reset de estilos del botón */
 .button__reset {
