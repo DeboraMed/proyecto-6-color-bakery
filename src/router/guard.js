@@ -1,7 +1,7 @@
 
 import router from './router';
 
-import { useUserStore } from '../stores/userStore.js';
+import { useUserStore } from '../stores/UserStore.js';
 
 const authGuard = (to, from, next) => {
     const userStore = useUserStore();

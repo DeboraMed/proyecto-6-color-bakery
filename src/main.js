@@ -18,4 +18,5 @@ createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
     .mount('#app')
 
-axios.defaults.baseURL = import.meta.env.VITE_APP_BACKEND_URL;
+// Obtener dinamicamente el nombre del host
+axios.defaults.baseURL = "http://" + window.location.hostname + ":8000";
