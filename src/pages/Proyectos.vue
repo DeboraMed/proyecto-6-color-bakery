@@ -63,7 +63,7 @@ export default {
 
 <template>
   <section class="container__center">
-    <article class="content__article">
+    <article >
     <h2>Crea tu nuevo proyecto y <span class="h2__color__sec">añade tus paletas</span> favoritas_</h2>
     <p>Desde aqui puedes añadir un nuevo proyecto o editar los existentes. Tambien puedes añadir nuevas paletas.</p>
 
@@ -73,6 +73,7 @@ export default {
       <button class="button" @click="navigate" role="link">
         <font-awesome-icon icon="fa-solid fa-palette" class="icon" title="ir a añadir paleta"/>Añadir paletas</button>
     </router-link>
+      
     </article>
     <!-- Modal para la Creacion de Proyectos -->
     <modal :isOpen="newProjectModal" @modal-close="closeModal" name="first-modal">

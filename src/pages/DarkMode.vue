@@ -1,5 +1,6 @@
 <script setup>
 import {useThemeStore} from '../stores/ThemeStore.js';
+
 const store = useThemeStore();
 document.documentElement.setAttribute('data-theme', store.theme);
 </script>
@@ -31,7 +32,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --bt-color-2-after: #e76c49;
   --bt-color-2-before: #C2431E;
 
-  --burguer-bg-color:#FFF8E8;
+  --burguer-bg-color: #FFF8E8;
   --bg-color-clear: #FFF8E8;
   --bg-color-medium: #FFEFC9;
   --bg-color-dark: #FCBD7A;
@@ -40,6 +41,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --ft-bg-color-dark: #2E2067;
 
 }
+
 [data-theme="dark"] {
   --font-color: #ffffff;
   --font-color-h2-pri: #ffffff;
@@ -58,7 +60,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   --bt-color-2-after: #e76c49;
   --bt-color-2-before: #C2431E;
 
-  --burguer-bg-color:#645c81;
+  --burguer-bg-color: #645c81;
   --bg-color-clear: #645c81;
   --bg-color-medium: #524b6e;
   --bg-color-dark: #3F3661;
@@ -69,7 +71,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
 
 /* boton Toggle */
 .toggle {
-  margin-top: 1.5rem ;
+  margin-top: 1.5rem;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -82,6 +84,7 @@ document.documentElement.setAttribute('data-theme', store.theme);
   cursor: pointer;
   z-index: 1;
 }
+
 .toggle::before {
   content: "";
   width: 25px;
@@ -94,9 +97,11 @@ document.documentElement.setAttribute('data-theme', store.theme);
   transform: translateY(-50%);
   transition: all 0.5s ease-in;
 }
+
 .toggle:checked {
   background: #c5bde7;
 }
+
 .toggle:checked::before {
   background: #333;
   left: 32px;

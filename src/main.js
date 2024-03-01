@@ -6,9 +6,16 @@ import {createPinia} from "pinia";
 import axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faHeart, faPalette, faPenToSquare, faStar, faXmark} from '@fortawesome/free-solid-svg-icons';
+import {
+    faHeart,
+    faPalette,
+    faPenToSquare,
+    faRightFromBracket,
+    faStar,
+    faXmark
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHeart,faXmark,faPenToSquare,faPalette,faStar);
+library.add(faHeart,faXmark,faPenToSquare,faPalette,faStar,faRightFromBracket);
 
 const pinia = createPinia()
 
