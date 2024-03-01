@@ -1,9 +1,10 @@
 <script>
 import { useUserStore } from '../stores/UserStore.js';
 import BorderFooter from "../shared/BorderFooter.vue";
+import Alert from "../shared/Alert.vue";
 
 export default {
-  components: {BorderFooter},
+  components: {Alert, BorderFooter},
   setup(){
     const userStore = useUserStore();
     return {
@@ -88,6 +89,7 @@ export default {
         </fieldset>
         <button class="button" type="submit">Enviar</button>
       </form>
+      <alert></alert>
     </section>
     <section class="content__section">
       <img class="content__section__img" src="../assets/img/img-colores.png" alt="Ruedas de colores" title="Ruedas de colores">

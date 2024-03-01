@@ -57,7 +57,7 @@ export const useUserStore = defineStore( 'user',{
                 })
                 .catch(error => {
                     console.error('Error en la solicitud:', error);
-                    alertStore.error('Ha ocurrido un error en la solicitud.');
+                    alertStore.error('Usuario o contraseña incorrectos.');
                 });
 
         },
