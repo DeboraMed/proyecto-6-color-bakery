@@ -111,33 +111,38 @@ export default {
 
     <alert></alert>
 
-    <!--itera proyectos-->
-    <article v-for="project in projectData.projects" :key="project.id" class="card container_project">
+    <article v-for="project in projectData.projects" :key="project.id" style="padding: 1rem">
+      <!--itera proyectos-->
+      <section class="container__center card_project container_project">
+        <article>
+          <button class="button__reset" @click="showEditProject(project)">
+            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="icon" title="editar proyecto"/>
+          </button>
+          <button class="button__reset" @click="projectStore.deleteProjects(project.id)">
+            <font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar proyecto"/>
+          </button>
 
-        <button class="button__reset" @click="showEditProject(project)"><font-awesome-icon icon="fa-solid fa-pen-to-square" class="icon" title="editar proyecto"/></button>
-        <button class="button__reset" @click="projectStore.deleteProjects(project.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar proyecto"/></button>
-
-        <h3>{{ project.name }}</h3>
-        <p>{{ project.description }}</p>
-        <p>Creado en: {{ new Date(project.created_at).toISOString().replace('T', ' - ').substring(0, 18) }}</p>
-        <!--itera paletas-->
-        <ul v-for="palette in project.palettes" :key="palette.id">
-
-          <!--boton: eliminar paleta-->
-          <button class="button__reset" @click="projectStore.deletePalette(palette.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar paleta"/></button>
-
-          <!--itera colores de paletas-->
-          <li class="main__article__li" v-for="color in palette.colors" :key="color.id"
-              :style="{
-                backgroundColor: '#'+color.hex,
-                width: 47 + '%',
-                height: 14 + '%'
-             }">
-            {{ color.name }}
-          </li>
-        </ul>
+          <h3>{{ project.name }}</h3>
+          <p>{{ project.description }}</p>
+          <p>Creado en: {{ new Date(project.created_at).toISOString().replace('T', ' - ').substring(0, 18) }}</p>
+          <!--itera paletas-->
+        </article>
+        <section class="container__center container_project">
+          <div v-for="palette in project.palettes" :key="palette.id" style="padding: 1rem;">
+            <button class="button__reset" @click="projectStore.deletePalette(palette.id)">
+              <font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar paleta"/>
+            </button>
+            <div class="card">
+              <div class="color-palette">
+                <div v-for="color in palette.colors" class="color" :style="{ 'background-color': '#' + color.hex }">
+                  <span class="color-name">{{ '#' + color.hex }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
     </article>
-
   </section>
 </template>
 
@@ -163,7 +168,52 @@ export default {
 .icon{
   padding-right: 0.3rem;
 }
-.icon:hover{
-  cursor:pointer;
+
+.icon:hover {
+  cursor: pointer;
 }
+
+
+/*estilos card*/
+.card_project {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card_project:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container_project {
+  padding: 2px 16px;
+}
+
+
+.card {
+  width: 200px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+.color-palette {
+  display: flex;
+  flex-direction: column;
+}
+
+.color {
+  height: 30px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.color-name {
+  margin-left: 10px;
+  text-shadow: -1px 0 dimgrey, 0 1px dimgrey, 1px 0 dimgrey, 0 -1px dimgrey;
+}
+
 </style>
