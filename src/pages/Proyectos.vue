@@ -50,38 +50,12 @@ export default {
       this.editProjectModal = false;
     },
     async createNewProject() {
-        try {
-          const config = {
-            headers: {Authorization: `Bearer ${useUserStore().token}`}
-          };
-          const response = await axios.post('/api/v1/projects', {
-            name: this.project_name,
-            description: this.project_description
-          }, config);
-          await useProjectStore().getProjects();
-          this.closeModal()
-
-          console.log(response.data);
-        } catch (error) {
-          console.error('Error al crear proyecto:', error);
-        }
+      await useProjectStore().createNewProject(this.project_name, this.project_description);
+      this.closeModal()
     },
     async editProject() {
-      try {
-        const config = {
-          headers: {Authorization: `Bearer ${useUserStore().token}`}
-        };
-        const response = await axios.put('/api/v1/projects/' + this.project_id, {
-          name: this.project_name,
-          description: this.project_description
-        }, config);
-        await useProjectStore().getProjects();
-        this.closeModal()
-
-        console.log(response.data);
-      } catch (error) {
-        console.error('Error al crear proyecto:', error);
-      }
+      await useProjectStore().editProject(this.project_id, this.project_name, this.project_description);
+      this.closeModal()
     },
   }
 }

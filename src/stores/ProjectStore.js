@@ -1,19 +1,19 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
 import {useAlertStore} from "./AlertStore.js";
+import {useUserStore} from "./UserStore.js";
 
 export const useProjectStore = defineStore( 'project',{
     state: () => ({
-        token: localStorage.getItem('token'),
         projectData: [],
     }),
     actions: {
         async getProjects() {
-            console.log(this.token)
+            console.log(useUserStore().token)
             const alertStore = useAlertStore();
             // llamada a la Api con autenticacion
             const config = {
-                headers: {Authorization: `Bearer ${this.token}`}
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
             };
             await axios.get('/api/v1/projects', config)
                 .then(data => {
@@ -34,7 +34,7 @@ export const useProjectStore = defineStore( 'project',{
             const alertStore = useAlertStore();
             // llamada a la Api con autenticacion
             const config = {
-                headers: {Authorization: `Bearer ${this.token}`}
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
             };
             axios.delete(`/api/v1/projects/${id}`, config)
                 .then(async data => {
@@ -50,31 +50,6 @@ export const useProjectStore = defineStore( 'project',{
             alertStore.clear();
 
         },
-        /*editProjects(id,name,description) {
-            let json =  {
-                "name": name,
-                "description": description
-            };
-            console.log(id)
-            const alertStore = useAlertStore();
-            // llamada a la Api con autenticacion
-            const config = {
-                headers: {Authorization: `Bearer ${this.token}`}
-            };
-            axios.put(`/api/v1/projects/${id}`,json,config)
-                .then(async data => {
-                    if (data.statusText === "OK") {
-                        console.log('Solicitud procesada correctamente', data);
-                        alertStore.success('Se ha editado el proyecto correctamente.');
-                        await this.getProjects()
-                    }
-                }).catch(error => {
-                console.error('Error en la solicitud:', error);
-                alertStore.error('Ha ocurrido un error en la solicitud.');
-            });
-            alertStore.clear();
-
-        },*/
         addPaletteToProject(project_id,color_palette){
             let json =  {
                 "name": "Mi Paleta",
@@ -85,11 +60,59 @@ export const useProjectStore = defineStore( 'project',{
             const alertStore = useAlertStore();
             // llamada a la Api con autenticacion
             const config = {
-                headers: {Authorization: `Bearer ${this.token}`}
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
             };
             axios.post(`/api/v1/palettes/`,json,config)
                 .then(async data => {
                     if (data.statusText === "Created") {
+                        console.log('Solicitud procesada correctamente', data);
+                        alertStore.success('Se ha editado el proyecto correctamente.');
+                        await this.getProjects()
+                    }
+                }).catch(error => {
+                console.error('Error en la solicitud:', error);
+                alertStore.error('Ha ocurrido un error en la solicitud.');
+            });
+            alertStore.clear();
+        },
+        async createNewProject(name, description) {
+            let json =  {
+                name: name,
+                description: description
+            };
+            console.log(json)
+            const alertStore = useAlertStore();
+            // llamada a la Api con autenticacion
+            const config = {
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
+            };
+            axios.post(`/api/v1/projects`,json,config)
+                .then(async data => {
+                    if (data.statusText === "Created") {
+                        console.log('Solicitud procesada correctamente', data);
+                        alertStore.success('Se ha creado el proyecto correctamente.');
+                        await this.getProjects()
+                    }
+                }).catch(error => {
+                console.error('Error en la solicitud:', error);
+                alertStore.error('Ha ocurrido un error en la solicitud.');
+            });
+            alertStore.clear();
+        },
+        async editProject(project_id, name, description) {
+            let json =  {
+                name: name,
+                description: description
+            };
+            console.log(json)
+            const alertStore = useAlertStore();
+            // llamada a la Api con autenticacion
+            const config = {
+                headers: {Authorization: `Bearer ${useUserStore().token}`}
+            };
+            axios.put(`/api/v1/projects/${project_id}`,json,config)
+                .then(async data => {
+                    if (data.statusText === "OK") {
                         console.log('Solicitud procesada correctamente', data);
                         alertStore.success('Se ha editado el proyecto correctamente.');
                         await this.getProjects()
