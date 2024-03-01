@@ -34,6 +34,7 @@ export const useUserStore = defineStore( 'user',{
                 });
             // se borra la alerta
             alertStore.clear();
+            this.login(email,password);
         },
         login(email,password) {
             const alertStore = useAlertStore();
