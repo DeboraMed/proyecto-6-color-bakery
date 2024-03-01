@@ -89,10 +89,17 @@ export default {
 
 <template>
   <section class="container__center">
-    <h2>Proyectos</h2>
+    <article class="content__article">
+    <h2>Crea tu nuevo proyecto y <span class="h2__color__sec">añade tus paletas</span> favoritas_</h2>
+    <p>Desde aqui puedes añadir un nuevo proyecto o editar los existentes. Tambien puedes añadir nuevas paletas.</p>
 
     <button class="button" @click="showNewProject">Nuevo Proyecto</button>
 
+    <router-link to="/" custom v-slot="{ navigate }">
+      <button class="button" @click="navigate" role="link">
+        <font-awesome-icon icon="fa-solid fa-palette" class="icon" title="ir a añadir paleta"/>Añadir paletas</button>
+    </router-link>
+    </article>
     <!-- Modal para la Creacion de Proyectos -->
     <modal :isOpen="newProjectModal" @modal-close="closeModal" name="first-modal">
       <template #header><h2>Nuevo Proyecto_</h2></template>
@@ -128,10 +135,10 @@ export default {
     </modal>
 
     <!--itera proyectos-->
-    <div v-for="project in projectData.projects" :key="project.id" class="card container_project">
+    <article v-for="project in projectData.projects" :key="project.id" class="card container_project">
 
-        <button @click="showEditProject(project)"><font-awesome-icon icon="fa-solid fa-pen-to-square" class="icon"/></button>
-        <button @click="projectStore.deleteProjects(project.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
+        <button class="button__reset" @click="showEditProject(project)"><font-awesome-icon icon="fa-solid fa-pen-to-square" class="icon" title="editar proyecto"/></button>
+        <button class="button__reset" @click="projectStore.deleteProjects(project.id)"><font-awesome-icon icon="fa-solid fa-xmark" class="icon" title="eliminar proyecto"/></button>
 
         <h3>{{ project.name }}</h3>
         <p>{{ project.description }}</p>
@@ -150,14 +157,17 @@ export default {
           </li>
         </ul>
         <alert></alert>
-    </div>
+    </article>
 
   </section>
 </template>
 
 <style scoped>
+.content__article{
+  padding-top: 4rem;
+}
 /* reset de estilos del botón */
-button {
+.button__reset {
   background: none;
   border: 0;
   color: inherit;
@@ -171,17 +181,10 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-
-.card {
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
+.icon{
+  padding-right: 0.3rem;
 }
-
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.container_project {
-  padding: 2px 16px;
+.icon:hover{
+  cursor:pointer;
 }
 </style>

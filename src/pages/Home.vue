@@ -282,11 +282,13 @@ export default {
 
             </select>
             <button class="button" type="submit">Elegir proyecto</button>
-            <button class="button" >Nuevo proyecto</button>
+            <router-link to="/proyectos" custom v-slot="{ navigate }">
+              <button class="button" @click="navigate" role="link">Nuevo proyecto</button>
+            </router-link>
           </fieldset>
         </form>
       </template>
-      <template >sin el #footer, cargaria el boton del componente modal</template>
+      <template ><!--sin el #footer, cargaria el boton del componente modal--></template>
     </modal>
   </main>
   <home-section></home-section>

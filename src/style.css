@@ -132,7 +132,20 @@ body:not(:-moz-handler-blocked) fieldset {
 .button:hover:before {
   width: 100%;
 }
-
+.button:disabled{
+  cursor: default;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.button:disabled:after{
+  background-color: #cccccc;
+  color: #666666;
+}
+.button:disabled:before{
+  background-color: #cccccc;
+  color: #666666;
+}
 /*boton secundario*/
 .button__sec {
   color: var(--bt-color-2);
@@ -218,12 +231,21 @@ h2{
   border: none;
   background: none;
 }
-
 .like__button:hover,
 .like__button.liked {
   color: red;
 }
-
+/*estilos card*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container_project {
+  padding: 2px 16px;
+}
 /*medias generales*/
 @media only screen and (max-width: 29.8125rem /*477px*/){
   img {

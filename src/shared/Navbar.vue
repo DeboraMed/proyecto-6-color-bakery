@@ -53,7 +53,10 @@ export default {
         <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/contacto">Contacto</router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/proyectos">Proyectos</router-link>
         <router-link v-show="!isMenuOpen && userStore.isLogged()" class="nav__router__pri" to="/favoritos">Favoritos</router-link>
-        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre"><button class="button">Descubre</button></router-link>
+        <router-link v-show="!isMenuOpen" class="nav__router__pri" to="/descubre">
+          <button title="descubre nuevos colores" class="button">
+            <font-awesome-icon icon="fa-solid fa-star" class="icon"/>Descubre
+          </button></router-link>
         <dark-mode/>
       </div>
       <!-- Menu hamburguesa-->
@@ -152,7 +155,9 @@ a:hover{
   margin-top: 0.5rem;
   animation: palpito 2s ease 0s 1 normal forwards;
 }
-
+.icon{
+  padding-right: 0.3rem;
+}
 img{
   height: 4rem;
   margin-left: 4rem;

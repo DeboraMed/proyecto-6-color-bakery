@@ -18,9 +18,9 @@ const userData = computed(() => {
 
 <template>
   <section class="container__center">
-    <h2>Usuario</h2>
-      Hola, {{ userData.name }}<br>
-      email {{ userData.email }}<br>
+    <h2>Bienvenid@ <span class="h2__color__sec">{{ userData.name }}_</span> </h2>
+      Hola, {{ userData.name }} Bienvenido a ColorBakery<br>
+      Tu email: {{ userData.email }}<br>
     <button class="button" @click="userStore.logout()">Cerrar sesión</button>
   </section>
 </template>

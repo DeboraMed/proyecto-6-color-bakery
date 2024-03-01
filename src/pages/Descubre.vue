@@ -5,12 +5,15 @@ import BorderFooter from "../shared/BorderFooter.vue";
 import Modal from "../shared/Modal.vue";
 import {useProjectStore} from "../stores/ProjectStore.js";
 import axios from "axios";
+import {useFavoriteStore} from "../stores/FavoriteStore.js";
+import Alert from "../shared/Alert.vue";
 
 
 /* para que el Modal sea reactivo */
 export default {
-  components: {Modal, BorderFooter, ResultadoColor, HomeSection},
+  components: {Alert,Modal, BorderFooter, ResultadoColor, HomeSection},
   data() {
+    const favoriteStore = useFavoriteStore();
     return {
       listProjects: [],
       colourPayload: [],
@@ -22,6 +25,8 @@ export default {
       selected: '',
       selectedProject: '',
       color: '',
+      isLiked: false,
+      favoriteStore,
       errors: {
         color: '',
         selected: '',
@@ -32,6 +37,11 @@ export default {
     projectStore: () => useProjectStore(),
   },
   methods: {
+    toggleLike() {
+      // boton llama a addFavorite
+      this.favoriteRandomColor()
+      this.isLiked = !this.isLiked;
+    },
     validateColor(color){
       const regexHex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       const regexRgb = /^([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5])$/;
@@ -136,6 +146,14 @@ export default {
             console.error('Error en la solicitud:', error);
           });
     },
+    favoriteRandomColor() {
+      if(this.color !== undefined){
+        // llama al favoriteStore
+        this.favoriteStore.addFavorites(this.color)
+      }else{
+        console.error('Error en la solicitud:', error);
+      }
+    },
   }
 }
 </script>
@@ -187,6 +205,13 @@ export default {
             </fieldset>
             <p class="p__error">{{ errors.selected }}</p>
           </form>
+          <article>
+            <h2> Añade tu <span class="h2__color__sec">nuevo color</span> a favoritos</h2>
+          <button v-bind:disabled="!this.color" title="Añadir a favoritos" class="button" :class="{ liked: isLiked }" @click="toggleLike">
+            <font-awesome-icon icon="fa-solid fa-heart" class="icon"/>Añadir a favoritos
+          </button>
+          <alert></alert>
+          </article>
         </section>
       </article>
     </section>
@@ -195,6 +220,7 @@ export default {
         <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor" @palette-liked="handleLikedColor"/>
       </article>
     </section>
+
 
     <!-- modal con la eleccion de proyecto para la paleta color-->
     <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
@@ -269,6 +295,9 @@ export default {
 }
 .home__select__option__projects{
   width:20rem;
+}
+.icon{
+  padding-right: 0.3rem;
 }
 h2{
   color: var(--font-color-h2-pri);
