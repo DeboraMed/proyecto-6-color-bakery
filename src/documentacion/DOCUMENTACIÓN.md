@@ -78,6 +78,7 @@ Una vez logueado el usuario, ademas de tener acceso a su perfil, en Descubre pod
 ## Proyectos
 
 En el apartado de proyectos el usuario podra crear nuevos proyectos y modificar los ya existentes
+
 ![nuevo proyecto](img_8.png)
 
 Nuevo proyecto
@@ -105,6 +106,8 @@ En el código, se definen varios componentes de Vue.js,
 como ResultadoColor, ResultadoImagen, Descubre, Favoritos, entre otros. 
 Estos componentes están estructurados en carpetas por funcionalidad y se componen de principalmente de propiedades y 
 métodos.
+
+
 
 # Reflexión sobre el desarrollo de la aplicación
 

@@ -129,9 +129,6 @@ export default {
     closeModal() {
       this.isModalOpened = false;
     },
-    submitHandler() {
-      // manejo del modal
-    },
     handleSubmission(selectedProject) {
       if (this.isHandlingColor) {
         this.projectStore.addPaletteToProject(selectedProject, this.colourPayload);
@@ -140,7 +137,6 @@ export default {
       }
     },
     async handleLikedColor(palette) {
-
 
       this.colourPayload = palette.colors.map(color => ({hex: color.hex.clean}))
 
@@ -250,10 +246,11 @@ export default {
     </section>
 
     <!-- modal con la eleccion de proyecto para la paleta color-->
-    <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
+    <modal :isOpen="isModalOpened" @modal-close="closeModal" name="first-modal">
       <template #header><h2>Tus proyectos_</h2></template>
       <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo
         proyecto:</p>
+
         <!-- select con los proyectos del usuario -->
         <form @submit.prevent="selectedProject && handleSubmission(selectedProject)">
           <fieldset class="section__article">

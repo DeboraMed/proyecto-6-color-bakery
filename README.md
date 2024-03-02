@@ -39,8 +39,13 @@ El proyecto ColorBakery se ha desarrollado utilizando las siguientes tecnología
 
 ## Enlaces Relevantes
 
-- **Versión Desplegada:** [ColorBakery App](#) (Añadir enlace una vez desplegado)
-- **Repositorio en GitHub:** [ColorBakery Repo](#) (https://github.com/DeboraMed/proyecto-6-color-bakery)
+- **Repositorio del Frontend en GitHub:** [ColorBakery Repositorio del Frontend](#) (https://github.com/DeboraMed/proyecto-6-color-bakery)
+- **Repositorio del Backend en GitHub:** [ColorBakery Repositorio del Backend](#) (https://github.com/DeboraMed/proyecto-6-color-bakery-laravel)
+
+
+- **Despliegue del Frontend en Netlify:** [Despliegue en Netlify](#) (https://colorbakery.netlify.app/)
+
+⚠️ **¡Atención!** El despliegue que esta actualmente accesible desde Netlify es solo del frontend por lo que la aplicación no funcionara de manera correcta. Estoy trabajando en el despliegue completo, perdon por las molestias.
 
 ## Contribución
 
