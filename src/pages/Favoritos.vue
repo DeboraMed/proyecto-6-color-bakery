@@ -8,7 +8,6 @@ const favoriteStore = useFavoriteStore();
 // llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
 onMounted(async () => {
   await favoriteStore.getFavorites();
-  console.log(favoriteStore.favoriteData)
 });
 // llama a la api con el token del usuario logueado
 const favoriteData = computed(() => {
@@ -23,35 +22,38 @@ const favoriteData = computed(() => {
       <h2>Tus <span class="h2__color__sec">colores</span> Favoritos_</h2>
       <p> Aqui podrás visualizar tos colores favoritos y si quieres añadir mas puedes pulsar en descubre.</p>
     </article>
-  <section class="container__center">
-    <!--card con los favoritos-->
-    <article v-if="favoriteData && favoriteData.favorites"
-             v-for="favorite in favoriteData.favorites" :key="favorite.id">
-      <ul class="cards">
-        <li>
-          <button @click="favoriteStore.deleteFavorites(favorite.id)">
-            <font-awesome-icon icon="fa-solid fa-xmark" class="icon"/>
-          </button>
-          <div class="card"
-               :style="{
+    <section class="container__center">
+      <!--card con los favoritos-->
+      <article v-if="favoriteData && favoriteData.favorites"
+               v-for="favorite in favoriteData.favorites" :key="favorite.id">
+        <ul class="cards">
+          <li>
+            <button @click="favoriteStore.deleteFavorites(favorite.id)">
+              <font-awesome-icon icon="fa-solid fa-xmark" class="icon"/>
+            </button>
+            <div class="card"
+                 :style="{
                 backgroundColor: '#'+favorite.color.hex,
              }">
-            <div class="card__image" alt="" />
-            <div class="card__overlay">
-              <div class="card__header">
-                <svg class="card__arc" xmlns="http://www.w3.org/2000/svg"><path /></svg>
-                <div class="card__header-text">
-                  <h3 class="card__title">{{ favorite.color.name }}</h3>
-                  <span class="card__status">Creado en: {{ new Date(favorite.created_at).toISOString().replace('T', ' - ').substring(0, 18) }}</span>
+              <div class="card__image"/>
+              <div class="card__overlay">
+                <div class="card__header">
+                  <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
+                  </svg>
+                  <div class="card__header-text">
+                    <h3 class="card__title">{{ favorite.color.name }}</h3>
+                    <span class="card__status">Creado en: {{
+                        new Date(favorite.created_at).toISOString().replace('T', ' - ').substring(0, 18)
+                      }}</span>
+                  </div>
                 </div>
+                <p class="card__description">#{{ favorite.color.hex }}</p>
               </div>
-              <p class="card__description">#{{ favorite.color.hex }}</p>
             </div>
-          </div>
-        </li>
-      </ul>
-    </article>
-  </section>
+          </li>
+        </ul>
+      </article>
+    </section>
   </section>
 </template>
 
@@ -71,6 +73,7 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
 }
+
 /*estilos de la card*/
 .cards {
   display: grid;
@@ -81,6 +84,7 @@ button {
   width: calc(25% - 1rem); /* 25% para 4 elementos en una fila */
   margin: 1.5rem; /* Espacio entre elementos */
 }
+
 .card {
   position: relative;
   display: block;
@@ -134,18 +138,11 @@ button {
 
 .card__arc path {
   fill: var(--surface-color);
-  d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+
 }
 
 .card:hover .card__header {
   transform: translateY(0);
-}
-
-.card__thumb {
-  flex-shrink: 0;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
 }
 
 .card__title {
@@ -154,12 +151,6 @@ button {
   color: #6A515E;
 }
 
-.card__tagline {
-  display: block;
-  margin: 1em 0;
-  font-size: .8em;
-  color: #D7BDCA;
-}
 
 .card__status {
   font-size: .8em;

@@ -6,18 +6,18 @@ import {useUserStore} from "../stores/UserStore.js";
 
 export default {
   components: {BorderFooter},
-  props:{
+  props: {
     color: {
       type: String,
       required: true,
     },
     selected: {
       type: String,
-      required:true,
+      required: true,
     },
     form: {
       type: String,
-      required:true,
+      required: true,
     },
   },
   data() {
@@ -31,10 +31,9 @@ export default {
   methods: {
     fetchColorPalette() {
       axios
-      theColorApi.get('scheme?hex=' + this.color + '&mode='+ this.selected)
+      theColorApi.get('scheme?hex=' + this.color + '&mode=' + this.selected)
           .then(response => {
             this.colorPalette = response.data;
-            console.log(this.colorPalette)
           })
           .catch(error => {
             console.error(error);
@@ -51,42 +50,46 @@ export default {
 <template>
   <section class="main__content__color">
     <section>
-      <figure  v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
+      <figure v-if="!colorPalette" class="main__img" title="Horno de colores"></figure>
       <article>
         <ul v-if="colorPalette" class="main__article">
 
-            <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+          <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color">
+            <font-awesome-icon icon="fa-solid fa-heart"/>
+          </button>
 
-        <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
-             :style="{
+          <li class="main__article__li" v-for="(color, index) in colorPalette.colors" :key="color.hex.value"
+              :style="{
                 backgroundColor: color.hex.value,
                 width: 47 + index + '%',
                 height: 14 + index + '%',
              }">
-          {{ color.hex.value }}
-        </li>
-      </ul>
-<!-- Pendiente de añadir imagen  <img src="">-->
-    </article>
-  </section>
+            {{ color.hex.value }}
+          </li>
+        </ul>
+        <!-- Pendiente de añadir imagen  <img src="">-->
+      </article>
+    </section>
   </section>
 </template>
 
 <style scoped>
-.like__button{
+.like__button {
   position: absolute;
   padding: 1rem;
   top: 0;
 }
-.main__content__color{
+
+.main__content__color {
   padding-top: 1rem;
   position: relative;
   margin: auto;
   color: black;
   font-size: 1rem;
-  text-shadow: #a4a4a4 1px 1px ;
+  text-shadow: #a4a4a4 1px 1px;
 }
-.main__img{
+
+.main__img {
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: auto;
@@ -99,7 +102,8 @@ export default {
 
   animation: fadein 2s ease 0s 1 normal forwards;
 }
-.main__article{
+
+.main__article {
   padding-top: 4rem;
   padding-bottom: 4rem;
   width: 100%;
@@ -114,8 +118,8 @@ export default {
 }
 
 .main__article__li {
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 1.42rem;
   margin: 0 auto;

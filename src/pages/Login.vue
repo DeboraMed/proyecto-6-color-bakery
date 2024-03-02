@@ -41,7 +41,6 @@ export default {
       this.validateForm('password');
 
       if (!Object.values(this.errors).some(error => error !== '')) {
-        console.log('Formulario enviado:', this.email, this.password);
       };
 
       // aqui llamar el UserStore

@@ -4,9 +4,8 @@ import Footer from "./shared/Footer.vue";
 import BorderFooter from "./shared/BorderFooter.vue";
 
 
-
 export default {
-  nombre:"App",
+  nombre: "App",
   components: {BorderFooter, Navbar, Footer}
 }
 </script>
@@ -14,10 +13,10 @@ export default {
 <template>
   <Navbar/>
   <main class="container">
-    <router-view />
+    <router-view/>
   </main>
   <BorderFooter></BorderFooter>
-  <Footer />
+  <Footer/>
 </template>
 
 <style>

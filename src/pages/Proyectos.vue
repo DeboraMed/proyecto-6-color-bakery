@@ -9,7 +9,6 @@ const projectStore = useProjectStore();
 // llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
 onMounted(async () => {
   await projectStore.getProjects();
-  console.log(projectStore.projectData)
 });
 
 const projectData = computed(() => {

@@ -8,7 +8,6 @@ const userStore = useUserStore();
 // llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
 onMounted(async () => {
   await userStore.fetchUser();
-  console.log(userStore.userData['email'])
 });
 // llama a la api con el token del usuario logueado
 const userData = computed(() => {

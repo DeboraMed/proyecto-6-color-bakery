@@ -77,7 +77,6 @@ export default {
         blue = "0" + blue;
 
       this.color = red + green + blue;
-      console.log(this.color)
       return this.color
     },
     validateFormColor() {
@@ -95,7 +94,6 @@ export default {
         this.validateFormColor();
 
         if (!Object.values(this.errors).some(error => error !== '')) {
-          console.log('Formulario enviado:', this.color);
           this.showColor = true;
           this.showImage = false;
           // llama al metodo para que se actualice
@@ -120,31 +118,24 @@ export default {
     },
     async handleLikedColor(palette) {
 
-      console.log(palette.colors)
-      /*let colourAPI = palette.colors;*/
 
       this.colourPayload = palette.colors.map(color => ({ hex: color.hex.clean }))
 
-      console.log(this.colourPayload);
       this.isHandlingColor = true;
       // Abre el modal
       this.isModalOpened = true;
 
-      console.log(this.isModalOpened)
       // flag que define el payload de la llamada a la api
       await this.projectStore.getProjects();
 
       this.listProjects = this.projectStore.projectData;
-      console.log(this.listProjects.projects)
     },
     getRandomColor() {
-      axios.get('/api/v1/colors/random') // mirar url peticion
+      axios.get('/api/v1/colors/random')
           .then(data => {
             if(data.statusText === "OK"){
-              console.log('Solicitud procesada correctamente',data);
 
-              this.color = data.data; //revisar estructura payload
-              console.log(this.color)
+              this.color = data.data;
             }
           })
           .catch(error => {

@@ -1,18 +1,20 @@
 <script setup>
-import { storeToRefs } from 'pinia';
+import {storeToRefs} from 'pinia';
 
-import { useAlertStore } from '../stores/AlertStore.js';
+import {useAlertStore} from '../stores/AlertStore.js';
 
 const alertStore = useAlertStore();
-const { alert } = storeToRefs(alertStore);
+const {alert} = storeToRefs(alertStore);
 </script>
 
 <template>
   <section v-if="alert">
-      <article class="alert" :class="alert.type">
-        <button @click="alertStore.clear()"><font-awesome-icon icon="fa-solid fa-xmark" class="icon"/></button>
-        {{alert.message}}
-      </article>
+    <article class="alert" :class="alert.type">
+      <button @click="alertStore.clear()">
+        <font-awesome-icon icon="fa-solid fa-xmark" class="icon"/>
+      </button>
+      {{ alert.message }}
+    </article>
   </section>
 </template>
 <style scoped>
@@ -31,19 +33,22 @@ button {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-.alert{
+
+.alert {
   align-items: center;
   padding: 1rem;
   margin-top: 0.4rem;
   position: relative;
   width: fit-content;
 }
-.alert__success{
+
+.alert__success {
   color: #1c6e37;
   background-color: #d5f1de;
   border: 1px solid #c0eace;
 }
-.alert__danger{
+
+.alert__danger {
   color: #893232;
   background-color: #fadddd;
   border: 1px solid #f7cbcb;

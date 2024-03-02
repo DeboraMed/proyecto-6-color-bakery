@@ -9,8 +9,10 @@ const routes = [
         children: [
             {
                 path: '',
-                component: () => import('../pages/HomeSection.vue') }
-        ]},
+                component: () => import('../pages/HomeSection.vue')
+            }
+        ]
+    },
     {   /*lazy loading*/
         path: '/registro',
         component: () => import('../pages/Registro.vue')

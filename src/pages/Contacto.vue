@@ -36,10 +36,9 @@ export default {
       return re.test(email);
     },
     submitForm() {
-      this.validateForm('nombre','email','titulo','mensaje');
+      this.validateForm('nombre', 'email', 'titulo', 'mensaje');
 
       if (!Object.values(this.errors).some(error => error !== '')) {
-        console.log('Formulario enviado:', this.nombre, this.email, this.titulo, this.mensaje);
       }
     },
   }
@@ -49,7 +48,8 @@ export default {
 <template>
   <main class="main__content">
     <section class="content__section">
-      <img class="content__section__img" src="../assets/img/img-horno.png" alt="Horno de colores" title="Horno de colores">
+      <img class="content__section__img" src="../assets/img/img-horno.png" alt="Horno de colores"
+           title="Horno de colores">
     </section>
     <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
@@ -102,24 +102,27 @@ export default {
 </template>
 
 <style scoped>
-.main__content{
-  margin: 4rem  auto;
+.main__content {
+  margin: 4rem auto;
   display: inline-flex;
   flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content__section{
+
+.content__section {
   display: flex;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   width: 50%;
 }
-.content__section__img{
+
+.content__section__img {
   width: 50%;
   margin: auto;
 }
+
 input {
   width: 25%;
   border: 1px #797474;
@@ -127,6 +130,7 @@ input {
   padding: 0.625rem;
   margin-top: 0.3125rem;
 }
+
 textarea {
   width: 50%;
   border: 0;

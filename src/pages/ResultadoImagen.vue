@@ -6,7 +6,7 @@ import {useUserStore} from "../stores/UserStore.js";
 /* uso de la libreria ColorThief con la URL de la imagen dada */
 export default {
   components: {BorderFooter},
-  props: ['url','form'],
+  props: ['url', 'form'],
   data() {
     return {
       palette: [],
@@ -40,7 +40,6 @@ export default {
       let colorThief = new ColorThief();
       this.palette = colorThief.getPalette(this.$refs.img);
       this.color = colorThief.getColor(this.$refs.img);
-      console.log(this.palette)
 
       for (let i = 0; i < this.palette.length; i++) {
         let p = this.palette[i];
@@ -49,11 +48,9 @@ export default {
         let b = Number(p[2])
         this.hexPalette.push(this.convertRGBtoHex(r, g, b))
       }
-      console.log(this.hexPalette)
-      console.log(this.url)
       return this.hexPalette;
     },
-    convertRGBtoHex(r,g,b){
+    convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
       let blue = b.toString(16);
@@ -70,7 +67,6 @@ export default {
     },
     // evento personalizado para manejar el like
     likeButtonClicked() {
-      console.log(this.hexPalette)
       this.$emit('palette-photo-liked', this.hexPalette);
     },
   }
@@ -85,21 +81,26 @@ export default {
       <article v-if="url">
         <picture class="image__container">
 
-            <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color" ><font-awesome-icon icon="fa-solid fa-heart" /></button>
+          <button v-show="userStore.isLogged()" class="like__button" @click="likeButtonClicked" v-if="this.color">
+            <font-awesome-icon icon="fa-solid fa-heart"/>
+          </button>
 
           <!--URL flicker de prueba https://loremflickr.com/320/240?random=1 -->
-          <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous" @load="onImageLoad" @error="onImageError">
+          <img class="image__container__img" :src="url" ref="img" alt="imagen seleccionada" crossorigin="anonymous"
+               @load="onImageLoad" @error="onImageError">
         </picture>
         <div class="color__palette">
-          <div v-if="imageError" >
-           <img alt="Tu imagen no se pudo cargar" src="../assets/img/magdalenas-quemadas-noimagen.png">
-            <p class="image__error">Tu imagen no ha podido ser procesada<br>Revisa la <a class="image__error__a" href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS"> politica CORS</a> del host.</p>
+          <div v-if="imageError">
+            <img alt="Tu imagen no se pudo cargar" src="../assets/img/magdalenas-quemadas-noimagen.png">
+            <p class="image__error">Tu imagen no ha podido ser procesada<br>Revisa la <a class="image__error__a"
+                                                                                         href="https://developer.mozilla.org/es/docs/Web/HTTP/CORS">
+              politica CORS</a> del host.</p>
           </div>
           <div class="color__swatch" v-else v-for="(color,i) in this.hexPalette.slice(0, 5)"
                :key="i"
                :style="`background-color: #${color}`"
           >
-            <span class="color__text">#{{color}}</span>
+            <span class="color__text">#{{ color }}</span>
           </div>
         </div>
       </article>
@@ -108,11 +109,12 @@ export default {
 </template>
 
 <style scoped>
-.like__button{
+.like__button {
   position: absolute;
   padding: 1rem;
   top: 0;
 }
+
 .color__text {
   padding: 1rem;
   align-content: baseline;
@@ -120,7 +122,7 @@ export default {
   filter: invert(100%);
 }
 
-.main__img{
+.main__img {
   padding-bottom: 4rem;
   width: 100%;
   height: 35rem;
@@ -132,7 +134,8 @@ export default {
 
   animation: fadein 2s ease 0s 1 normal forwards;
 }
-.content__image{
+
+.content__image {
   margin: 4rem auto;
   display: flex;
   justify-content: center;
@@ -141,6 +144,7 @@ export default {
   height: auto;
   animation: fadein 2s ease 0s 1 normal forwards;
 }
+
 .image__container {
   width: auto;
   height: auto;
@@ -148,6 +152,7 @@ export default {
   align-items: center;
   position: relative;
 }
+
 .image__container__img {
   width: 100%;
   height: 100%;
@@ -155,22 +160,27 @@ export default {
   max-height: 500px;
   object-fit: cover;
 }
-.image__error{
+
+.image__error {
   padding: 1rem;
   text-align: center;
 }
-.image__error__a{
+
+.image__error__a {
   text-decoration: none;
   color: var(--font-color);
   font-weight: bold;
 }
+
 .color__palette {
   display: flex;
 }
+
 .color__swatch {
   width: 7.25rem;
   height: 8rem;
 }
+
 /*animacion de imagen*/
 @keyframes fadein {
   0% {

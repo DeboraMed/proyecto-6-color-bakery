@@ -100,7 +100,11 @@ En el apartado de favoritos el usuario podra guardar los colores de descubre
 
 # Desarrollo de la aplicación
 
-
+- Componentes de Vue.js: 
+En el código, se definen varios componentes de Vue.js, 
+como ResultadoColor, ResultadoImagen, Descubre, Favoritos, entre otros. 
+Estos componentes están estructurados en carpetas por funcionalidad y se componen de principalmente de propiedades y 
+métodos.
 
 # Reflexión sobre el desarrollo de la aplicación
 

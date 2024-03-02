@@ -1,11 +1,11 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from "./router/router.js";
 import {createPinia} from "pinia";
 import axios from "axios";
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
 import {
     faHeart,
     faPalette,
@@ -15,7 +15,7 @@ import {
     faXmark
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHeart,faXmark,faPenToSquare,faPalette,faStar,faRightFromBracket);
+library.add(faHeart, faXmark, faPenToSquare, faPalette, faStar, faRightFromBracket);
 
 const pinia = createPinia()
 
