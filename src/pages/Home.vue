@@ -9,6 +9,10 @@ import {useProjectStore} from "../stores/ProjectStore.js";
 
 export default {
   components: {Modal, BorderFooter, ResultadoColor, ResultadoImagen, HomeSection},
+  /**
+   * Función de composición
+   * @returns {{colourPayload: *[], color: string, showColor: boolean, colourPayloadImage: *[], listProjects: *[], showImage: boolean, url: string, isModalOpened: boolean, form: string, isValidImage: boolean, selectedProject: string, text: string, selected: string, errors: {color: string, selected: string, url: string}}}
+   */
   data() {
     return {
       listProjects: [],
@@ -32,9 +36,18 @@ export default {
     }
   },
   computed: {
+    /**
+     *
+     * @returns {Store<"project", {projectData: []}, {}, {editProject(*, *, *): Promise<void>, getProjects(): Promise<void>, createNewProject(*, *): Promise<void>, deletePalette(*): void, deleteProjects(*): void, addPaletteToProject(*, *): void}>}
+     */
     projectStore: () => useProjectStore(),
   },
   methods: {
+    /**
+     * Valida el formato de un color, aceptando HEX o RGB.
+     * @param color
+     * @returns {default.methods.color|boolean}
+     */
     validateColor(color) {
       const regexHex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       const regexRgb = /^([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5])$/;
@@ -52,6 +65,13 @@ export default {
         return this.convertRGBtoHex(r, g, b)
       }
     },
+    /**
+     * Convierte valores RGB a formato hexadecimal.
+     * @param r
+     * @param g
+     * @param b
+     * @returns {string}
+     */
     convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
@@ -67,6 +87,11 @@ export default {
       this.color = red + green + blue;
       return this.color
     },
+    /**
+     * Valida la URL de una imagen.
+     * @param url
+     * @returns {Promise<unknown>}
+     */
     validateImageURL(url) {
       return new Promise((resolve, reject) => {
         let img = new Image();
@@ -81,6 +106,9 @@ export default {
         img.src = url;
       });
     },
+    /**
+     * Valida los campos del formulario de color:
+     */
     validateFormColor() {
       if (!this.color || !this.validateColor(this.color)) {
         this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
@@ -91,6 +119,9 @@ export default {
         this.errors.selected = '';
       }
     },
+    /**
+     * Valida el campo de URL de la imagen, mostrando un mensaje de error si la URL no es válida.
+     */
     validateFormImage() {
       if (!this.isValidImage) {
         this.errors.url = 'Indica una URL válida.';
@@ -98,6 +129,9 @@ export default {
         this.errors.url = '';
       }
     },
+    /**
+     * Cierra el modal.
+     */
     submitFormColor() {
       try {
         this.validateFormColor();
@@ -112,6 +146,10 @@ export default {
         console.error('Ocurrio un error al enviar el formulario de color', error)
       }
     },
+    /**
+     * Valida el formulario de imagen
+     * @returns {Promise<void>}
+     */
     async submitFormImage() {
       try {
         await this.validateImageURL(this.url);
@@ -126,9 +164,16 @@ export default {
         console.error('Ha ocurrido un error al enviar el formulario de imagen', error)
       }
     },
+    /**
+     * Cierra el Modal
+     */
     closeModal() {
       this.isModalOpened = false;
     },
+    /**
+     * Agrega la paleta de colores a un proyecto elegido
+     * @param selectedProject
+     */
     handleSubmission(selectedProject) {
       if (this.isHandlingColor) {
         this.projectStore.addPaletteToProject(selectedProject, this.colourPayload);
@@ -136,6 +181,11 @@ export default {
         this.projectStore.addPaletteToProject(selectedProject, this.colourPayloadImage);
       }
     },
+    /**
+     * Obtiene los colores de la paleta pasada como parámetro.
+     * @param palette
+     * @returns {Promise<void>}
+     */
     async handleLikedColor(palette) {
 
       this.colourPayload = palette.colors.map(color => ({hex: color.hex.clean}))
@@ -149,6 +199,11 @@ export default {
 
       this.listProjects = this.projectStore.projectData;
     },
+    /**
+     * Obtiene los primeros 5 colores de la paleta pasada como parámetro.
+     * @param palette
+     * @returns {Promise<void>}
+     */
     async handleLikedPalette(palette) {
       let paletteFive = palette.slice(0, 5);
       // convierto para pasar el dato a la API

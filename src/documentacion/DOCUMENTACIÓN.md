@@ -101,13 +101,21 @@ En el apartado de favoritos el usuario podra guardar los colores de descubre
 
 # Desarrollo de la aplicación
 
-- Componentes de Vue.js: 
-En el código, se definen varios componentes de Vue.js, 
+- **Componentes de Vue.js:** 
+ En el código, se definen varios componentes de Vue.js, 
 como ResultadoColor, ResultadoImagen, Descubre, Favoritos, entre otros. 
 Estos componentes están estructurados en carpetas por funcionalidad y se componen de principalmente de propiedades y 
 métodos.
 
+### Login.vue
+componente Vue que permite a los usuarios iniciar sesión. El componente utiliza un almacén de datos del usuario (posiblemente Vuex o Pinia) a través de useUserStore. Los métodos validateForm y validateEmail se encargan de la validación del formulario, y el método submitForm maneja el envío del formulario e interactúa con el almacén de datos del usuario para realizar el login.
 
+### Registro.vue
+
+- **Documentación con JSDoc:**
+ El código de ColorBakery esta documentado con la ayuda de JSDoc. JSDoc es una popular herramienta de documentación para JavaScript. Se ha usado para documentar los 
+componentes Vue y sus propiedades, métodos, eventos, etc. WebStorm tiene soporte 
+integrado para JSDoc, lo que facilita su uso. 
 
 # Reflexión sobre el desarrollo de la aplicación
 

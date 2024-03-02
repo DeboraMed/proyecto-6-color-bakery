@@ -6,7 +6,9 @@ import Modal from "../shared/Modal.vue";
 
 const projectStore = useProjectStore();
 
-// llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+/**
+ * llamar a getProjects en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+ */
 onMounted(async () => {
   await projectStore.getProjects();
 });
@@ -17,11 +19,13 @@ const projectData = computed(() => {
 </script>
 
 <script>
-import {useUserStore} from "../stores/UserStore.js";
 import {useProjectStore} from '../stores/ProjectStore.js';
-import axios from "axios";
 
 export default {
+  /**
+   * Define las propiedades reactivas del componente
+   * @returns {{project_description: string, project_id: string, newProjectModal: boolean, project_palettes: *[], editProjectModal: boolean, project_name: string}}
+   */
   data() {
     return {
       newProjectModal: false,
@@ -33,25 +37,43 @@ export default {
     }
   },
   methods: {
+    /**
+     * Limpia los campos del formulario para la creación de un nuevo proyecto.
+     */
     showNewProject() {
       this.project_name = '';
       this.project_description = '';
       this.newProjectModal = true;
     },
+    /**
+     * Pre-carga los datos de un proyecto existente en el formulario de edición
+     * @param project
+     */
     showEditProject(project) {
       this.project_id = project.id;
       this.project_name = project.name;
       this.project_description = project.description;
       this.editProjectModal = true;
     },
+    /**
+     * Cierra ambos modales: newProjectModal y editProjectModal.
+     */
     closeModal() {
       this.newProjectModal = false;
       this.editProjectModal = false;
     },
+    /**
+     * Utiliza el projectStore (a través de useProjectStore()) para crear un nuevo proyecto con el nombre y descripción ingresados en el formulario.
+     * @returns {Promise<void>}
+     */
     async createNewProject() {
       await useProjectStore().createNewProject(this.project_name, this.project_description);
       this.closeModal()
     },
+    /**
+     * Utiliza el projectStore (a través de useProjectStore()) para editar un proyecto existente con la información modificada en el formulario.
+     * @returns {Promise<void>}
+     */
     async editProject() {
       await useProjectStore().editProject(this.project_id, this.project_name, this.project_description);
       this.closeModal()
@@ -63,16 +85,18 @@ export default {
 <template>
   <section class="container__center">
     <article>
-    <h2>Crea tu nuevo proyecto y <span class="h2__color__sec">añade tus paletas</span> favoritas_</h2>
-    <p>Desde aqui puedes añadir un nuevo proyecto o editar los existentes. Tambien puedes añadir nuevas paletas.</p>
+      <h2>Crea tu nuevo proyecto y <span class="h2__color__sec">añade tus paletas</span> favoritas_</h2>
+      <p>Desde aqui puedes añadir un nuevo proyecto o editar los existentes. Tambien puedes añadir nuevas paletas.</p>
 
-    <button class="button" @click="showNewProject">Nuevo Proyecto</button>
+      <button class="button" @click="showNewProject">Nuevo Proyecto</button>
 
-    <router-link to="/" custom v-slot="{ navigate }">
-      <button class="button" @click="navigate" role="link">
-        <font-awesome-icon icon="fa-solid fa-palette" class="icon" title="ir a añadir paleta"/>Añadir paletas</button>
-    </router-link>
-      
+      <router-link to="/" custom v-slot="{ navigate }">
+        <button class="button" @click="navigate" role="link">
+          <font-awesome-icon icon="fa-solid fa-palette" class="icon" title="ir a añadir paleta"/>
+          Añadir paletas
+        </button>
+      </router-link>
+
     </article>
     <!-- Modal para la Creacion de Proyectos -->
     <modal :isOpen="newProjectModal" @modal-close="closeModal" name="first-modal">
@@ -83,7 +107,8 @@ export default {
             <label>Nombre del Proyecto:</label><br>
             <input v-model="project_name" type="text" id="project_name" name="project_name" required><br>
             <label>Descripción:</label><br>
-            <textarea v-model="project_description" id="project_description" name="project_description" rows="5" cols="50" required></textarea>
+            <textarea v-model="project_description" id="project_description" name="project_description" rows="5"
+                      cols="50" required></textarea>
             <br>
             <button class="button" type="submit">Crear proyecto</button>
           </fieldset>
@@ -100,7 +125,8 @@ export default {
             <label>Nombre del Proyecto:</label><br>
             <input v-model="project_name" type="text" id="project_name" name="project_name" required><br>
             <label>Descripción:</label><br>
-            <textarea v-model="project_description" id="project_description" name="project_description" rows="5" cols="50" required></textarea>
+            <textarea v-model="project_description" id="project_description" name="project_description" rows="5"
+                      cols="50" required></textarea>
             <br>
             <button class="button" type="submit">Aceptar cambios</button>
           </fieldset>
@@ -146,10 +172,11 @@ export default {
 </template>
 
 <style scoped>
-.project__container{
+.project__container {
   padding-top: 1rem;
   width: 80%;
 }
+
 /* reset de estilos del botón */
 .button__reset {
   background: none;
@@ -165,7 +192,8 @@ export default {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-.icon{
+
+.icon {
   padding-right: 0.3rem;
 }
 

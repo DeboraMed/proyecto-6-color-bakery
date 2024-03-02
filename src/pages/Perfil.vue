@@ -5,11 +5,12 @@ import {useUserStore} from '../stores/UserStore.js';
 
 const userStore = useUserStore();
 
-// llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+/**
+ * llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+ */
 onMounted(async () => {
   await userStore.fetchUser();
 });
-// llama a la api con el token del usuario logueado
 const userData = computed(() => {
   return userStore.userData;
 });

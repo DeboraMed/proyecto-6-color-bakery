@@ -5,11 +5,13 @@ import Alert from "../shared/Alert.vue";
 
 const favoriteStore = useFavoriteStore();
 
-// llamar a fetchUser en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+/**
+ * llamar a getFavorites en el hook `onMounted` para obtener la información del usuario cuando se monta el componente
+ */
 onMounted(async () => {
   await favoriteStore.getFavorites();
 });
-// llama a la api con el token del usuario logueado
+
 const favoriteData = computed(() => {
   return favoriteStore.favoriteData;
 });

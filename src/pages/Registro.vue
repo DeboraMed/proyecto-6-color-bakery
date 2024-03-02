@@ -1,15 +1,20 @@
 <script>
-import { useUserStore } from '../stores/UserStore.js';
+import {useUserStore} from '../stores/UserStore.js';
 import BorderFooter from "../shared/BorderFooter.vue";
 import Alert from "../shared/Alert.vue";
 import {useAlertStore} from "../stores/AlertStore.js";
+
 export default {
-  components: {Alert, BorderFooter},  setup(){
+  components: {Alert, BorderFooter}, setup() {
     const userStore = useUserStore();
     return {
       userStore,
     }
   },
+  /**
+   * Define las propiedades reactivas del componente
+   * @returns {{password: string, re_password: string, nombre: string, email: string, errors: {password: string, re_password: string, nombre: string, email: string}}}
+   */
   data() {
     return {
       nombre: '',
@@ -25,6 +30,10 @@ export default {
     }
   },
   methods: {
+    /**
+     * Valida un campo específico del formulario de registro:
+     * @param field
+     */
     validateForm(field) {
       if (field === 'nombre' && (!this.nombre || typeof this.nombre !== 'string' || this.nombre.length < 3)) {
         this.errors.nombre = 'Introduce un nombre con al menos 3 caracteres.';
@@ -32,22 +41,30 @@ export default {
         this.errors.email = 'Introduce un correo electrónico válido.';
       } else if (field === 'password' && (!this.password || this.password.length < 2)) {
         this.errors.password = 'Introduce un contraseña con al menos 3 caracteres.';
-      } else if (!this.re_password || this.re_password!== this.password) {
+      } else if (!this.re_password || this.re_password !== this.password) {
         this.errors.re_password = 'Introduce la misma contraseña.';
       } else {
         this.errors[field] = '';
       }
     },
+    /**
+     * Valida el formato del correo electrónico usando una expresión regular.
+     * @param email
+     * @returns {boolean}
+     */
     validateEmail(email) {
       let re = /\w+@\w+\.+[a-z]/;
       return re.test(email);
     },
+    /**
+     * Valida todos los campos del formulario llamando a validateForm para cada campo relevante.
+     * @returns {Promise<void>}
+     */
     async submitForm() {
-      this.validateForm('nombre','email','password','re_password');
-      const alertStore = useAlertStore();
+      this.validateForm('nombre', 'email', 'password', 're_password');
 
       // aqui llamar el UserStore
-      this.userStore.register(this.nombre,this.email,this.password);
+      this.userStore.register(this.nombre, this.email, this.password);
 
     },
   }
@@ -57,7 +74,8 @@ export default {
 <template>
   <main class="main__content">
     <section class="content__section">
-      <img class="content__section__img" src="../assets/img/img-bolleria.png" alt="Bollitos de colores" title="Bollitos de colores">
+      <img class="content__section__img" src="../assets/img/img-bolleria.png" alt="Bollitos de colores"
+           title="Bollitos de colores">
     </section>
     <section class="content__article">
       <form class="form" @submit.prevent="submitForm">
@@ -111,27 +129,31 @@ export default {
 </template>
 
 <style scoped>
-.main__content{
-  margin: 4rem  auto;
+.main__content {
+  margin: 4rem auto;
   display: inline-flex;
   /*flex-wrap: nowrap;*/
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content__section{
+
+.content__section {
   display: flex;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   width: 50%;
 }
-.content__section__img{
+
+.content__section__img {
   width: 60%;
   margin: auto;
 }
-form{
+
+form {
   text-align: left;
 }
+
 input {
   width: 50%;
   border: 1px #797474;

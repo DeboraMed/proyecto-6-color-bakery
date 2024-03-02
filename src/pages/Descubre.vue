@@ -9,14 +9,21 @@ import {useFavoriteStore} from "../stores/FavoriteStore.js";
 import Alert from "../shared/Alert.vue";
 import {useUserStore} from "../stores/UserStore.js";
 
-/* para que el Modal sea reactivo */
 export default {
-  components: {Alert,Modal, BorderFooter, ResultadoColor, HomeSection},
+  components: {Alert, Modal, BorderFooter, ResultadoColor, HomeSection},
+  /**
+   *
+   * @returns {{userStore: _StoreWithState<"user", {userData: [], token: string}, {}, {logout(): void, isLogged(): boolean, fetchUser(): Promise<void>, login(*, *): void, register(*, *, *): void}> & UnwrapRef<{userData: [], token: string}> & _StoreWithGetters<{}> & {logout(): void, isLogged(): boolean, fetchUser(): Promise<void>, login(*, *): void, register(*, *, *): void} & PiniaCustomProperties<"user", {userData: [], token: string}, {}, {logout(): void, isLogged(): boolean, fetchUser(): Promise<void>, login(*, *): void, register(*, *, *): void}> & PiniaCustomStateProperties<{userData: [], token: string}>}}
+   */
   setup() {
     const userStore = useUserStore();
 
-    return { userStore };
+    return {userStore};
   },
+  /**
+   * Define las propiedades reactivas del componente
+   * @returns {{colourPayload: *[], color: string, showColor: boolean, isLiked: boolean, colourPayloadImage: *[], listProjects: *[], favoriteStore: _StoreWithState<"favorite", {favoriteData: [], token: string}, {}, {getFavorites(): Promise<void>, addFavorites(*): void, deleteFavorites(*): void}> & UnwrapRef<{favoriteData: [], token: string}> & _StoreWithGetters<{}> & {getFavorites(): Promise<void>, addFavorites(*): void, deleteFavorites(*): void} & PiniaCustomProperties<"favorite", {favoriteData: [], token: string}, {}, {getFavorites(): Promise<void>, addFavorites(*): void, deleteFavorites(*): void}> & PiniaCustomStateProperties<{favoriteData: [], token: string}>, isModalOpened: boolean, form: string, selectedProject: string, text: string, selected: string, errors: {color: string, selected: string}}}
+   */
   data() {
     const favoriteStore = useFavoriteStore();
     return {
@@ -39,15 +46,27 @@ export default {
     }
   },
   computed: {
+    /**
+     * Acceso al ProjectStore a través de una computed property
+     * @returns {Store<"project", {projectData: []}, {}, {editProject(*, *, *): Promise<void>, getProjects(): Promise<void>, createNewProject(*, *): Promise<void>, deletePalette(*): void, deleteProjects(*): void, addPaletteToProject(*, *): void}>}
+     */
     projectStore: () => useProjectStore(),
   },
   methods: {
+    /**
+     * Llama a `addFavorite` del FavoriteStore
+     */
     toggleLike() {
       // boton llama a addFavorite
       this.favoriteRandomColor()
       this.isLiked = !this.isLiked;
     },
-    validateColor(color){
+    /**
+     * Validación del formato de color (HEX o RGB)
+     * @param color
+     * @returns {default.methods.color|boolean}
+     */
+    validateColor(color) {
       const regexHex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
       const regexRgb = /^([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5]),([0-1]?\d?\d|2[0-4]\d|25[0-5])$/;
 
@@ -55,15 +74,22 @@ export default {
         return false;
       } else if (regexHex.test(color)) {
         return true;
-      } else if (regexRgb.test(color)){
+      } else if (regexRgb.test(color)) {
         color = color.split(',')
         let r = Number(color[0])
         let g = Number(color[1])
         let b = Number(color[2])
 
-        return this.convertRGBtoHex(r,g,b)
+        return this.convertRGBtoHex(r, g, b)
       }
     },
+    /**
+     * Convierte valores RGB a HEXadecimal
+     * @param r
+     * @param g
+     * @param b
+     * @returns {string}
+     */
     convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
@@ -79,16 +105,22 @@ export default {
       this.color = red + green + blue;
       return this.color
     },
+    /**
+     * Valida el color y la opción seleccionada
+     */
     validateFormColor() {
       if (!this.color || !this.validateColor(this.color)) {
         this.errors.color = 'Introduce un color en formato HEX sin # (FFFFFF) o RGB (123,12,245).';
-      } else if (this.selected === ''){
+      } else if (this.selected === '') {
         this.errors.selected = 'Elige tu esquema de color.';
       } else {
         this.errors.color = '';
         this.errors.selected = '';
       }
     },
+    /**
+     * Valida el formulario llamando a validateFormColor
+     */
     submitFormColor() {
       try {
         this.validateFormColor();
@@ -103,12 +135,16 @@ export default {
         console.error('Ocurrio un error al enviar el formulario de color', error)
       }
     },
+    /**
+     * Cierra el modal estableciendo isModalOpened en false.
+     */
     closeModal() {
       this.isModalOpened = false;
     },
-    submitHandler() {
-      // manejo del modal
-    },
+    /**
+     * Agrega la paleta de colores al proyecto seleccionado a través del projectStore
+     * @param selectedProject
+     */
     handleSubmission(selectedProject) {
       if (this.isHandlingColor) {
         this.projectStore.addPaletteToProject(selectedProject, this.colourPayload);
@@ -116,10 +152,14 @@ export default {
         this.projectStore.addPaletteToProject(selectedProject, this.colourPayloadImage);
       }
     },
+    /**
+     * Obtiene los colores de la paleta pasada como parámetro.
+     * @param palette
+     * @returns {Promise<void>}
+     */
     async handleLikedColor(palette) {
 
-
-      this.colourPayload = palette.colors.map(color => ({ hex: color.hex.clean }))
+      this.colourPayload = palette.colors.map(color => ({hex: color.hex.clean}))
 
       this.isHandlingColor = true;
       // Abre el modal
@@ -130,10 +170,13 @@ export default {
 
       this.listProjects = this.projectStore.projectData;
     },
+    /**
+     * Realiza una petición GET a la API para obtener un color aleatorio.
+     */
     getRandomColor() {
       axios.get('/api/v1/colors/random')
           .then(data => {
-            if(data.statusText === "OK"){
+            if (data.statusText === "OK") {
 
               this.color = data.data;
             }
@@ -142,11 +185,14 @@ export default {
             console.error('Error en la solicitud:', error);
           });
     },
+    /**
+     * Añade el color actual a los favoritos a través del favoriteStore si el color está definido
+     */
     favoriteRandomColor() {
-      if(this.color !== undefined){
+      if (this.color !== undefined) {
         // llama al favoriteStore
         this.favoriteStore.addFavorites(this.color)
-      }else{
+      } else {
         console.error('Error en la solicitud:', error);
       }
     },
@@ -162,8 +208,9 @@ export default {
           <h2>Descubre nuevos <span class="h2__color__sec">colores_</span></h2>
           <p>Descubre un nuevo color y genera paletas con el.</p>
 
-          <p class="color__text" :style="{ background: '#' + this.color }">color generado: #{{this.color}} </p>
-          <button class="button" :style="{ background: '#' + this.color }" @click="getRandomColor()" >Generar color</button>
+          <p class="color__text" :style="{ background: '#' + this.color }">color generado: #{{ this.color }} </p>
+          <button class="button" :style="{ background: '#' + this.color }" @click="getRandomColor()">Generar color
+          </button>
 
           <form @submit.prevent="submitFormColor">
             <fieldset>
@@ -203,17 +250,20 @@ export default {
           </form>
           <article v-show="userStore.isLogged()">
             <h2> Añade tu <span class="h2__color__sec">nuevo color</span> a favoritos</h2>
-          <button v-bind:disabled="!this.color" title="Añadir a favoritos" class="button" :class="{ liked: isLiked }" @click="toggleLike">
-            <font-awesome-icon icon="fa-solid fa-heart" class="icon"/>Añadir a favoritos
-          </button>
-          <alert></alert>
+            <button v-bind:disabled="!this.color" title="Añadir a favoritos" class="button" :class="{ liked: isLiked }"
+                    @click="toggleLike">
+              <font-awesome-icon icon="fa-solid fa-heart" class="icon"/>
+              Añadir a favoritos
+            </button>
+            <alert></alert>
           </article>
         </section>
       </article>
     </section>
     <section class="content__section">
       <article v-show="showColor">
-        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor" @palette-liked="handleLikedColor"/>
+        <resultado-color :color="color" :form="form" :selected="selected" ref="rescolor"
+                         @palette-liked="handleLikedColor"/>
       </article>
     </section>
 
@@ -221,7 +271,8 @@ export default {
     <!-- modal con la eleccion de proyecto para la paleta color-->
     <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
       <template #header><h2>Tus proyectos_</h2></template>
-      <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo proyecto:</p>
+      <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo
+        proyecto:</p>
         <!-- select con los proyectos del usuario -->
         <form @submit.prevent="selectedProject && handleSubmission(selectedProject)">
           <fieldset class="section__article">
@@ -239,68 +290,79 @@ export default {
 
             </select>
             <button class="button" type="submit">Elegir proyecto</button>
-            <button class="button" >Nuevo proyecto</button>
+            <button class="button">Nuevo proyecto</button>
           </fieldset>
         </form>
       </template>
-      <template >sin el #footer, cargaria el boton del componente modal</template>
+      <template>sin el #footer, cargaria el boton del componente modal</template>
     </modal>
   </main>
   <home-section></home-section>
 </template>
 
 <style scoped>
-.main__section{
+.main__section {
   justify-self: center;
   padding: 0 2rem;
   margin: 0 2rem;
 }
-.main__content{
+
+.main__content {
   display: inline-flex;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
-.content__section{
+
+.content__section {
   width: 60%;
   margin: 0 auto;
   height: 100%;
   object-fit: cover;
   object-position: center center;
 }
-.content__article{
+
+.content__article {
   margin: 4rem auto;
   width: 80%;
 }
-.section__article{
-  display:inline-flex;
+
+.section__article {
+  display: inline-flex;
 }
-.home__select{
-  width:14.8rem;
-  height:fit-content;
+
+.home__select {
+  width: 14.8rem;
+  height: fit-content;
   border: 1px #797474;
   border-radius: 0.7rem;
   padding: 0.625rem 0.625rem;
   margin: 0.625rem 0;
 }
-.home__select__option{
+
+.home__select__option {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 4;
 }
-.home__select__option__projects{
-  width:20rem;
+
+.home__select__option__projects {
+  width: 20rem;
 }
-.icon{
+
+.icon {
   padding-right: 0.3rem;
 }
-h2{
+
+h2 {
   color: var(--font-color-h2-pri);
 }
-form{
+
+form {
   text-align: left;
 }
+
 input {
   width: 50%;
   border: 1px #797474;
@@ -309,7 +371,8 @@ input {
   margin-top: 0.3125rem;
 
 }
-.color__text{
+
+.color__text {
   text-shadow: #a4a4a4 1px 1px;
 }
 </style>

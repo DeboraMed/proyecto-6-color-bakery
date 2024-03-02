@@ -7,6 +7,10 @@ import {useUserStore} from "../stores/UserStore.js";
 export default {
   components: {BorderFooter},
   props: ['url', 'form'],
+  /**
+   *
+   * @returns {{color: string, imageLoaded: boolean, palette: *[], hexPalette: *[], imageError: boolean}}
+   */
   data() {
     return {
       palette: [],
@@ -17,6 +21,10 @@ export default {
     }
   },
   watch: {
+    /**
+     *
+     * @param newValue
+     */
     imageLoaded(newValue) {
       if (newValue) {
         this.getPaletteImageColor();
@@ -24,17 +32,31 @@ export default {
     }
   },
   computed: {
+    /**
+     *
+     * @returns {Store<"user", {userData: [], token: string}, {}, {logout(): void, isLogged(): boolean, fetchUser(): Promise<void>, login(*, *): void, register(*, *, *): void}>}
+     */
     userStore: () => useUserStore(),
   },
   methods: {
+    /**
+     * Se llama cuando la imagen se carga correctamente:
+     */
     onImageLoad() {
       this.imageLoaded = true;
       this.imageError = false;
       this.hexPalette = [];
     },
+    /**
+     * Se llama cuando ocurre un error al cargar la imagen:
+     */
     onImageError() {
       this.imageError = true;
     },
+    /**
+     * Obtiene la paleta de colores de la imagen
+     * @returns {*[]}
+     */
     getPaletteImageColor() {
       this.hexPalette = [];
       let colorThief = new ColorThief();
@@ -50,6 +72,13 @@ export default {
       }
       return this.hexPalette;
     },
+    /**
+     * Convierte valores RGB a formato hexadecimal
+     * @param r
+     * @param g
+     * @param b
+     * @returns {string}
+     */
     convertRGBtoHex(r, g, b) {
       let red = r.toString(16);
       let green = g.toString(16);
@@ -65,7 +94,9 @@ export default {
       this.color = red + green + blue;
       return this.color
     },
-    // evento personalizado para manejar el like
+    /**
+     * Maneja el evento personalizado likeButtonClicked:
+     */
     likeButtonClicked() {
       this.$emit('palette-photo-liked', this.hexPalette);
     },

@@ -1,6 +1,6 @@
 <script setup>
-// el codigo tiene que esta en un script setup
 import {useThemeStore} from '../stores/ThemeStore';
+
 const store = useThemeStore();
 </script>
 
@@ -8,8 +8,10 @@ const store = useThemeStore();
   <!-- borde naranja del footer-->
   <section class="border__ft__init">
     <div class="border__ft__init__img">
-      <img v-if="store.theme === 'dark'" class="border__ft__init__background" src="../assets/img/color-bakery-texto-dark.svg" alt="ColorBakery">
-      <img v-else class="border__ft__init__background" src="../assets/img/color-bakery-texto-light.svg" alt="ColorBakery">
+      <img v-if="store.theme === 'dark'" class="border__ft__init__background"
+           src="../assets/img/color-bakery-texto-dark.svg" alt="ColorBakery">
+      <img v-else class="border__ft__init__background" src="../assets/img/color-bakery-texto-light.svg"
+           alt="ColorBakery">
     </div>
   </section>
 </template>
@@ -21,13 +23,15 @@ const store = useThemeStore();
   border-bottom-style: solid;
   border-bottom-color: var(--bg-color-dark);
 }
-.border__ft__init__img{
+
+.border__ft__init__img {
   display: flex;
   flex-direction: row-reverse;
   align-items: flex-end;
   background-color: var(--bg-color-medium);
 }
-.border__ft__init__background{
+
+.border__ft__init__background {
   margin-right: 1rem;
   margin-bottom: -1.1rem;
   width: 25%;

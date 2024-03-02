@@ -20,15 +20,26 @@ export default {
       required: true,
     },
   },
+  /**
+   * Define las propiedades reactivas del componente
+   * @returns {{colorPalette: null}}
+   */
   data() {
     return {
       colorPalette: null,
     };
   },
   computed: {
+    /**
+     *
+     * @returns {Store<"user", {userData: [], token: string}, {}, {logout(): void, isLogged(): boolean, fetchUser(): Promise<void>, login(*, *): void, register(*, *, *): void}>}
+     */
     userStore: () => useUserStore(),
   },
   methods: {
+    /**
+     * Recupera una paleta de colores basada en el color y la opción seleccionados
+     */
     fetchColorPalette() {
       axios
       theColorApi.get('scheme?hex=' + this.color + '&mode=' + this.selected)
@@ -39,7 +50,9 @@ export default {
             console.error(error);
           });
     },
-    // evento personalizado para manejar el like
+    /**
+     * Maneja el evento personalizado likeButtonClicked
+     */
     likeButtonClicked() {
       this.$emit('palette-liked', this.colorPalette);
     },
@@ -67,7 +80,6 @@ export default {
             {{ color.hex.value }}
           </li>
         </ul>
-        <!-- Pendiente de añadir imagen  <img src="">-->
       </article>
     </section>
   </section>
