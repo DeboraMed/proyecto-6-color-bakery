@@ -140,12 +140,6 @@ export default {
   color: var(--font-color);
 }
 
-@media screen and (max-width: 1200px) {
-  .burger__menu__items {
-    display: block;
-  }
-}
-
 /* barra de navegacion */
 .nav {
   z-index: 3;
@@ -207,6 +201,12 @@ img {
 }
 
 /*navbar medias*/
+@media screen and (max-width: 1200px) {
+  .burger__menu__items {
+    display: block;
+  }
+}
+
 @media only screen and (max-width: 29.8125rem /*477px*/
 ) {
   .nav__router {

@@ -269,7 +269,7 @@ export default {
 
 
     <!-- modal con la eleccion de proyecto para la paleta color-->
-    <modal :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
+    <modal :isOpen="isModalOpened" @modal-close="closeModal" name="first-modal">
       <template #header><h2>Tus proyectos_</h2></template>
       <template #content><p> Selecciona un proyecto de la lista donde guardar tu nueva paleta, o crea un nuevo
         proyecto:</p>
@@ -290,7 +290,9 @@ export default {
 
             </select>
             <button class="button" type="submit">Elegir proyecto</button>
-            <button class="button">Nuevo proyecto</button>
+            <router-link to="/proyectos" custom v-slot="{ navigate }">
+              <button class="button" @click="navigate" role="link">Nuevo proyecto</button>
+            </router-link>
           </fieldset>
         </form>
       </template>
@@ -374,5 +376,50 @@ input {
 
 .color__text {
   text-shadow: #a4a4a4 1px 1px;
+}
+@media only screen and (max-width: 48rem /*768px*/
+) {
+  .main__section{
+    margin: 0;
+    padding: 0;
+  }
+  .main__content {
+    flex-direction: column;
+    padding: 0 2rem 0 2rem;
+  }
+
+  .content__section {
+    width: 100%;
+  }
+  .content__article{
+    margin: 0;
+    width: 100%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  form {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+  input {
+    width: 50%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+  .main__content{
+    padding: 0 2rem 0 2rem;
+  }
+
 }
 </style>

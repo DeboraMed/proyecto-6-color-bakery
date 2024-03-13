@@ -24,13 +24,14 @@ const favoriteData = computed(() => {
       <h2>Tus <span class="h2__color__sec">colores</span> Favoritos_</h2>
       <p> Aqui podrás visualizar tos colores favoritos y si quieres añadir mas puedes pulsar en descubre.</p>
     </article>
-    <section class="container__center">
-      <!--card con los favoritos-->
-      <article v-if="favoriteData && favoriteData.favorites"
+    <!--card con los favoritos-->
+    <section class="favoritos__container">
+    <section class="container__center__favoritos">
+      <article  v-if="favoriteData && favoriteData.favorites"
                v-for="favorite in favoriteData.favorites" :key="favorite.id">
         <ul class="cards">
           <li>
-            <button @click="favoriteStore.deleteFavorites(favorite.id)">
+            <button class="button__reset" @click="favoriteStore.deleteFavorites(favorite.id)">
               <font-awesome-icon icon="fa-solid fa-xmark" class="icon"/>
             </button>
             <div class="card"
@@ -56,24 +57,27 @@ const favoriteData = computed(() => {
         </ul>
       </article>
     </section>
+    </section>
   </section>
 </template>
 
 <style scoped>
-/* reset de estilos del botón */
-button {
-  background: none;
-  border: 0;
-  color: inherit;
-  cursor: default;
-  font: inherit;
-  line-height: normal;
-  overflow: visible;
-  padding: 0;
-  -webkit-user-select: none; /* for button */
-  -webkit-appearance: button; /* for input */
-  -moz-user-select: none;
-  -ms-user-select: none;
+.favoritos__container{
+  max-width: 75%;
+  padding: 2rem;
+  margin: 1rem;
+}
+.container__center {
+  padding: 3rem;
+}
+
+.container__center__favoritos {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 /*estilos de la card*/
@@ -84,7 +88,7 @@ button {
   padding: 0;
   list-style-type: none;
   width: calc(25% - 1rem); /* 25% para 4 elementos en una fila */
-  margin: 1.5rem; /* Espacio entre elementos */
+  margin: 1.5rem;
 }
 
 .card {
@@ -153,7 +157,6 @@ button {
   color: #6A515E;
 }
 
-
 .card__status {
   font-size: .8em;
   color: #b4acd9;
@@ -167,5 +170,30 @@ button {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+  .container__center {
+    padding: 2.2rem;
+  }
+
+}
+
+@media only screen and (max-width: 48rem /*768px*/
+) {
+  .container__center__favoritos{
+    justify-content: space-between;
+  }
+  .cards {
+    margin: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 29.8125rem /*477px*/
+) {
+  .container__center__favoritos{
+    justify-content: space-between;
+  }
 }
 </style>

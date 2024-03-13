@@ -147,7 +147,7 @@ export default {
 }
 
 input {
-  width: 25%;
+  width: 50%;
   border: 1px #797474;
   border-radius: 0.7rem;
   padding: 0.625rem;
@@ -155,10 +155,52 @@ input {
 }
 
 textarea {
-  width: 50%;
+  width: 100%;
   border: 0;
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
+}
+
+@media only screen and (max-width: 48rem /*768px*/
+) {
+  .main__content {
+    flex-direction: column;
+    padding: 0 2rem 0 2rem;
+  }
+
+  .content__section {
+    width: 100%;
+  }
+
+  .content__section__img {
+    width: 80%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  .form {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+  input {
+    width: 50%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  .content__section__img {
+    width: 70%;
+  }
 }
 </style>

@@ -162,7 +162,6 @@ export default {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;
-
   animation: fadein 2s ease 0s 1 normal forwards;
 }
 

@@ -38,7 +38,6 @@ const userData = computed(() => {
 .main__content {
   margin: 4rem auto;
   display: inline-flex;
-  flex-wrap: nowrap;
   width: 100%;
   padding: 0 6rem 0 6rem;
 }
@@ -53,7 +52,36 @@ const userData = computed(() => {
 }
 
 .content__section__img {
-  width: 50%;
+  width: 60%;
   margin: auto;
+}
+
+img {
+  min-width: 300px
+}
+
+@media only screen and (max-width: 48rem /*768px*/
+) {
+  .main__content {
+    flex-direction: column;
+    padding: 0 2rem 0 2rem;
+  }
+
+  .content__section {
+    width: 100%;
+  }
+
+  .content__section__img {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+
+  .content__section__img {
+    width: 70%;
+  }
 }
 </style>

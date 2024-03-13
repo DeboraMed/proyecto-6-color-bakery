@@ -48,10 +48,51 @@ onClickOutside(target, () => emit('modal-close'))
 
 .modal__container {
   width: 50%;
-  margin: 150px auto;
-  padding: 20px 30px;
+  margin: 6rem auto;
+  padding: 2rem 3rem;
   background-color: var(--bg-color-clear);
-  border-radius: 2px;
+  border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+  .modal__container {
+    width: 80%;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+  }
+
+  .modal__container input,
+  .modal__container textarea {
+    width: 80%;
+    box-sizing: border-box;
+  }
+}
+
+@media only screen and (max-width: 48rem /*768px*/
+) {
+  .modal__container {
+    width: 80%;
+    margin: 2rem auto;
+    padding: 1rem 2rem;
+  }
+
+  .modal__container input,
+  .modal__container textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+/*medias generales*/
+@media only screen and (max-width: 29.8125rem /*477px*/
+) {
+  .modal__container {
+    min-width: 300px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 1rem 1.5rem;
+  }
 }
 </style>

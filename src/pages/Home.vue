@@ -352,6 +352,7 @@ export default {
   width: 60%;
   margin: 0 auto;
   height: 100%;
+  min-width: 300px;
   object-fit: cover;
   object-position: center center;
 }
@@ -400,6 +401,48 @@ input {
   border-radius: 0.7rem;
   padding: 0.625rem;
   margin-top: 0.3125rem;
+}
+
+@media only screen and (max-width: 48rem /*768px*/
+) {
+
+  .main__content {
+    /*flex-direction: column;*/
+    padding: 0 2rem 0 2rem;
+  }
+
+  .content__section {
+    width: 100%;
+  }
+  .content__article{
+    margin: 0;
+    width: 100%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  form {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 75rem /*1200px*/
+) {
+  input {
+    width: 50%;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+  }
+  main__content{
+    padding: 0 4rem 0 4rem;
+  }
 
 }
 </style>
